@@ -1,6 +1,9 @@
 package com.example.mindaid.Controller;
+import com.example.mindaid.Dto.ConcernDto;
+import com.example.mindaid.Model.Concern;
 import com.example.mindaid.Model.Login;
 import com.example.mindaid.Model.User;
+import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.UserRepository;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.UserService;
@@ -23,11 +26,14 @@ public class IndexController {
     @Autowired
     UserRepository userRepository;
     @Autowired
+    ConcernRepository concernRepository;
+    @Autowired
     Signup_request signup_request;
     @Autowired
     EmailVerificationService emailVerificationService;
     @Autowired
     UserService userService;
+
 
     @GetMapping("/home")
     public String getHome(Model model) {
@@ -50,7 +56,6 @@ public class IndexController {
         model.addAttribute(user);
         List<Login> loginList=new ArrayList<>();
         int loginValidate=userService.loginValidation(login);
-//        System.out.println("Validation "+loginValidate);
         if (loginValidate==1) return "concern";
         else if(loginValidate==2){
             login.setMessage("Please verify your account from email!!");
@@ -65,7 +70,6 @@ public class IndexController {
             return "login";
         }
         }
-
     //log in area end
 
     @GetMapping("/register")
@@ -74,7 +78,6 @@ public class IndexController {
         model.addAttribute(user);
         return "register";
     }
-
     @PostMapping("/processregister")
     public String postSignup(User user, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
         if ((signup_request.emailCheck(user.email)) && (signup_request.passCheck(user.password, user.confirmPassword))) {
@@ -100,8 +103,20 @@ public class IndexController {
     }
     @GetMapping("/concern")
     public String getConcern(Model model) {
-        User user = new User();
-        model.addAttribute(user);
-        return "concern";
+        Concern concern=new Concern();
+        ConcernDto concernDto=new ConcernDto();
+        List<Concern>concernList=concernRepository.findAll();
+        System.out.println(concernList.size());
+        model.addAttribute(concernDto);
+        model.addAttribute(concern);
+        model.addAttribute("concernList",concernList);
+        return "concernLive";
+    }
+    @PostMapping("/submitconcern")
+    public String postConcern(ConcernDto concernDto,Model model){
+        System.out.println("concern:"+concernDto.concerns[1]);
+        System.out.println("concern:"+concernDto.concerns[0]);
+        System.out.println(concernDto.concernL.size());
+        return "dummy";
     }
 }
