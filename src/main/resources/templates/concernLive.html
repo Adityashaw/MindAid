@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
 
 <!--    <link rel="stylesheet" href="assets/imported/style.css">-->
 <!--    <link rel="stylesheet" href="assets/imported/bootstrap.min.css">-->
@@ -144,14 +145,14 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="concern_content">
-                    <h2 class="title">Let us know your concerns</h2>
-                    <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p>
+                    <h2 class="title">Let us know your concerns</h2><br>
+                    <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p><br>
                     <Form th:action="@{/submitconcern}"  th:object="${concernDto}" method="POST">
                     <div class="checkbox-list">
                         <th:block th:each="concern : ${concernList}">
                         <!--label start-->
                         <label class="check-item">
-                            <input type="checkbox" th:name="concerns[0]" th:value="Depression" th:checked="${concernDto.concerns[1]}">
+                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernName}" th:checked="${concernDto.concerns[0]}">
                             <span>
                              <p th:text="${concern.getConcernName}"></p>
                             </span>

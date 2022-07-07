@@ -14138,8 +14138,8 @@ p {
   padding: 0;
   font-size: 18px;
   line-height: 28px;
-  color: var(--font-color);
-  font-family: 'Hind Siliguri', sans-serif;
+  color: black;
+  font-family: revert;
 }
 
 li {
@@ -16167,11 +16167,12 @@ div#owl-demo2 .owl-dots {
 }
 
 h2.title {
-  color: #fff;
-  font-size: 45px;
+  color: black;
+  font-size: 30px;
   font-weight: 700;
   text-align: center;
-  margin-top: 50px;
+  /*margin-top: 50px;*/
+  font-family: unset;
 }
 
 .breadcrumbs-custom-path li {

@@ -115,7 +115,7 @@ public class IndexController {
     @PostMapping("/submitconcern")
     public String postConcern(ConcernDto concernDto,Model model){
         System.out.println("concern:"+concernDto.concerns[1]);
-        System.out.println("concern:"+concernDto.concerns[0]);
+        System.out.println("concern:"+concernDto.concerns[2]);
         System.out.println(concernDto.concernL.size());
         return "dummy";
     }

@@ -58,7 +58,7 @@ body {
     line-height: 1.5;
     color: #212529;
     text-align: left;
-    background-color: #fff
+    background-color: #1b5660;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -78,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
     margin-top: 0;
-    margin-bottom: 1rem
+    /*margin-bottom: 1rem*/
 }
 
 abbr[data-original-title], abbr[title] {
@@ -2587,6 +2587,7 @@ textarea.form-control {
     transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
 }
 
+
 @media (prefers-reduced-motion: reduce) {
     .btn {
         transition: none
@@ -2986,8 +2987,10 @@ a.btn.disabled, fieldset:disabled a.btn {
 }
 
 .btn-outline-info {
-    color: #17a2b8;
-    border-color: #17a2b8
+    color: white;
+    border-color: #17a2b8;
+    border-radius: 10px;
+    background-color: #325359;
 }
 
 .btn-outline-info:hover {
