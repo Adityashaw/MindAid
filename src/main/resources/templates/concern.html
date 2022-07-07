@@ -11,103 +11,132 @@
     <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
           rel="stylesheet">
     <!-- Template CSS -->
+    <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+
+<!--    <link rel="stylesheet" href="assets/imported/style.css">-->
+<!--    <link rel="stylesheet" href="assets/imported/bootstrap.min.css">-->
 </head>
 <body>
-<div class="header-w3l">
-    <!--header-->
-    <header id="site-header" class="header-w3l fixed-top">
-        <div class="container">
-            <nav class="navbar navbar-expand-lg stroke">
-                <a class="navbar-brand" href="index.html">
-                    M<span class="sub-logo">i</span>ndA</span><span class="sub-logo">i</span>d</span>
-                </a>
-                <!-- if logo is image enable this -->
-                <!-- <a class="navbar-brand" href="#index.html">
-                    <img src="assets/images/MindAid.png" alt="Your logo" title="Your logo" style="height:70px;" />
-                </a>  -->
-                <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
-                        data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
-                    <span class="navbar-toggler-icon fa icon-close fa-times"></span>
-                    </span>
-                </button>
+<!--header-->
+<header id="site-header" class="header-w3l fixed-top">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg stroke">
+            <a class="navbar-brand" href="index.html">
+                M<span class="sub-logo">i</span>ndA</span><span class="sub-logo">i</span>d</span>
+            </a>
+            <!-- if logo is image enable this -->
+            <!-- <a class="navbar-brand" href="#index.html">
+                <img src="assets/images/MindAid.png" alt="Your logo" title="Your logo" style="height:70px;" />
+            </a>  -->
+            <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+                <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+                </span>
+            </button>
 
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mx-lg-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="services.html">Login</a>
-                        </li>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mx-lg-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="services.html">Login</a>
+                    </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
-                        </li>
-                        <li class="search-bar ml-lg-3 mr-lg-5 mt-lg-0 mt-4">
-                            <!--/search-right-->
-                            <form class="search position-relative">
-                                <input type="search" class="search__input" name="search" placeholder="Search here.."
-                                       onload="equalWidth()" required="">
-                                <span class="fa fa-search search__icon"></span>
-                            </form>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                    <li class="search-bar ml-lg-3 mr-lg-5 mt-lg-0 mt-4">
+                        <!--/search-right-->
+                        <form class="search position-relative">
+                            <input type="search" class="search__input" name="search" placeholder="Search here.."
+                                   onload="equalWidth()" required="">
+                            <span class="fa fa-search search__icon"></span>
+                        </form>
 
-                            <!--//search-right-->
-                        </li>
+                        <!--//search-right-->
+                    </li>
 
-                    </ul>
+                </ul>
 
-                </div>
-                <!-- toggle switch for light and dark theme -->
-                <div class="mobile-position">
-                    <nav class="navigation">
-                        <div class="theme-switch-wrapper">
-                            <label class="theme-switch" for="checkbox">
-                                <input type="checkbox" id="checkbox">
-                                <div class="mode-container">
-                                    <i class="gg-sun"></i>
-                                    <i class="gg-moon"></i>
-                                </div>
-                            </label>
-                        </div>
-                    </nav>
-                </div>
-                <!-- //toggle switch for light and dark theme -->
-            </nav>
-        </div>
-    </header>
+            </div>
+            <!-- toggle switch for light and dark theme -->
+            <div class="mobile-position">
+                <nav class="navigation">
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="checkbox">
+                            <input type="checkbox" id="checkbox">
+                            <div class="mode-container">
+                                <i class="gg-sun"></i>
+                                <i class="gg-moon"></i>
+                            </div>
+                        </label>
+                    </div>
+                </nav>
+            </div>
+            <!-- //toggle switch for light and dark theme -->
+        </nav>
+    </div>
+</header>
 </div>
 <!-- //header -->
 
 
-<!--=========== Sidebar Area Start Desktop View==========-->
-<section class="sidebar section-padding-1 d-none d-md-block">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="wrapper d-flex">
-                <div class="sidebar">
-                    <p class="pl-3 pt-2"><i class="fas fa-user-circle"></i> Username </p>
-                    <hr>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-home profile-icon"></i> Dashboard</a></li>
-                        <li><a href="#"><i class="fas fa-user profile-icon"></i> Profile</a></li>
-                        <li><a href="#"><i class="fas fa-file-invoice profile-icon"></i> Appointments</a></li>
-                    </ul>
-                    <div class="sign-out">
-                        <p>Sign Out <i class="fas fa-arrow-right"></i></p>
-                    </div>
+<!--&lt;!&ndash;=========== Sidebar Area Start Desktop View==========&ndash;&gt;-->
+<!--<section class="sidebar section-padding-1 d-none d-md-block">-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--            <div class="wrapper d-flex">-->
+<!--                <div class="sidebar">-->
+<!--                    <p class="pl-3 pt-2"><i class="fas fa-user-circle"></i> Username </p>-->
+<!--                    <hr>-->
+<!--                    <ul>-->
+<!--                        <li><a href="#"><i class="fas fa-home profile-icon"></i> Dashboard</a></li>-->
+<!--                        <li><a href="#"><i class="fas fa-user profile-icon"></i> Profile</a></li>-->
+<!--                        <li><a href="#"><i class="fas fa-file-invoice profile-icon"></i> Appointments</a></li>-->
+<!--                    </ul>-->
+<!--                    <div class="sign-out">-->
+<!--                        <p>Sign Out <i class="fas fa-arrow-right"></i></p>-->
+<!--                    </div>-->
 
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!--=========== Sidebar Area End ==========-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash;=========== Sidebar Area End ==========&ndash;&gt;-->
+
+<!--&lt;!&ndash;=========== Sidebar Area Start Mobile View==========&ndash;&gt;-->
+<!--<section class="sidebar section-padding-1 d-block d-md-none" >-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="row">-->
+<!--            <div class="wrapper d-flex">-->
+<!--                <div class="sidebar">-->
+<!--                    <p class="pl-3 pt-2"><i class="fas fa-user-circle"></i></p>-->
+<!--                    <hr>-->
+<!--                    <ul>-->
+<!--                        <li><a href="#"><i class="fas fa-home profile-icon"></i></a></li>-->
+<!--                        <li><a href="#"><i class="fas fa-user profile-icon"></i></a></li>-->
+<!--                        <li><a href="#"><i class="fas fa-file-invoice profile-icon"></i></a></li>-->
+<!--                    </ul>-->
+<!--                    <div class="sign-out">-->
+<!--                        <i class="fas fa-sign-out-alt profile-icon"></i>-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--&lt;!&ndash;=========== Sidebar Area End ==========&ndash;&gt;-->
 
 
 <!--=========== Concern Area Start ==========-->
@@ -116,166 +145,22 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="concern_content">
-                    <h2 class="title">Let us know your concerns</h2>
-                    <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p>
-                    <Form th:action="@{/submitconcernLive}"  th:object="${concern}" method="POST">
-                        <div class="checkbox-list">
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[0]" th:value="Depression" th:checked="${concern.live_arr[0] eq 'Depression'}">
-
-                                <span>
-                                Depression
+                    <h2 class="title">Let us know your concerns</h2><br>
+                    <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p><br>
+                    <Form th:action="@{/submitconcern}"  th:object="${concernDto}" method="POST">
+                    <div class="checkbox-list">
+                        <th:block th:each="concern : ${concernList}">
+                        <!--label start-->
+                        <label class="check-item">
+                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernName}" th:checked="${concernDto.concerns[0]}">
+                            <span>
+                             <p th:text="${concern.getConcernName}"></p>
                             </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[1]" th:value="Anxiety" th:checked="${concern.live_arr[1] eq 'Anxiety'}">
-                                <span>
-                                Anxiety/Worry
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[2]" th:value="Insecurity" th:checked="${concern.live_arr[2] eq 'Insecurity'}">
-                                <span>
-                                Insecurities
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[3]" th:value="Stress" th:checked="${concern.live_arr[3] eq 'Stress'}">
-                                <span>
-                                Stress
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[4]" th:value="Relationships" th:checked="${concern.live_arr[4] eq 'Relationships'}">
-                                <span>
-                                Relationships
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[5]" th:value="PanicAttacks" th:checked="${concern.live_arr[5] eq 'PanicAttacks'}">
-                                <span>
-                                Panic Attacks
-                            </span>
-                            </label>
-                            <!--label end-->
-
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[6]" th:value="SocialAnxiety" th:checked="${concern.live_arr[6] eq 'SocialAnxiety'}">
-                                <span>
-                                Social Anxiety
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[7]" th:value="Trauma" th:checked="${concern.live_arr[7] eq 'Trauma'}">
-                                <span>
-                                Trauma
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[8]" th:value="Insomnia" th:checked="${concern.live_arr[8] eq 'Insomnia'}">
-                                <span>
-                                Insomnia
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[9]" th:value="ChronicPain" th:checked="${concern.live_arr[9] eq 'ChronicPain'}">
-                                <span>
-                               Chronic Pain
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[10]" th:value="Phobias" th:checked="${concern.live_arr[10] eq 'Phobias'}">
-                                <span>
-                                Phobias
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[11]" th:value="Procrastination" th:checked="${concern.live_arr[11] eq 'Procrastination'}">
-                                <span>
-                                Procrastination
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[12]" th:value="BipolarDisorder" th:checked="${concern.live_arr[12] eq 'BipolarDisorder'}">
-                                <span>
-                                Bipolar Disorder
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[13]" th:value="Anger" th:checked="${concern.live_arr[0] eq 'Anger'}">
-                                <span>
-                                Anger
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[14]" th:value="FamilyIssues" th:checked="${concern.live_arr[14] eq 'FamilyIssues'}">
-                                <span>
-                                Family Issues
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[15]" th:value="GeneralConcern" th:checked="${concern.live_arr[15] eq 'GeneralConcern'}">
-                                <span>
-                                General Concerns
-                            </span>
-                            </label>
-                            <!--label end-->
-
-                            <!--label start-->
-                            <label class="check-item">
-                                <input type="checkbox" name="live_arr[16]" th:value="Cannot" th:checked="${concern.live_arr[16] eq 'Cannot'}">
-                                <span>
-                                Cannot Figure out
-                            </span>
-                            </label>
-                            <!--label end-->
-                        </div>
-                        <button type="submit" class="btn btn-outline-info mt-5">Submit</button>
+                        </label>
+                        <!--label end-->
+                        </th:block>
+                    </div>
+                    <button type="submit" class="btn btn-outline-info mt-5">Submit</button>
                     </Form>
                 </div>
             </div><!-- col-lg-12 end-->
@@ -284,5 +169,8 @@
 </section><!-- section end-->
 <!--=========== Concern Area End ==========-->
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/js/all.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 </body>
 </html>

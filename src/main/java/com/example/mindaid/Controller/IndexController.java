@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import javax.management.Query;
+
 import java.util.ArrayList;
 import java.util.List;
 import javax.mail.MessagingException;
@@ -110,7 +110,7 @@ public class IndexController {
         model.addAttribute(concernDto);
         model.addAttribute(concern);
         model.addAttribute("concernList",concernList);
-        return "concernLive";
+        return "concern";
     }
     @PostMapping("/submitconcern")
     public String postConcern(ConcernDto concernDto,Model model){
@@ -118,5 +118,10 @@ public class IndexController {
         System.out.println("concern:"+concernDto.concerns[2]);
         System.out.println(concernDto.concernL.size());
         return "dummy";
+    }
+
+    @GetMapping("/doctorslist")
+    public String getdoctorList(Model model){
+        return "doctorslist";
     }
 }
