@@ -1,11 +1,16 @@
 package com.example.mindaid.Controller;
 import com.example.mindaid.Dto.ConcernDto;
+import com.example.mindaid.Dto.DoctorsDto;
 import com.example.mindaid.Model.Concern;
+import com.example.mindaid.Model.Doctors;
 import com.example.mindaid.Model.Login;
 import com.example.mindaid.Model.User;
 import com.example.mindaid.Repository.ConcernRepository;
+import com.example.mindaid.Repository.DoctorConcernRepository;
+import com.example.mindaid.Repository.DoctorsRepository;
 import com.example.mindaid.Repository.UserRepository;
 import com.example.mindaid.Request.Signup_request;
+import com.example.mindaid.Service.DoctorListService;
 import com.example.mindaid.Service.UserService;
 import com.example.mindaid.Service.EmailVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +38,13 @@ public class IndexController {
     EmailVerificationService emailVerificationService;
     @Autowired
     UserService userService;
+    @Autowired
+    DoctorListService doctorListService;
+    @Autowired
+    DoctorConcernRepository doctorConcernRepository;
+    @Autowired
+    DoctorsRepository doctorsRepository;
+
 
 
     @GetMapping("/home")
@@ -114,9 +126,11 @@ public class IndexController {
     }
     @PostMapping("/submitconcern")
     public String postConcern(ConcernDto concernDto,Model model){
-        System.out.println("concern:"+concernDto.concerns[1]);
-        System.out.println("concern:"+concernDto.concerns[2]);
-        System.out.println(concernDto.concernL.size());
+        List<Doctors> doctorsList=doctorListService.getDoctorList(concernDto);
+        System.out.println(doctorsList);
+        model.addAttribute("doctorsList",doctorsList);
+        Doctors doctor=new Doctors();
+        model.addAttribute(doctor);
         return "doctorslist";
     }
 
@@ -124,4 +138,5 @@ public class IndexController {
     public String getdoctorList(Model model){
         return "doctorslist";
     }
+
 }
