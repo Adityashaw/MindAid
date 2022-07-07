@@ -117,7 +117,7 @@ public class IndexController {
         System.out.println("concern:"+concernDto.concerns[1]);
         System.out.println("concern:"+concernDto.concerns[2]);
         System.out.println(concernDto.concernL.size());
-        return "dummy";
+        return "doctorslist";
     }
 
     @GetMapping("/doctorslist")

@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConcernDto {
-    public String[]concerns=new String[100];
+    public int[]concerns=new int[18];
     public List<String>concernL=new ArrayList<>();
 
-    public String[] getConcerns() {
+    public int[] getConcerns() {
         return concerns;
     }
 
-    public void setConcerns(String[] concerns) {
+    public void setConcerns(int[] concerns) {
         this.concerns = concerns;
     }
 }

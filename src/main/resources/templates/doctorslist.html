@@ -91,11 +91,11 @@
 <!--=========== Doctor List Start ==========-->
 <section class="service section-padding-1">
     <div class="container text-center">
-        <h2 class="title">See our Specialized Therapists</h2>
+        <h3 class="title">See our Specialized Therapists</h3>
         <p class="mb-5">You can get access to many features. Explore and know what you need.</p>
         <div class="row justify-content-center doc-list">
 
-            <th:block th:each="docName : ${doctorListUltimate}">
+            <th:block th:each="docName : ${doctorsList}">
 
                 <div class="col-lg-6">
                     <div class="card mb-3" style="max-width: 540px;">
@@ -105,29 +105,14 @@
                             </div>
                             <div class="col-md-8">
 
-                                <form method=post th:action="@{/postDocMessage}" th:object="${docSchedule}">
+                                <form method=post th:action="@{/postdoctorlist}" th:object="${doctor}">
 
 
                                     <div class="card-body">
                                         <h5 class="card-title" th:utext="${docName.getName()}"></h5>
-                                        <p class="card-text">Registered Psychologist</p>
+                                        <p class="card-text" th:utext="${docName.getSpeciality()}"></p>
                                         <p class="card-text"><small class="text-muted">Available slots:</small></p>
-                                        <div class="slot-details">
-                                        <span class="slots-time">
-                                          <select id="time" th:field="*{slot}" required>
-                                            <option th:value="${docName.getSlot1()}" th:text="${docName.getSlot1()}"> </option>
-                                            <option th:value="${docName.getSlot2()}" th:text="${docName.getSlot2()}"></option>
-                                            <option th:value="${docName.getSlot3()}" th:text="${docName.getSlot3()}"></option>
-                                          </select>
-                                        </span>
-                                            <span class="slots-date">
-                                          <select id="date">
-                                            <option value="1">October 25</option>
-                                            <option value="2" selected>October 26</option>
-                                            <option value=3>October 27</option>
-                                          </select>
-                                        </span>
-                                        </div>
+                                        <p class="card-text" th:utext="${docName.getSchedule()}"></p>
                                         <div class="doc-info justify-content-center">
                                             <span class="btn-outline-info btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Know More</span>
                                             <!-- Modal -->
@@ -153,12 +138,7 @@
                                                             <i class="fas fa-times" data-bs-dismiss="modal" style="cursor: pointer;"></i>
                                                         </div>
                                                         <div class="modal-body doc-content">
-                                                            Dr.W passionately believes that every individual has the innate capacity to lead fulfilling lives with
-                                                            meaning and purpose. He completed his Masters of Psychology from the University of Michigan and has
-                                                            worked extensively with youth, adults, and families providing counselling and mental health treatment in community
-                                                            settings. Sometimes life circumstances have led us to develop limiting beliefs and negative thought processes which block
-                                                            us from reaching our goals and living our dreams. He collaborates in partnership with her clients to overcome these
-                                                            barriers and honours them as the experts in their in lives.
+                                                            <p class="card-text" th:utext="${docName.getDescription()}"></p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
