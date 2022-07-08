@@ -8139,6 +8139,7 @@ a.bg-dark:focus, a.bg-dark:hover, button.bg-dark:focus, button.bg-dark:hover {
 }
 
 .fixed-top {
+    background-color: #1b5660;
     position: fixed;
     top: 0;
     right: 0;

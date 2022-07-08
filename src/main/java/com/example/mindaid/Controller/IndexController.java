@@ -1,16 +1,15 @@
 package com.example.mindaid.Controller;
+import com.example.mindaid.Dto.ChooseDto;
 import com.example.mindaid.Dto.ConcernDto;
 import com.example.mindaid.Dto.DoctorsDto;
-import com.example.mindaid.Model.Concern;
-import com.example.mindaid.Model.Doctors;
-import com.example.mindaid.Model.Login;
-import com.example.mindaid.Model.User;
+import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
 import com.example.mindaid.Repository.DoctorsRepository;
 import com.example.mindaid.Repository.UserRepository;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.DoctorListService;
+import com.example.mindaid.Service.TemporaryConcernService;
 import com.example.mindaid.Service.UserService;
 import com.example.mindaid.Service.EmailVerificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +43,8 @@ public class IndexController {
     DoctorConcernRepository doctorConcernRepository;
     @Autowired
     DoctorsRepository doctorsRepository;
+    @Autowired
+    TemporaryConcernService temporaryConcernService;
 
 
 
@@ -126,19 +127,45 @@ public class IndexController {
     }
     @PostMapping("/submitconcern")
     public String postConcern(ConcernDto concernDto,Model model){
-        List<Doctors> doctorsList=doctorListService.getDoctorList(concernDto);
-        System.out.println(doctorsList);
-        System.out.println(doctorsList.get(0));
-        model.addAttribute("doctorsList",doctorsList);
-        Doctors doctor=new Doctors();
-        model.addAttribute(doctor);
-        return "doctorslist";
+        Choose choose=new Choose();
+        ChooseDto chooseDto=new ChooseDto();
+        model.addAttribute(chooseDto);
+        temporaryConcernService.chooseList.add(concernDto);
+        return "choose";
+    }
+    @GetMapping("/doctors-list")
+    public String getdoctorList(Model model){
+        return "doctorsListNew";
+
+    }
+    @GetMapping("/doctors-details")
+    public String getdoctorDetails(Model model){
+        return "doctorsDetails";
+
+    }
+    @GetMapping("/booking")
+    public String getBooking(Model model){
+        return "bookingPage";
+
     }
 
-    @GetMapping("/doctorslist")
-    public String getdoctorList(Model model){
-        return "doctordetails";
+    @GetMapping("/choose")
+    public String getChoose(Model model){
+        return "choose";
+
     }
+    @PostMapping("/doctors-list")
+    public String postChoose(Model model, ChooseDto chooseDto){
+        List<Doctors> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+        System.out.println(doctorsList);
+        System.out.println(doctorsList.get(0));
+        System.out.println("choose: "+chooseDto.contactMedia);
+        model.addAttribute("doctorsList",doctorsList);
+        DoctorsDto doctorDto=new DoctorsDto();
+        model.addAttribute(doctorDto);
+        return "doctorsList";
+    }
+
 
 
 }

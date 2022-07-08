@@ -1,5 +1,6 @@
 package com.example.mindaid.Service;
 
+import com.example.mindaid.Dto.ChooseDto;
 import com.example.mindaid.Dto.ConcernDto;
 import com.example.mindaid.Dto.DoctorsDto;
 import com.example.mindaid.Model.Doctors;
@@ -17,7 +18,7 @@ public class DoctorListService {
     DoctorsRepository doctorsRepository;
     @Autowired
     DoctorConcernRepository doctorConcernRepository;
-    public List<Doctors> getDoctorList(ConcernDto concernDto){
+    public List<Doctors> getDoctorList(ConcernDto concernDto, ChooseDto chooseDto){
         List<Doctors> finalDoctorList=new ArrayList<>();
         List<Object[]> chosenDoctors= doctorConcernRepository.findByConcernId(concernDto.concerns);
                 for(Object[] doctors:chosenDoctors){
