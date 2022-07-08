@@ -128,6 +128,7 @@ public class IndexController {
     public String postConcern(ConcernDto concernDto,Model model){
         List<Doctors> doctorsList=doctorListService.getDoctorList(concernDto);
         System.out.println(doctorsList);
+        System.out.println(doctorsList.get(0));
         model.addAttribute("doctorsList",doctorsList);
         Doctors doctor=new Doctors();
         model.addAttribute(doctor);

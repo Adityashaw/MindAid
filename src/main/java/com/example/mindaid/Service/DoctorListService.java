@@ -19,16 +19,16 @@ public class DoctorListService {
     DoctorConcernRepository doctorConcernRepository;
     public List<Doctors> getDoctorList(ConcernDto concernDto){
         List<Doctors> finalDoctorList=new ArrayList<>();
-        for(int id: concernDto.concerns){
-            if (id>0){
-                List<Doctors> chosenDoctors= doctorConcernRepository.findByConcernId(id);
-                for(Doctors doctors:chosenDoctors){
-                    finalDoctorList.add(doctors);
+        List<Object[]> chosenDoctors= doctorConcernRepository.findByConcernId(concernDto.concerns);
+                for(Object[] doctors:chosenDoctors){
+                    Doctors doctor=new Doctors();
+                    doctor.setDoc_id((Integer) doctors[0]);
+                    doctor.setName((String) doctors[1]);
+                    doctor.setDescription((String) doctors[2]);
+                    doctor.setSpeciality((String) doctors[3]);
+                    doctor.setSchedule((String) doctors[4]);
+                    finalDoctorList.add(doctor);
                 }
-
-            }
-        }
         return finalDoctorList;
-
     }
 }
