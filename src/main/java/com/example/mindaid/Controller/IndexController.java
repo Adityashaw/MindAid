@@ -137,7 +137,7 @@ public class IndexController {
 
     @GetMapping("/doctorslist")
     public String getdoctorList(Model model){
-        return "doctorslist";
+        return "demodemo";
     }
 
 }
