@@ -130,6 +130,7 @@ public class IndexController {
         Choose choose=new Choose();
         ChooseDto chooseDto=new ChooseDto();
         model.addAttribute(chooseDto);
+        temporaryConcernService.chooseList.clear();
         temporaryConcernService.chooseList.add(concernDto);
         return "choose";
     }
@@ -164,6 +165,11 @@ public class IndexController {
         DoctorsDto doctorDto=new DoctorsDto();
         model.addAttribute(doctorDto);
         return "doctorsList";
+    }
+    @PostMapping("/postdoctorlist")
+    public  String postdoclist(Model model,DoctorsDto doctorsDto){
+        System.out.println(doctorsDto.getDoc_id());
+        return "doctorsDetails";
     }
 
 
