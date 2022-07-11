@@ -164,11 +164,15 @@ public class IndexController {
         model.addAttribute("doctorsList",doctorsList);
         DoctorsDto doctorDto=new DoctorsDto();
         model.addAttribute(doctorDto);
-        return "doctorsList";
+        return "doctorsListNew";
     }
     @PostMapping("/postdoctorlist")
-    public  String postdoclist(Model model,DoctorsDto doctorsDto){
-        System.out.println(doctorsDto.getDoc_id());
+    public  String postdoclist(Model model,ChooseDto chooseDto){
+//        System.out.println(doctorsDto.getDoc_id());
+        List<Doctors> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+        model.addAttribute("doctorsList",doctorsList);
+        DoctorsDto doctorsDto1=new DoctorsDto();
+        model.addAttribute(doctorsDto1);
         return "doctorsDetails";
     }
 

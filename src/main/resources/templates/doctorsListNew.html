@@ -105,7 +105,6 @@
         </nav>
     </div>
 </header>
-</div>
 <!-- //header -->
 
 <!-- doctor list view start -->
@@ -113,146 +112,49 @@
 <div class="bg_color_1">
     <div class="container margin_120_95">
         <div class="main_title">
-            <h2>Most Viewed doctors</h2>
-            <p>Usu habeo equidem sanctus no. Suas summo id sed, erat erant oporteat cu pri.</p>
+            <h2><b>Our Specialized Therapists</b></h2>
+            <p>Book a therapist to get an appointment</p>
         </div>
         <div class="row">
             <div class="col-lg-4 col-md-6">
+                <th:block th:each="docName: ${doctorsList}">
                 <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
+
+<!--                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>-->
                     <figure>
 
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_1.jpg" class="img-fluid" alt=""></a>
+                        <a href="detail-page.html"><img src="assets/images/doctor-icon.jpg" class="img-fluid" alt=""></a>
                         <div class="preview"><span>Read more</span></div>
                     </figure>
+                    <form method=post th:action="@{/postdoctorlist}" th:object="${doctorDto}">
                     <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Watamaniuk</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
+
+                        <p th:utext="${docName.getSpeciality()}"></p>
+                        <h5 th:utext="${docName.getName()}"></h5>
+<!--                        <p style="font-size: 15px" >Available slots:</p>-->
+                        <p style="display:inline">Available slot: </p><p th:utext="${docName.getSchedule()}"></p>
+                        Fee: <p> 500tk/hour</p>
+<!--                        <button type="submit" class="btn btn-outline-info mt-5">Book now</button>-->
+                        <button type="submit" class="btn btn-outline-info mt-5">Submit</button>
+<!--                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>-->
+<!--                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>-->
                     </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
+<!--                    <ul>-->
+<!--&lt;!&ndash;                        <li><i class="icon-eye-7"></i> 854 Views</li>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <li><a href="detail-page.html">Book now</a></li>&ndash;&gt;-->
+<!--                    </ul>-->
+                    </form>
                 </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
-                    <figure>
-
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_2.jpg" class="img-fluid" alt=""></a>
-                        <div class="preview"><span>Read more</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Mantooth</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
-                    </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
-                    <figure>
-
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_3.jpg" class="img-fluid" alt=""></a>
-                        <div class="preview"><span>Read more</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Pullman</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_2.svg" width="15" height="15" alt=""></a>
-                    </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
-                    <figure>
-
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_4.jpg" class="img-fluid" alt=""></a>
-                        <div class="preview"><span>Read more</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Toothaker</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_6.svg" width="15" height="15" alt=""></a>
-                    </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
-                    <figure>
-
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_5.jpg" class="img-fluid" alt=""></a>
-                        <div class="preview"><span>Read more</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Brilliant</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_6.svg" width="15" height="15" alt=""></a>
-                    </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="box_list home">
-                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>
-                    <figure>
-
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_6.jpg" class="img-fluid" alt=""></a>
-                        <div class="preview"><span>Read more</span></div>
-                    </figure>
-                    <div class="wrapper">
-                        <small>Psicologist</small>
-                        <h3>Dr. Crownover</h3>
-                        <p>Id placerat tacimates definitionem sea, prima quidam vim no. Duo nobis persecuti cuodo....</p>
-                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>
-                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>
-                    </div>
-                    <ul>
-                        <li><i class="icon-eye-7"></i> 854 Views</li>
-                        <li><a href="detail-page.html">Book now</a></li>
-                    </ul>
-                </div>
+                </th:block>
             </div>
         </div>
+
         <!-- /row -->
         <p class="text-center add_top_30"><a href="list.html" class="btn_1 medium">View all Doctors</a></p>
     </div>
 </div>
+
+
     <!-- doctor list view end -->
 <!-- COMMON SCRIPTS -->
 <script src="assets/js/jquery-3.6.0.min.js"></script>
