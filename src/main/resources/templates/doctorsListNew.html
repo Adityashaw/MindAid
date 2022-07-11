@@ -13,7 +13,6 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/custom.css">
 
     <!--    <link rel="stylesheet" href="assets/imported/style.css">-->
@@ -110,20 +109,21 @@
 <!-- doctor list view start -->
 
 <div class="bg_color_1">
-    <div class="container margin_120_95">
+    <div class="container">
+<!--    <div class="container margin_120_95">-->
         <div class="main_title">
             <h2><b>Our Specialized Therapists</b></h2>
             <p>Book a therapist to get an appointment</p>
         </div>
-        <div class="row">
+<!--        <div class="row">-->
+            <div class="row justify-content-center doc-list">
+            <th:block th:each="docName: ${doctorsList}">
             <div class="col-lg-4 col-md-6">
-                <th:block th:each="docName: ${doctorsList}">
+<!--                <th:block th:each="docName: ${doctorsList}">-->
                 <div class="box_list home">
-
-<!--                    <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Add to wishlist" class="wish_bt"></a>-->
                     <figure>
 
-                        <a href="detail-page.html"><img src="assets/images/doctor-icon.jpg" class="img-fluid" alt=""></a>
+                        <a href="detail-page.html"><img src="assets/img/doctor_listing_1.jpg" class="img-fluid" alt=""></a>
                         <div class="preview"><span>Read more</span></div>
                     </figure>
                     <form method=post th:action="@{/postdoctorlist}" th:object="${doctorDto}">
@@ -131,22 +131,16 @@
 
                         <p th:utext="${docName.getSpeciality()}"></p>
                         <h5 th:utext="${docName.getName()}"></h5>
-<!--                        <p style="font-size: 15px" >Available slots:</p>-->
                         <p style="display:inline">Available slot: </p><p th:utext="${docName.getSchedule()}"></p>
                         Fee: <p> 500tk/hour</p>
-<!--                        <button type="submit" class="btn btn-outline-info mt-5">Book now</button>-->
-                        <button type="submit" class="btn btn-outline-info mt-5">Submit</button>
-<!--                        <span class="rating"><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star voted"></i><i class="icon_star"></i><i class="icon_star"></i> <small>(145)</small></span>-->
-<!--                        <a href="#0" data-bs-toggle="tooltip" data-bs-placement="top" title="Badge Level" class="badge_list_1"><img src="assets/img/badges/badge_1.svg" width="15" height="15" alt=""></a>-->
+                        <button type="submit" class="btn btn-outline-info  btn-custom">Submit</button>
                     </div>
-<!--                    <ul>-->
-<!--&lt;!&ndash;                        <li><i class="icon-eye-7"></i> 854 Views</li>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <li><a href="detail-page.html">Book now</a></li>&ndash;&gt;-->
-<!--                    </ul>-->
+
                     </form>
                 </div>
-                </th:block>
+<!--                </th:block>-->
             </div>
+            </th:block>
         </div>
 
         <!-- /row -->
