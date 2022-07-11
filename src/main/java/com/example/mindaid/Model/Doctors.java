@@ -21,6 +21,8 @@ public class Doctors {
     public String schedule;
     @Column(name="contact_media")
     public String contactMedia;
+    @Column(name="education")
+    public String education;
 
     public int getDoc_id() {
         return doc_id;
@@ -68,5 +70,13 @@ public class Doctors {
 
     public void setContactMedia(String contactMedia) {
         this.contactMedia = contactMedia;
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education;
     }
 }

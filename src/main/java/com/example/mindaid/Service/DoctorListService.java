@@ -18,16 +18,17 @@ public class DoctorListService {
     DoctorsRepository doctorsRepository;
     @Autowired
     DoctorConcernRepository doctorConcernRepository;
-    public List<Doctors> getDoctorList(ConcernDto concernDto, ChooseDto chooseDto){
-        List<Doctors> finalDoctorList=new ArrayList<>();
+    public List<DoctorsDto> getDoctorList(ConcernDto concernDto, ChooseDto chooseDto){
+        List<DoctorsDto> finalDoctorList=new ArrayList<>();
         List<Object[]> chosenDoctors= doctorConcernRepository.findByConcernId(concernDto.concerns,chooseDto.contactMedia);
                 for(Object[] doctors:chosenDoctors){
-                    Doctors doctor=new Doctors();
+                    DoctorsDto doctor=new DoctorsDto();
                     doctor.setDoc_id((Integer) doctors[0]);
                     doctor.setName((String) doctors[1]);
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
                     doctor.setSchedule((String) doctors[4]);
+                    doctor.setFee((Integer) doctors[7]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;

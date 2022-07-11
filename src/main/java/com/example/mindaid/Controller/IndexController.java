@@ -153,11 +153,10 @@ public class IndexController {
     @GetMapping("/choose")
     public String getChoose(Model model){
         return "choose";
-
     }
     @PostMapping("/doctors-list")
     public String postChoose(Model model, ChooseDto chooseDto){
-        List<Doctors> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
         System.out.println(doctorsList);
         System.out.println(doctorsList.get(0));
         System.out.println("choose: "+chooseDto.contactMedia);
@@ -169,7 +168,7 @@ public class IndexController {
     @PostMapping("/postdoctorlist")
     public  String postdoclist(Model model,ChooseDto chooseDto){
 //        System.out.println(doctorsDto.getDoc_id());
-        List<Doctors> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
         model.addAttribute("doctorsList",doctorsList);
         DoctorsDto doctorsDto1=new DoctorsDto();
         model.addAttribute(doctorsDto1);

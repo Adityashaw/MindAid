@@ -132,8 +132,8 @@
                         <p th:utext="${docName.getSpeciality()}"></p>
                         <h5 th:utext="${docName.getName()}"></h5>
                         <p style="display:inline">Available slot: </p><p th:utext="${docName.getSchedule()}"></p>
-                        Fee: <p> 500tk/hour</p>
-                        <button type="submit" class="btn btn-outline-info  btn-custom">Submit</button>
+                        <p th:utext="'Fee: '+${docName.getFee()}"> </p>
+                        <button type="submit" class="btn btn-outline-info  btn-custom">Book Now</button>
                     </div>
 
                     </form>
@@ -144,7 +144,7 @@
         </div>
 
         <!-- /row -->
-        <p class="text-center add_top_30"><a href="list.html" class="btn_1 medium">View all Doctors</a></p>
+<!--        <p class="text-center add_top_30"><a href="list.html" class="btn_1 medium">View all Doctors</a></p>-->
     </div>
 </div>
 
