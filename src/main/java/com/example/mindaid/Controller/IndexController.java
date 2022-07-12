@@ -178,13 +178,7 @@ public class IndexController {
     @PostMapping("/postdoctorlist")
     public  String postdoclist(Model model,DoctorsDto docDto){
         List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=schedulingService.getScheduleTimeAndTimeStr(docDto,temporaryObjectHoldService.getDoctorsDtoList().get(0),model);
-        List<LocalDate>scheduleDays=new ArrayList<>();
-        LocalDate date=LocalDate.now().plusDays(1);
-        scheduleDays.add(date);
-        LocalDate dateNext= LocalDate.now().plusDays(2);
-        scheduleDays.add(dateNext);
-        LocalDate dateNextNext= LocalDate.now().plusDays(3);
-        scheduleDays.add(dateNextNext);
+        List<LocalDate>scheduleDays=schedulingService.getScheduleDays();
         model.addAttribute("scheduleTimeAndTimeStr",scheduleTimeAndTimeStr);
         model.addAttribute("scheduleDays",scheduleDays);
         return "doctorsDetails";

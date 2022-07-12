@@ -19,8 +19,6 @@ public class Doctors {
     public String speciality;
     @Column(name="schedule")
     public String schedule;
-    @Column(name="contact_media")
-    public String contactMedia;
     @Column(name="education")
     public String education;
 
@@ -62,14 +60,6 @@ public class Doctors {
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
-    }
-
-    public String getContactMedia() {
-        return contactMedia;
-    }
-
-    public void setContactMedia(String contactMedia) {
-        this.contactMedia = contactMedia;
     }
 
     public String getEducation() {

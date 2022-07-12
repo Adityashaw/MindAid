@@ -131,8 +131,8 @@
                                         </figure>
                                     </div>
                                     <div class="col-lg-7 col-md-8">
-                                        <small>Specialized at </small>
-                                        <h1>Dr. A</h1>
+                                        <small th:text="'Specialized at: '+${doctorsDto.getSpeciality}"></small>
+                                        <h1 th:text="${doctorsDto.getName}"></h1>
                                         <ul class="statistic">
                                             <li>854 Views</li>
                                             <li>124 Patients</li>
@@ -140,10 +140,10 @@
                                         <ul class="contacts">
                                             <li>
                                                 <h6>Fee</h6>
-                                                Tk. 500/session
+                                                <p th:text="'Tk. '+${doctorsDto.getFee}+'/session'"> </p>
                                             </li>
                                             <li>
-                                                <h6>Available on</h6> <p>Monday-Thursday, 3pm-6pm</p></li>
+                                                <h6>Available on</h6> <p th:text="${doctorsDto.getScheduleDay} + ' , '  +${doctorsDto.getScheduleTime}"></p></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -153,7 +153,7 @@
 
                             <div class="indent_title_in">
                                 <h3>About me</h3>
-                                <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+                                <p th:text="${doctorsDto.getDescription}"></p>
                             </div>
                             <div class="wrapper_indent">
                             </div>
@@ -162,10 +162,10 @@
 
                             <div class="indent_title_in">
                                 <h3>Education</h3>
-                                <p>Mussum ipsum cacilds, vidis litro abertis.</p>
+                                <p>Educational background.</p>
                             </div>
                             <div class="wrapper_indent">
-                                <p>Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapibus id, mattis vel, nisi. Nullam mollis. Phasellus hendrerit. Pellentesque aliquet nibh nec urna. In nisi neque, aliquet vel, dapi.</p>
+                                <p th:text="${doctorsDto.getEducation}"></p>
                                 <h6>Curriculum</h6>
                                 <ul class="list_edu">
                                     <li><strong>New York Medical College</strong> - Doctor of Medicine</li>
@@ -182,7 +182,7 @@
                         <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
                             <div class="title">
                                 <h3>Book a Session</h3>
-                                <small th:utext="${doctorsDto.getScheduleTime()}"></small>
+                                <small th:utext="${doctorsDto.getScheduleDay()}+','+${doctorsDto.getScheduleTime()}"></small>
                             </div>
                             <div class="row">
                                 <div class="col-6">

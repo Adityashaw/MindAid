@@ -30,11 +30,11 @@ public class DoctorListService {
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
                     doctor.setScheduleTime((String) doctors[4]);
-                    doctor.setContactMedia((String) doctors[5]);
-                    doctor.setEducation((String) doctors[6]);
-                    doctor.setScheduleDay((String) doctors[7]);
-                    doctor.setScheduleTimeStart((Time) doctors[8]);
-                    doctor.setFee((Integer) doctors[9]);
+                    doctor.setEducation((String) doctors[5]);
+                    doctor.setScheduleDay((String) doctors[6]);
+                    doctor.setScheduleTimeStart((Time) doctors[7]);
+                    doctor.setFee((Integer) doctors[8]);
+                    doctor.setContactMedia((String) doctors[9]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;
