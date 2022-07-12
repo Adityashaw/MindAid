@@ -28,6 +28,8 @@ public class DoctorListService {
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
                     doctor.setSchedule((String) doctors[4]);
+                    doctor.setContactMedia((String) doctors[5]);
+                    doctor.setEducation((String) doctors[6]);
                     doctor.setFee((Integer) doctors[7]);
                     finalDoctorList.add(doctor);
                 }
