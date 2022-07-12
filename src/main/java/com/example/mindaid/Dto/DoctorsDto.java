@@ -3,7 +3,10 @@ package com.example.mindaid.Dto;
 import com.example.mindaid.Model.Doctors;
 
 import javax.persistence.Column;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DoctorsDto {
@@ -11,11 +14,17 @@ public class DoctorsDto {
     public String name;
     public String description;
     public String speciality;
-    public String schedule;
+    public String scheduleTime;
     public String contactMedia;
-    public int fee;
     public String education;
+
+    public String scheduleDay;
+    public Time scheduleTimeStart;
+    public int fee;
     List<Doctors> DoctorsList=new ArrayList<>();
+
+    public Date selectedScheduleDay;
+    public LocalTime selectedScheduleTime;
 
     public int getDoc_id() {
         return doc_id;
@@ -49,12 +58,12 @@ public class DoctorsDto {
         this.speciality = speciality;
     }
 
-    public String getSchedule() {
-        return schedule;
+    public String getScheduleTime() {
+        return scheduleTime;
     }
 
-    public void setSchedule(String schedule) {
-        this.schedule = schedule;
+    public void setScheduleTime(String scheduleTime) {
+        this.scheduleTime = scheduleTime;
     }
 
     public String getContactMedia() {
@@ -63,6 +72,22 @@ public class DoctorsDto {
 
     public void setContactMedia(String contactMedia) {
         this.contactMedia = contactMedia;
+    }
+
+    public String getScheduleDay() {
+        return scheduleDay;
+    }
+
+    public void setScheduleDay(String scheduleDay) {
+        this.scheduleDay = scheduleDay;
+    }
+
+    public Time getScheduleTimeStart() {
+        return scheduleTimeStart;
+    }
+
+    public void setScheduleTimeStart(Time scheduleTimeStart) {
+        this.scheduleTimeStart = scheduleTimeStart;
     }
 
     public int getFee() {
@@ -87,5 +112,21 @@ public class DoctorsDto {
 
     public void setDoctorsList(List<Doctors> doctorsList) {
         DoctorsList = doctorsList;
+    }
+
+    public Date getSelectedScheduleDay() {
+        return selectedScheduleDay;
+    }
+
+    public void setSelectedScheduleDay(Date selectedScheduleDay) {
+        this.selectedScheduleDay = selectedScheduleDay;
+    }
+
+    public LocalTime getSelectedScheduleTime() {
+        return selectedScheduleTime;
+    }
+
+    public void setSelectedScheduleTime(LocalTime selectedScheduleTime) {
+        this.selectedScheduleTime = selectedScheduleTime;
     }
 }

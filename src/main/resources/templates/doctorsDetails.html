@@ -9,6 +9,7 @@
     <title>Doctordetails</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link href="assets/css/custom.css" rel="stylesheet">
 
     <!-- Favicons-->
     <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
@@ -178,27 +179,40 @@
                 <!-- /col -->
                 <aside class="col-xl-4 col-lg-4" id="sidebar">
                     <div class="box_general_3 booking">
-<!--                        <form>-->
+                        <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
                             <div class="title">
-                                <h3>Book a Visit</h3>
-                                <small>Monday to Friday 09.00am-06.00pm</small>
+                                <h3>Book a Session</h3>
+                                <small th:utext="${doctorsDto.getScheduleTime()}"></small>
                             </div>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">
+<!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
+                                        <select id="selectedScheduleDay" class="custom-select-option"  th:with="selectedScheduleDay=*{selectedScheduleDay}" required>
+<!--                                            th:field="*{selectedScheduleDay}"-->
+                                            <option th:selected="true" th:disabled="disabled" value="something">Select Day </option>
+                                            <th:block th:each="scheduleDay : ${scheduleDays}">
+                                            <option th:value="${scheduleDay}" th:text="${scheduleDay}"> </option>
+                                            </th:block>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">
+<!--                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
+                                        <select id="selectedScheduleTime" class="custom-select-option"  th:with="selectedScheduleTime=*{selectedScheduleTime}" required>
+                                            <!--                                            th:field="*{selectedScheduleDay}"-->
+                                            <option th:selected="true" th:disabled="disabled" value="something">Select Time </option>
+                                            <th:block th:each="scheduleTime : ${scheduleTimeAndTimeStr}">
+                                                <option th:value="${scheduleTime.getScheduleTime()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>
+                                            </th:block>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
-
                             <hr>
                             <a href="booking-page.html" class="btn_1 full-width">Book Now</a>
-<!--                        </form>-->
+                        </form>
                     </div>
                     <!-- /box_general -->
                 </aside>

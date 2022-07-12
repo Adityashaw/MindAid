@@ -13,11 +13,11 @@ import java.util.List;
 
 @Repository
 public interface DoctorConcernRepository extends JpaRepository<DoctorConcern , Integer> {
-    @Query(value = "SELECT distinct d.*,s.fee FROM concern c,doctors d, doctorconcern dc, schedule s"+
+    @Query(value = "SELECT distinct d.*,s.schedule_day,s.schedule_time_start,s.fee FROM concern c,doctors d, doctorconcern dc, schedule s"+
             " WHERE dc.concern_id IN :concerns"+
             " AND dc.concern_id=c.iconcernid "+
             " AND dc.doc_id=d.doc_id "+
-            " AND d.contact_media=:contactMedia "+
+            " AND d.doc_id = s.doc_id "+
             " AND dc.doc_id=s.doc_id "+
             " AND s.contact_media=:contactMedia "+
             " ORDER BY d.name ASC ",

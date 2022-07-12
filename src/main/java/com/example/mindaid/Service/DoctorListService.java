@@ -9,6 +9,8 @@ import com.example.mindaid.Repository.DoctorsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,10 +29,12 @@ public class DoctorListService {
                     doctor.setName((String) doctors[1]);
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
-                    doctor.setSchedule((String) doctors[4]);
+                    doctor.setScheduleTime((String) doctors[4]);
                     doctor.setContactMedia((String) doctors[5]);
                     doctor.setEducation((String) doctors[6]);
-                    doctor.setFee((Integer) doctors[7]);
+                    doctor.setScheduleDay((String) doctors[7]);
+                    doctor.setScheduleTimeStart((Time) doctors[8]);
+                    doctor.setFee((Integer) doctors[9]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;

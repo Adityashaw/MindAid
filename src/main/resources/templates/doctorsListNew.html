@@ -128,11 +128,16 @@
                     </figure>
                     <form method=post th:action="@{/postdoctorlist}" th:object="${doctorDto}">
                     <div class="wrapper">
-
-                        <p th:utext="${docName.getSpeciality()}"></p>
+                        <small th:utext="${docName.getSpeciality()}"></small>
                         <h5 th:utext="${docName.getName()}"></h5>
-                        <p style="display:inline">Available slot: </p><p th:utext="${docName.getSchedule()}"></p>
+                        <p class="education-custom" th:utext="${docName.getEducation()}"> </p>
+
+                        <p>Available On: <span th:utext="${docName.getScheduleDay()}+' | '+${docName.getScheduleTimeStart()}"></span></p>
+
+<!--                        <p th:utext="'Available On: '+${docName.getScheduleDay()}+' | '+${docName.getScheduleTime()}"></p>-->
                         <p th:utext="'Fee: '+${docName.getFee()}"> </p>
+                        <hr>
+                        <input type="hidden" th:value="${docName.getDoc_id()}" th:attr="name='doc_id'"/>
                         <button type="submit" class="btn btn-outline-info  btn-custom">Book Now</button>
                     </div>
 

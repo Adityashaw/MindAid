@@ -189,6 +189,7 @@ ul,li{
 
 .doc-list p{
     margin-bottom: 5px !important;
+    font-family: serif;
 }
 
 @media only screen and (max-width: 767px){

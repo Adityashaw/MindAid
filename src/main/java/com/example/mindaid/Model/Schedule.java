@@ -1,6 +1,8 @@
 package com.example.mindaid.Model;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.time.LocalTime;
 
 @Entity
 @Table(name = "schedule")
@@ -15,11 +17,10 @@ public class Schedule {
     public String contactMedia;
     @Column(name = "schedule_day")
     public String scheduleDay;
-    @Column(name = "schedule_time")
-    public String scheduleTime;
+    @Column(name = "schedule_time_start")
+    public Time scheduleTimeStart;
     @Column(name = "fee")
     public int fee;
-
     public int getScheduleId() {
         return scheduleId;
     }
@@ -52,12 +53,12 @@ public class Schedule {
         this.scheduleDay = scheduleDay;
     }
 
-    public String getScheduleTime() {
-        return scheduleTime;
+    public Time getScheduleTimeStart() {
+        return scheduleTimeStart;
     }
 
-    public void setScheduleTime(String scheduleTime) {
-        this.scheduleTime = scheduleTime;
+    public void setScheduleTimeStart(Time scheduleTimeStart) {
+        this.scheduleTimeStart = scheduleTimeStart;
     }
 
     public int getFee() {
