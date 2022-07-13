@@ -21,6 +21,17 @@ public class Schedule {
     public Time scheduleTimeStart;
     @Column(name = "fee")
     public int fee;
+    @Column(name = "scheduleday_parameter")
+    public String scheduleday_parameter;
+
+    public String getScheduleday_parameter() {
+        return scheduleday_parameter;
+    }
+
+    public void setScheduleday_parameter(String scheduleday_parameter) {
+        this.scheduleday_parameter = scheduleday_parameter;
+    }
+
     public int getScheduleId() {
         return scheduleId;
     }

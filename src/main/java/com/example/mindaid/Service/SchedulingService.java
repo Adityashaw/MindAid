@@ -5,11 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import java.sql.DatabaseMetaData;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -35,6 +37,7 @@ public class SchedulingService {
         List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=new ArrayList<>();
         for (DoctorsDto doctorsDto : doctorsDtoList){
             if (docDto.doc_id==doctorsDto.doc_id){
+                getScheduleDays(doctorsDto,model);
                 if (doctorsDto.contactMedia.equals("live")) {
                     Time time = doctorsDto.scheduleTimeStart;
                     LocalTime localTime = time.toLocalTime();
@@ -56,6 +59,7 @@ public class SchedulingService {
                     Collections.addAll(scheduleTimeAndTimeStr, obj1, obj2, obj3);
                     doctorsDto.setScheduleTime(scheduleTimestr1+"-"+scheduleTimestr3);
                     model.addAttribute("doctorsDto",doctorsDto);
+
                     return scheduleTimeAndTimeStr;
                 }
                 else {
@@ -81,14 +85,53 @@ public class SchedulingService {
         return scheduleTimeAndTimeStr;
     }
 
-    public List<LocalDate> getScheduleDays(){
-        List<LocalDate>scheduleDays=new ArrayList<>();
-        LocalDate date=LocalDate.now().plusDays(1);
-        scheduleDays.add(date);
-        LocalDate dateNext= LocalDate.now().plusDays(2);
-        scheduleDays.add(dateNext);
-        LocalDate dateNextNext= LocalDate.now().plusDays(3);
-        scheduleDays.add(dateNextNext);
-        return scheduleDays;
+    public void getScheduleDays(DoctorsDto doctorsDto,Model model){
+        List<TemporaryObjectHoldService> scheduleDays=new ArrayList<>();
+
+        TemporaryObjectHoldService obj1=new TemporaryObjectHoldService();
+        TemporaryObjectHoldService obj2=new TemporaryObjectHoldService();
+        TemporaryObjectHoldService obj3=new TemporaryObjectHoldService();
+
+        LocalDate date1=LocalDate.now().plusDays(1);
+        obj1.setScheduleDate(date1);
+        obj1.setActiveStatus(getActiveStatus(doctorsDto,date1));
+        obj1.setActiveStatusBool(getActiveStatusBool(doctorsDto,date1));
+
+        LocalDate date2= LocalDate.now().plusDays(2);
+        obj2.setScheduleDate(date2);
+        obj2.setActiveStatus(getActiveStatus(doctorsDto,date2));
+        obj2.setActiveStatusBool(getActiveStatusBool(doctorsDto,date2));
+
+        LocalDate date3= LocalDate.now().plusDays(3);
+        obj3.setScheduleDate(date3);
+        obj3.setActiveStatus(getActiveStatus(doctorsDto,date3));
+        obj3.setActiveStatusBool(getActiveStatusBool(doctorsDto,date3));
+
+       Collections.addAll(scheduleDays,obj1,obj2,obj3);
+       model.addAttribute("scheduleDays",scheduleDays);
+    }
+
+    public int getActiveStatus(DoctorsDto doctorsDto,LocalDate date){
+        int status=0;
+        int day= date.getDayOfWeek().getValue();
+        char[] scheduleday_paramater=doctorsDto.getScheduleday_parameter().toCharArray();
+        for(char c: scheduleday_paramater){
+            if(day==Character.getNumericValue(c)){
+                status=1;
+            }
+        }
+        return status;
+    }
+
+    public boolean getActiveStatusBool(DoctorsDto doctorsDto,LocalDate date){
+        boolean status=true;
+        int day= date.getDayOfWeek().getValue();
+        char[] scheduleday_paramater=doctorsDto.getScheduleday_parameter().toCharArray();
+        for(char c: scheduleday_paramater){
+            if(day==Character.getNumericValue(c)){
+                status=false;
+            }
+        }
+        return status;
     }
 }
