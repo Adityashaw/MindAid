@@ -73,6 +73,6 @@ public class DoctorsController {
         }
         @PostMapping("/payment")
         public  String postdocDetails(Model model,DoctorsDto doctorsDto){
-                return "dummy";
+                return "payment";
         }
         }
