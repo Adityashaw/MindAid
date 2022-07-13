@@ -25,6 +25,15 @@ public class DoctorsDto {
 
     public Date selectedScheduleDay;
     public LocalTime selectedScheduleTime;
+    public String scheduleday_parameter;
+
+    public String getScheduleday_parameter() {
+        return scheduleday_parameter;
+    }
+
+    public void setScheduleday_parameter(String scheduleday_parameter) {
+        this.scheduleday_parameter = scheduleday_parameter;
+    }
 
     public int getDoc_id() {
         return doc_id;

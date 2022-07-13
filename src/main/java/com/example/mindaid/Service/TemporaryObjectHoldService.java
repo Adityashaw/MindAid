@@ -3,6 +3,7 @@ package com.example.mindaid.Service;
 import com.example.mindaid.Dto.DoctorsDto;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,33 @@ public class TemporaryObjectHoldService {
     public List<TemporaryObjectHoldService>temporaryObjectHoldServiceList=new ArrayList<>();
     public String scheduleTimeStr;
     public LocalTime scheduleTime;
+    public LocalDate scheduleDate;
+    public int activeStatus;
+    public boolean activeStatusBool;
+
+    public boolean isActiveStatusBool() {
+        return activeStatusBool;
+    }
+
+    public void setActiveStatusBool(boolean activeStatusBool) {
+        this.activeStatusBool = activeStatusBool;
+    }
+
+    public LocalDate getScheduleDate() {
+        return scheduleDate;
+    }
+
+    public void setScheduleDate(LocalDate scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public int getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(int activeStatus) {
+        this.activeStatus = activeStatus;
+    }
 
     public List<TemporaryObjectHoldService> getTemporaryObjectHoldServiceList() {
         return temporaryObjectHoldServiceList;

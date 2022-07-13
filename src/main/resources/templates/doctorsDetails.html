@@ -192,7 +192,7 @@
 <!--                                            th:field="*{selectedScheduleDay}"-->
                                             <option th:selected="true" th:disabled="disabled" value="something">Select Day </option>
                                             <th:block th:each="scheduleDay : ${scheduleDays}">
-                                            <option th:value="${scheduleDay}" th:text="${scheduleDay}"> </option>
+                                            <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>
                                             </th:block>
                                         </select>
                                     </div>
@@ -211,7 +211,7 @@
                                 </div>
                             </div>
                             <hr>
-                            <a href="booking-page.html" class="btn_1 full-width">Book Now</a>
+                            <button class="btn btn-info" type="submit">Book Now</button>
                         </form>
                     </div>
                     <!-- /box_general -->

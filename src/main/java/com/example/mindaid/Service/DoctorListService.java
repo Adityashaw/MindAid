@@ -35,6 +35,7 @@ public class DoctorListService {
                     doctor.setScheduleTimeStart((Time) doctors[7]);
                     doctor.setFee((Integer) doctors[8]);
                     doctor.setContactMedia((String) doctors[9]);
+                    doctor.setScheduleday_parameter((String) doctors[10]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;
