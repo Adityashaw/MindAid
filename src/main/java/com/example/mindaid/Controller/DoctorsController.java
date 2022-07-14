@@ -74,7 +74,7 @@ public class DoctorsController {
         }
         @PostMapping("/payment")
         public  String postdocDetails(Model model, DoctorsDto doctorsDto){
-                PaymentDto paymentDto=new PaymentDto();
+                Payment paymentDto=new PaymentDto();
                 model.addAttribute(paymentDto);
                 model.addAttribute("doctorsDto", doctorsDto);
                 System.out.println(doctorsDto.selectedScheduleDay);

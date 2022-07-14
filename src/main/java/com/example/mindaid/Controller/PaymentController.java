@@ -1,14 +1,13 @@
 package com.example.mindaid.Controller;
-import com.example.mindaid.Repository.ConcernRepository;
-import com.example.mindaid.Repository.DoctorConcernRepository;
-import com.example.mindaid.Repository.DoctorsRepository;
-import com.example.mindaid.Repository.UserRepository;
+import com.example.mindaid.Dto.PaymentDto;
+import com.example.mindaid.Repository.*;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class PaymentController {
@@ -34,16 +33,23 @@ public class PaymentController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    PaymentRepository paymentRepository;
 
     @GetMapping("/booking")
     public String getBooking(Model model){
         return "payment";
-
     }
 
-
     @GetMapping("/booking-confirm")
-    public String geetConfirm(){
+    public String getConfirm(){
         return "paymentConfirm";
+    }
+    @PostMapping("/booking-confirm")
+    public String postBooking(Model model, PaymentDto paymentDto){
+        model.addAttribute(paymentDto);
+        paymentRepository.save(paymentDto);
+        return "paymentConfirm";
+
     }
 }
