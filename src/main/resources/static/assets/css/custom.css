@@ -55,3 +55,17 @@ hr.custom-hr{
     background-color: #ededed !important;
     opacity: 1;
 }
+header.fixed-top-custom{
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+    background-color: #0c5460;
+    position: fixed;
+    /* padding-bottom: 10px; */
+}
+custom-middle{
+    padding: 3rem;
+    margin-left: 280px;
+    position: relative;
+}
