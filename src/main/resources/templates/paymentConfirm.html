@@ -30,6 +30,7 @@
     <!-- YOUR CUSTOM CSS -->
     <link href="assets/css/custom_2.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
 
 </head>
@@ -44,9 +45,10 @@
 <header id="site-header" class="header-w3l fixed-top">
     <div class="container">
         <nav class="navbar navbar-expand-lg stroke">
-            <a class="navbar-brand" href="index.html">
-                M<span class="sub-logo">i</span>ndA</span><span class="sub-logo">i</span>d</span>
+            <a class="brand-logo" href="#">
+                M<span class="sub-logo">i</span>ndA<span class="sub-logo">i</span>d
             </a>
+
             <!-- if logo is image enable this -->
             <!-- <a class="navbar-brand" href="#index.html">
                 <img src="assets/images/MindAid.png" alt="Your logo" title="Your logo" style="height:70px;" />
@@ -125,7 +127,7 @@
                         </svg>
                     </div>
                     <h2>Thanks for your booking!</h2>
-                    <p>You'll receive a confirmation email at mail@example.com</p>
+                    <a th:href="@{/user-profile}">Go to your profile</a>
                 </div>
             </div>
         </div>

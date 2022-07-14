@@ -54,16 +54,12 @@ public class ConcernController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    ConcernService concernService;
 
     @GetMapping("/concern")
     public String getConcern(Model model) {
-        Concern concern=new Concern();
-        ConcernDto concernDto=new ConcernDto();
-        List<Concern>concernList=concernRepository.findAll();
-        System.out.println(concernList.size());
-        model.addAttribute(concernDto);
-        model.addAttribute(concern);
-        model.addAttribute("concernList",concernList);
+        concernService.getAndSetConcernList(model);
         return "concern";
     }
     @PostMapping("/submitconcern")

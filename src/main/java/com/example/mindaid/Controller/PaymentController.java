@@ -1,5 +1,6 @@
 package com.example.mindaid.Controller;
 import com.example.mindaid.Dto.PaymentDto;
+import com.example.mindaid.Model.Payment;
 import com.example.mindaid.Repository.*;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.*;
@@ -46,7 +47,7 @@ public class PaymentController {
         return "paymentConfirm";
     }
     @PostMapping("/booking-confirm")
-    public String postBooking(Model model, PaymentDto paymentDto){
+    public String postBooking(Model model, Payment paymentDto){
         model.addAttribute(paymentDto);
         paymentRepository.save(paymentDto);
         return "paymentConfirm";

@@ -53,6 +53,8 @@ public class IndexController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    ConcernService concernService;
 
 
 
@@ -77,7 +79,10 @@ public class IndexController {
         model.addAttribute(user);
         List<Login> loginList=new ArrayList<>();
         int loginValidate=userService.loginValidation(login);
-        if (loginValidate==1) return "concern";
+        if (loginValidate==1) {
+            concernService.getAndSetConcernList(model);
+            return "concern";
+        }
         else if(loginValidate==2){
             login.setMessage("Please verify your account from email!!");
             loginList.add(login);

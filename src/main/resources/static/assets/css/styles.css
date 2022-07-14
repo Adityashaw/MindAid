@@ -3862,6 +3862,8 @@ ul.treatments.checkout li.total {
 
 #confirm {
   text-align: center;
+  padding-bottom: 370px;
+  padding-top: 250px;
 }
 
 @-webkit-keyframes checkmark {

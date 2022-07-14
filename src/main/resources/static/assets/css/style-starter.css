@@ -726,6 +726,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+
 }
 
 .no-gutters {
@@ -14070,7 +14071,7 @@ html {
   padding: 0;
   background: var(--bg-grey);
   color: var(--font-color);
-  font-family: 'Hind Siliguri', sans-serif;
+  font-family: "Poppins", Helvetica, sans-serif;
 }
 
 body a,
@@ -14503,6 +14504,7 @@ button.navbar-toggler.collapsed .icon-expand {
   font-size: 30px;
   font-weight: 700;
   color: #fff;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header-w3l .navbar .navbar-brand span.sub-logo {
@@ -14565,6 +14567,7 @@ a.navbar-brand img {
   padding: 14px 0;
   font-size: 18px;
   font-weight: 500;
+  font-family: serif;
   position: relative;
   color: #fff;
 }
