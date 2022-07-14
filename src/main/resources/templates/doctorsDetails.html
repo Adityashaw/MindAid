@@ -188,7 +188,7 @@
                                 <div class="col-6">
                                     <div class="form-group">
 <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
-                                        <select id="selectedScheduleDay" class="custom-select-option"  th:with="selectedScheduleDay=*{selectedScheduleDay}" required>
+                                        <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-select-option" required>
 <!--                                            th:field="*{selectedScheduleDay}"-->
                                             <option th:selected="true" th:disabled="disabled" value="something">Select Day </option>
                                             <th:block th:each="scheduleDay : ${scheduleDays}">
@@ -200,18 +200,21 @@
                                 <div class="col-6">
                                     <div class="form-group">
 <!--                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
-                                        <select id="selectedScheduleTime" class="custom-select-option"  th:with="selectedScheduleTime=*{selectedScheduleTime}" required>
+                                        <select th:name="selectedScheduleTime" id="selectedScheduleTime" class="custom-select-option" required>
                                             <!--                                            th:field="*{selectedScheduleDay}"-->
                                             <option th:selected="true" th:disabled="disabled" value="something">Select Time </option>
                                             <th:block th:each="scheduleTime : ${scheduleTimeAndTimeStr}">
-                                                <option th:value="${scheduleTime.getScheduleTime()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>
+                                                <option th:value="${scheduleTime.getScheduleTimeStr()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>
                                             </th:block>
                                         </select>
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <button class="btn btn-info" type="submit">Book Now</button>
+<!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
+                            <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
+                            <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
+                            <button class="btn_1 full-width" type="submit">Book Now</button>
                         </form>
                     </div>
                     <!-- /box_general -->
@@ -228,6 +231,7 @@
 
 <div id="toTop"></div>
 <!-- Back to top button -->
+
 
 <!-- COMMON SCRIPTS -->
 <script src="assets/js/jquery-3.6.0.min.js"></script>

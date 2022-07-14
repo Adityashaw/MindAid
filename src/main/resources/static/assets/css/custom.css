@@ -50,3 +50,8 @@ p.education-custom{
     font-family: serif;
     color: #4f83c3;
 }
+hr.custom-hr{
+    margin: 2px 0 15px 0;
+    background-color: #ededed !important;
+    opacity: 1;
+}

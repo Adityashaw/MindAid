@@ -4,6 +4,7 @@ import com.example.mindaid.Model.Doctors;
 
 import javax.persistence.Column;
 import java.sql.Time;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,8 +24,8 @@ public class DoctorsDto {
     public int fee;
     List<Doctors> DoctorsList=new ArrayList<>();
 
-    public Date selectedScheduleDay;
-    public LocalTime selectedScheduleTime;
+    public String selectedScheduleDay;
+    public String selectedScheduleTime;
     public String scheduleday_parameter;
 
     public String getScheduleday_parameter() {
@@ -123,19 +124,19 @@ public class DoctorsDto {
         DoctorsList = doctorsList;
     }
 
-    public Date getSelectedScheduleDay() {
+    public String getSelectedScheduleDay() {
         return selectedScheduleDay;
     }
 
-    public void setSelectedScheduleDay(Date selectedScheduleDay) {
+    public void setSelectedScheduleDay(String selectedScheduleDay) {
         this.selectedScheduleDay = selectedScheduleDay;
     }
 
-    public LocalTime getSelectedScheduleTime() {
+    public String getSelectedScheduleTime() {
         return selectedScheduleTime;
     }
 
-    public void setSelectedScheduleTime(LocalTime selectedScheduleTime) {
+    public void setSelectedScheduleTime(String selectedScheduleTime) {
         this.selectedScheduleTime = selectedScheduleTime;
     }
 }

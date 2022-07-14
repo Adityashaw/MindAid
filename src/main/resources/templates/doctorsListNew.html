@@ -136,9 +136,9 @@
 
 <!--                        <p th:utext="'Available On: '+${docName.getScheduleDay()}+' | '+${docName.getScheduleTime()}"></p>-->
                         <p th:utext="'Fee: '+${docName.getFee()}"> </p>
-                        <hr>
+                        <hr class="custom-hr">
                         <input type="hidden" th:value="${docName.getDoc_id()}" th:attr="name='doc_id'"/>
-                        <button type="submit" class="btn btn-outline-info  btn-custom">Book Now</button>
+                        <button class="btn_1 full-width" type="submit">Book Now</button>
                     </div>
 
                     </form>

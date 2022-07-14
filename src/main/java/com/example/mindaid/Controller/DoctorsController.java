@@ -2,6 +2,7 @@ package com.example.mindaid.Controller;
 import com.example.mindaid.Dto.ChooseDto;
 import com.example.mindaid.Dto.ConcernDto;
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.PaymentDto;
 import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
@@ -72,7 +73,11 @@ public class DoctorsController {
                 return "doctorsDetails";
         }
         @PostMapping("/payment")
-        public  String postdocDetails(Model model,DoctorsDto doctorsDto){
+        public  String postdocDetails(Model model, DoctorsDto doctorsDto){
+                PaymentDto paymentDto=new PaymentDto();
+                model.addAttribute(paymentDto);
+                model.addAttribute("doctorsDto", doctorsDto);
+                System.out.println(doctorsDto.selectedScheduleDay);
                 return "payment";
         }
         }
