@@ -102,3 +102,12 @@ header.a.navbar-brand-custom{
 .brand-logo span {
     color: #2caee2;
 }
+.custom-row-1{
+    display: flex;
+}
+.custom-column-1{
+    margin-left: 50px;
+}
+.custom-column-2{
+    margin-left: 200px;
+}
