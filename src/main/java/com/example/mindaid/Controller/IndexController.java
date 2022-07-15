@@ -1,7 +1,4 @@
 package com.example.mindaid.Controller;
-import com.example.mindaid.Dto.ChooseDto;
-import com.example.mindaid.Dto.ConcernDto;
-import com.example.mindaid.Dto.DoctorsDto;
 import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
@@ -17,14 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.sql.Time;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
@@ -62,7 +52,7 @@ public class IndexController {
     public String getHome(Model model) {
         User user = new User();
         model.addAttribute(user);
-        return "index";
+        return "home";
     }
     //log in area start
     @GetMapping("/login")
