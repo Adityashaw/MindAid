@@ -28,7 +28,6 @@ public class UserService {
         List<User> userList = userRepository.findByEmail(login.email);
         if (userList.size() > 0) {
             if (login.password.equals(userList.get(0).confirmPassword)) {
-
                 if (userList.get(0).isEnabled()) return 1;
                 else return 2;
             }

@@ -80,6 +80,7 @@ public class IndexController {
         List<Login> loginList=new ArrayList<>();
         int loginValidate=userService.loginValidation(login);
         if (loginValidate==1) {
+
             concernService.getAndSetConcernList(model);
             return "concern";
         }
