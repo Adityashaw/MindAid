@@ -147,7 +147,7 @@
                 <div class="concern_content">
                     <h2 class="title">Let us know your concerns</h2><br>
                     <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p><br>
-                    <Form th:action="@{/submitconcern}"  th:object="${concernDto}" method="POST">
+                    <form th:action="@{/submitconcern}"  th:object="${concernDto}" method="POST">
                     <div class="checkbox-list">
                         <th:block th:each="concern : ${concernList}">
                         <!--label start-->
@@ -160,8 +160,14 @@
                         <!--label end-->
                         </th:block>
                     </div>
+
+<!--Hidden Input Section-->
+<input type="hidden" th:name="userId" th:value="${userDto.getUserId}"/>
+<!-- Hidden Input Section end-->
+
+
                     <button type="submit" class="btn btn-outline-info mt-5">Submit</button>
-                    </Form>
+                    </form>
                 </div>
             </div><!-- col-lg-12 end-->
         </div><!-- row end-->

@@ -124,6 +124,11 @@
                         <form method="post" th:action="@{/doctors-list}" th:object="${login}">
                             <input type="hidden" th:value="message" th:attr="name='contactMedia'"/>
                             <!--                            <a href="#" class="btn btn-info"><i class="fas fa-angle-double-right"></i></a>-->
+<!--Hidden Input Section-->
+                            <input type="hidden" th:name="userId" th:value="${userDto.getUserId}"/>
+
+<!-- Hidden Input Section end-->
+
                             <button class="btn btn-info" type="submit"><i class="fas fa-angle-double-right"></i></button>
                         </form>
                     </div>
