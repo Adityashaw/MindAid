@@ -2,6 +2,7 @@ package com.example.mindaid.Controller;
 import com.example.mindaid.Dto.ChooseDto;
 import com.example.mindaid.Dto.ConcernDto;
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.UserDto;
 import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
@@ -63,12 +64,17 @@ public class ConcernController {
         return "concern";
     }
     @PostMapping("/submitconcern")
-    public String postConcern(ConcernDto concernDto,Model model){
+    public String postConcern(ConcernDto concernDto, UserDto userDto, Model model){
         Choose choose=new Choose();
         ChooseDto chooseDto=new ChooseDto();
-        model.addAttribute(chooseDto);
         temporaryConcernService.chooseList.clear();
         temporaryConcernService.chooseList.add(concernDto);
+        //test
+        System.out.println(userDto.userId);
+        //test end
+        model.addAttribute(concernDto);
+        model.addAttribute(chooseDto);
+        model.addAttribute(userDto);
         return "choose";
     }
 }

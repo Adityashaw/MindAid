@@ -78,9 +78,8 @@ public class IndexController {
         User user=new User();
         model.addAttribute(user);
         List<Login> loginList=new ArrayList<>();
-        int loginValidate=userService.loginValidation(login);
+        int loginValidate=userService.loginValidationAndUserIdTransfer(login,model);
         if (loginValidate==1) {
-
             concernService.getAndSetConcernList(model);
             return "concern";
         }

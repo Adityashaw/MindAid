@@ -2,6 +2,7 @@ package com.example.mindaid.Controller;
 import com.example.mindaid.Dto.ChooseDto;
 import com.example.mindaid.Dto.ConcernDto;
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.UserDto;
 import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
@@ -60,8 +61,9 @@ public class ChooseController {
         return "choose";
     }
     @PostMapping("/doctors-list")
-    public String postChoose(Model model, ChooseDto chooseDto){
+    public String postChoose(Model model, ChooseDto chooseDto, UserDto userDto,ConcernDto concernDto){
         List<DoctorsDto> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+//        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(concernDto,chooseDto);
         temporaryObjectHoldService.doctorsDtoList.clear();
         temporaryObjectHoldService.doctorsDtoList.add(doctorsList);
         System.out.println(doctorsList);
