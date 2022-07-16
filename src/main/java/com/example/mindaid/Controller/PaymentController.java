@@ -10,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.nio.charset.Charset;
+import java.util.Random;
+
 @Controller
 public class PaymentController {
     @Autowired
@@ -49,8 +52,7 @@ public class PaymentController {
     @PostMapping("/booking-confirm")
     public String postBooking(Model model, Payment paymentDto){
         model.addAttribute(paymentDto);
-        paymentRepository.save(paymentDto);
-        return "paymentConfirm";
 
+        return "paymentConfirm";
     }
 }
