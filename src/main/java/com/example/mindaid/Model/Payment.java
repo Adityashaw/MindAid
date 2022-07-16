@@ -44,6 +44,28 @@ public class Payment {
     @Column(name = "session_link")
     public String sessionLink;
 
+    @Column(name = "contact_media")
+    public String contactMedia;
+
+    @Column(name = "active_status")
+    public int activeStatus;
+
+    public int getActiveStatus() {
+        return activeStatus;
+    }
+
+    public void setActiveStatus(int activeStatus) {
+        this.activeStatus = activeStatus;
+    }
+
+    public String getContactMedia() {
+        return contactMedia;
+    }
+
+    public void setContactMedia(String contactMedia) {
+        this.contactMedia = contactMedia;
+    }
+
     public String getSessionLink() {
         return sessionLink;
     }
