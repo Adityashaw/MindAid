@@ -25,7 +25,7 @@ public class DoctorListService {
         List<Object[]> chosenDoctors= doctorConcernRepository.findByConcernId(concernDto.concerns,chooseDto.contactMedia);
                 for(Object[] doctors:chosenDoctors){
                     DoctorsDto doctor=new DoctorsDto();
-                    doctor.setDoc_id((Integer) doctors[0]);
+                    doctor.setDocId((Integer) doctors[0]);
                     doctor.setName((String) doctors[1]);
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
@@ -36,6 +36,7 @@ public class DoctorListService {
                     doctor.setFee((Integer) doctors[8]);
                     doctor.setContactMedia((String) doctors[9]);
                     doctor.setScheduleday_parameter((String) doctors[10]);
+                    doctor.setScheduleId((int)doctors[11]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;

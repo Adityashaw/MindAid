@@ -11,22 +11,21 @@ import java.util.Date;
 import java.util.List;
 
 public class DoctorsDto {
-    public int doc_id;
+    public int docId;
     public String name;
     public String description;
     public String speciality;
     public String scheduleTime;
     public String contactMedia;
     public String education;
-
+    public int scheduleId;
     public String scheduleDay;
     public Time scheduleTimeStart;
     public int fee;
-    List<Doctors> DoctorsList=new ArrayList<>();
-
     public String selectedScheduleDay;
     public String selectedScheduleTime;
     public String scheduleday_parameter;
+    List<Doctors> DoctorsList=new ArrayList<>();
 
     public String getScheduleday_parameter() {
         return scheduleday_parameter;
@@ -36,12 +35,12 @@ public class DoctorsDto {
         this.scheduleday_parameter = scheduleday_parameter;
     }
 
-    public int getDoc_id() {
-        return doc_id;
+    public int getDocId() {
+        return docId;
     }
 
-    public void setDoc_id(int doc_id) {
-        this.doc_id = doc_id;
+    public void setDocId(int docId) {
+        this.docId = docId;
     }
 
     public String getName() {
@@ -138,5 +137,12 @@ public class DoctorsDto {
 
     public void setSelectedScheduleTime(String selectedScheduleTime) {
         this.selectedScheduleTime = selectedScheduleTime;
+    }
+    public int getScheduleId() {
+        return scheduleId;
+    }
+
+    public void setScheduleId(int scheduleId) {
+        this.scheduleId = scheduleId;
     }
 }

@@ -58,22 +58,14 @@ public class UserProfileController {
     @GetMapping("/user-profile")
     public String getUserProfile(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=new ArrayList<>();
-        for (Payment payment: paymentList){
-            ScheduleDto scheduleDto=new ScheduleDto();
-            scheduleDto.setScheduleDate(payment.getScheduleDate());
-            scheduleDto.setScheduleTime(schedulingService.AmPmFormetter(payment.getScheduleTime()));
-            scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
-            scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
-            scheduleDto.setScheduleDuration(payment.getScheduleDuration());
-            scheduleInfoList.add(scheduleDto);
-        }
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";
     }
     @PostMapping("/connect-session")
     public String joinSession(Model model,ScheduleDto scheduleDto){
+        String sessionlink="https://meet.jit.si/tamzid";
+        model.addAttribute("sessionlink",sessionlink);
         return "dummy";
     }
 }

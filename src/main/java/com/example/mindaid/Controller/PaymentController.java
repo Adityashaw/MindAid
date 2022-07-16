@@ -10,11 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-<<<<<<< HEAD
-import java.nio.charset.Charset;
-=======
->>>>>>> 85c55f6583633448e8969b924504f7029e5caf6d
 import java.util.Random;
 
 @Controller
@@ -55,9 +50,8 @@ public class PaymentController {
     }
     @PostMapping("/booking-confirm")
     public String postBooking(Model model, Payment paymentDto, DoctorsDto doctorsDto){
+        schedulingService.savePaymentDetails(paymentDto,doctorsDto);
         model.addAttribute(paymentDto);
-<<<<<<< HEAD
-=======
         int leftLimit = 97; // letter 'a'
         int rightLimit = 122; // letter 'z'
         int targetStringLength = 10;
@@ -72,13 +66,9 @@ public class PaymentController {
         generatedString="https://meet.jit.si/mindaid"+generatedString;
         paymentDto.setSessionLink(generatedString);
         paymentDto.setUserId(temporaryObjectHoldService.getUserDto().getUserId());
-        paymentDto.setDocId((doctorsDto.getDoc_id()));
         paymentDto.setScheduleDate(doctorsDto.getSelectedScheduleDay());
         paymentDto.setScheduleTime(doctorsDto.getSelectedScheduleTime());
         paymentRepository.save(paymentDto);
-        return "paymentConfirm";
->>>>>>> 85c55f6583633448e8969b924504f7029e5caf6d
-
         return "paymentConfirm";
     }
 }

@@ -263,8 +263,10 @@
                     <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
                     <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
                     <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
-                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleDate()}" th:attr="name='scheduleDay'"/>
-                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleTime()}" th:attr="name='scheduleTime'"/>
+                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleDay()}" th:attr="name='selectedScheduleDay'"/>
+                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleTime()}" th:attr="name='selectedScheduleTime'"/>
+                    <input type="hidden" th:value="${doctorsDto.getScheduleId()}" th:attr="name='scheduleId'"/>
+                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>
                     <button class="btn_1 full-width" type="submit">Confirm and Pay</button>
 
                 </div>

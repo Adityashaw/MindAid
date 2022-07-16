@@ -1,6 +1,12 @@
 package com.example.mindaid.Service;
 
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.ScheduleDto;
+import com.example.mindaid.Model.Payment;
+import com.example.mindaid.Model.Schedule;
+import com.example.mindaid.Repository.DoctorsRepository;
+import com.example.mindaid.Repository.PaymentRepository;
+import com.example.mindaid.Repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -9,16 +15,22 @@ import java.sql.DatabaseMetaData;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class SchedulingService {
 
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    TemporaryObjectHoldService temporaryObjectHoldService;
+    @Autowired
+    PaymentRepository paymentRepository;
+    @Autowired
+    DoctorsRepository doctorsRepository;
+    @Autowired
+    ScheduleRepository scheduleRepository;
+
     public String AmPmFormetter(String strr1){
         String scheduleTimestr1;
         String am_pmStr=String.valueOf(strr1.charAt(0))+String.valueOf(strr1.charAt(1));
@@ -36,7 +48,7 @@ public class SchedulingService {
     public List<TemporaryObjectHoldService> getScheduleTimeAndTimeStr(DoctorsDto docDto, List<DoctorsDto> doctorsDtoList, Model model){
         List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=new ArrayList<>();
         for (DoctorsDto doctorsDto : doctorsDtoList){
-            if (docDto.doc_id==doctorsDto.doc_id){
+            if (docDto.docId==doctorsDto.docId){
                 getScheduleDays(doctorsDto,model);
                 if (doctorsDto.contactMedia.equals("live")) {
                     Time time = doctorsDto.scheduleTimeStart;
@@ -133,5 +145,51 @@ public class SchedulingService {
             }
         }
         return status;
+    }
+
+    public String randomURLGenerator(){
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+        int targetStringLength = 10;
+        Random random = new Random();
+        StringBuilder buffer = new StringBuilder(targetStringLength);
+        for (int i = 0; i < targetStringLength; i++) {
+            int randomLimitedInt = leftLimit + (int)
+                    (random.nextFloat() * (rightLimit - leftLimit + 1));
+            buffer.append((char) randomLimitedInt);
+        }
+        String generatedString = buffer.toString();
+        return generatedString;
+
+    }
+
+    public void savePaymentDetails(Payment paymentDto, DoctorsDto doctorsDto){
+        paymentDto.setUserId(temporaryObjectHoldService.getUserDto().getUserId());
+        paymentDto.setDocId((doctorsDto.getDocId()));
+        paymentDto.setScheduleDate(doctorsDto.getSelectedScheduleDay());
+        paymentDto.setScheduleTime(doctorsDto.getSelectedScheduleTime());
+        paymentDto.setScheduleId(doctorsDto.getScheduleId());
+        paymentDto.setContactMedia(doctorsDto.getContactMedia());
+        paymentDto.setActiveStatus(2); //future 2
+        if(doctorsDto.contactMedia.equals("message")) paymentDto.setScheduleDuration(3);
+        else paymentDto.setScheduleDuration(1);
+        String generatedString="https://meet.jit.si/mindaid"+schedulingService.randomURLGenerator();
+        paymentDto.setSessionLink(generatedString);
+        paymentRepository.save(paymentDto);
+    }
+
+    public List<ScheduleDto> getcheduleInfo(Model model){
+        List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=new ArrayList<>();
+        for (Payment payment: paymentList){
+            ScheduleDto scheduleDto=new ScheduleDto();
+            scheduleDto.setScheduleDate(payment.getScheduleDate());
+            scheduleDto.setScheduleTime(payment.getScheduleTime());
+            scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
+            scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
+            scheduleDto.setScheduleDuration(payment.getScheduleDuration());
+            scheduleInfoList.add(scheduleDto);
+        }
+        return  scheduleInfoList;
     }
 }
