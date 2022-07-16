@@ -13,6 +13,12 @@ public class Payment {
     public int userId;
     @Column(name = "doc_id")
     public int docId;
+    @Column(name = "schedule_date")
+    public String scheduleDate;
+    @Column(name = "schedule_time")
+    public String scheduleTime;
+    @Column(name = "schedule_duration")
+    public int scheduleDuration;
     @Column(name = "schedule_id")
     public int scheduleId;
     @Column(name = "name_on_card")
@@ -146,5 +152,29 @@ public class Payment {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    public String getScheduleDate() {
+        return scheduleDate;
+    }
+
+    public void setScheduleDate(String scheduleDate) {
+        this.scheduleDate = scheduleDate;
+    }
+
+    public String getScheduleTime() {
+        return scheduleTime;
+    }
+
+    public void setScheduleTime(String scheduleTime) {
+        this.scheduleTime = scheduleTime;
+    }
+
+    public int getScheduleDuration() {
+        return scheduleDuration;
+    }
+
+    public void setScheduleDuration(int scheduleDuration) {
+        this.scheduleDuration = scheduleDuration;
     }
 }

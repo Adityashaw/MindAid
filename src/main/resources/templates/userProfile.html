@@ -228,16 +228,21 @@
 <!--                <button type="submit" class="btn btn-outline-info mt-5">Submit</button>-->
 <!--              </Form>-->
               <div class="custom-row-1">
+                <th:block th:each="scheduleInfo : ${scheduleInfoList}">
                 <div class="custom-column-1">
-                  <p>Something is bla bla bla....</p>
-                  <p>Something is bla bla bla....</p>
-                  <p>Something is bla bla bla....</p>
-                  <p>Something is bla bla bla....</p>
-
+                  <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>
+                  <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>
+                  <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>
+                  <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>
                 </div>
                 <div class="custom-column-2">
-                  <a href="#">Click to join</a>
+<!--                  <a href="#">Click to join</a>-->
+                  <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">
+                    <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
+                    <button class="custom-join-btn" type="submit">Join Now</button>
+                  </form>
                 </div>
+                </th:block>
               </div>
             </div>
           </div><!-- col-lg-12 end-->

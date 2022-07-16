@@ -23,6 +23,8 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     EncodePassword encodePassword;
+    @Autowired
+    TemporaryObjectHoldService temporaryObjectHoldService;
 
     @PersistenceContext
     public EntityManager entityManager;
@@ -33,6 +35,7 @@ public class UserService {
                 if (userList.get(0).isEnabled()) {
                     UserDto userDto=new UserDto();
                     userDto.setUserId(userList.get(0).userId);
+                    temporaryObjectHoldService.setUserDto(userDto);
                     userDto.setUserDto(userDto);
                     model.addAttribute(userDto);
                     return 1;

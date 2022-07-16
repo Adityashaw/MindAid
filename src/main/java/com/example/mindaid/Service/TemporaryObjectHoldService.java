@@ -1,6 +1,7 @@
 package com.example.mindaid.Service;
 
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.UserDto;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +25,7 @@ public class TemporaryObjectHoldService {
     public LocalDate scheduleDate;
     public int activeStatus;
     public boolean activeStatusBool;
+    public UserDto userDto;
 
     public boolean isActiveStatusBool() {
         return activeStatusBool;
@@ -71,5 +73,13 @@ public class TemporaryObjectHoldService {
 
     public void setScheduleTime(LocalTime scheduleTime) {
         this.scheduleTime = scheduleTime;
+    }
+
+    public UserDto getUserDto() {
+        return userDto;
+    }
+
+    public void setUserDto(UserDto userDto) {
+        this.userDto = userDto;
     }
 }

@@ -1,14 +1,8 @@
 package com.example.mindaid.Controller;
 
-import com.example.mindaid.Dto.ChooseDto;
-import com.example.mindaid.Dto.ConcernDto;
-import com.example.mindaid.Dto.DoctorsDto;
-import com.example.mindaid.Dto.PaymentDto;
+import com.example.mindaid.Dto.*;
 import com.example.mindaid.Model.*;
-import com.example.mindaid.Repository.ConcernRepository;
-import com.example.mindaid.Repository.DoctorConcernRepository;
-import com.example.mindaid.Repository.DoctorsRepository;
-import com.example.mindaid.Repository.UserRepository;
+import com.example.mindaid.Repository.*;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,9 +50,30 @@ public class UserProfileController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    PaymentRepository paymentRepository;
+    @Autowired
+    ScheduleRepository scheduleRepository;
 
     @GetMapping("/user-profile")
     public String getUserProfile(Model model){
+        System.out.println(temporaryObjectHoldService.userDto.userId);
+        List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=new ArrayList<>();
+        for (Payment payment: paymentList){
+            ScheduleDto scheduleDto=new ScheduleDto();
+            scheduleDto.setScheduleDate(payment.getScheduleDate());
+            scheduleDto.setScheduleTime(schedulingService.AmPmFormetter(payment.getScheduleTime()));
+            scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
+            scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
+            scheduleDto.setScheduleDuration(payment.getScheduleDuration());
+            scheduleInfoList.add(scheduleDto);
+        }
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";
+    }
+    @PostMapping("/connect-session")
+    public String joinSession(Model model,ScheduleDto scheduleDto){
+        return "dummy";
     }
 }
