@@ -214,6 +214,7 @@
 <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
                             <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
                             <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
+                            <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
                             <button class="btn_1 full-width" type="submit">Book Now</button>
                         </form>
                     </div>

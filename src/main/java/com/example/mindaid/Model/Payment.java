@@ -41,6 +41,16 @@ public class Payment {
     public String confirmEmail;
     @Column(name = "telephone")
     public String telephone;
+    @Column(name = "session_link")
+    public String sessionLink;
+
+    public String getSessionLink() {
+        return sessionLink;
+    }
+
+    public void setSessionLink(String sessionLink) {
+        this.sessionLink = sessionLink;
+    }
 
     public int getPaymentId() {
         return paymentId;

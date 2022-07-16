@@ -260,7 +260,12 @@
                             </li>
                         </ul>
                         <hr>
-                        <button class="btn_1 full-width" type="submit">Confirm and Pay</button>
+                    <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
+                    <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
+                    <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
+                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleDate()}" th:attr="name='scheduleDay'"/>
+                    <input type="hidden" th:value="${doctorsDto.getSelectedScheduleTime()}" th:attr="name='scheduleTime'"/>
+                    <button class="btn_1 full-width" type="submit">Confirm and Pay</button>
 
                 </div>
                 <!-- /box_general -->
