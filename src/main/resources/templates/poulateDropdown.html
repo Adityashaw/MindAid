@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dropdown</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        ("#selectedScheduleDay").change(function(){
+            var categoryId = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: "/schedule-time/",
+                success: function(data){
+                    var selectedScheduleTime=$('#selectedScheduleTime'), option="";
+                    selectedScheduleTime.empty();
+
+                    for(var i=0; i<data.length; i++){
+                        option = option + "<option value='"+data[i] + "'>"+data[i] + "</option>";
+                    }
+                    selectedScheduleTime.append(option);
+                },
+                error:function(){
+                    alert("error");
+                }
+
+            });
+        });
+    </script>
+</head>
+<body>
+<form method=post th:action="@{/payment}" th:object="${doctorsDto}">
+    <div class="title">
+        <h3>Book a Session</h3>
+        <small th:utext="${doctorsDto.getScheduleDay()}+','+${doctorsDto.getScheduleTime()}"></small>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <div class="form-group">
+                <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
+                <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-select-option" required>
+                    <!--                                            th:field="*{selectedScheduleDay}"-->
+                    <option th:selected="true" th:disabled="disabled" value="something">Select Day </option>
+                    <th:block th:each="scheduleDay : ${scheduleDays}">
+                        <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="form-group">
+                <!--                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
+                <select th:name="selectedScheduleTime" id="selectedScheduleTime" class="custom-select-option" required>
+                    <!--                                            th:field="*{selectedScheduleDay}"-->
+                    <option th:selected="true" th:disabled="disabled" value="something">Select Time </option>
+                    <th:block th:each="scheduleTime : ${scheduleTimeAndTimeStr}">
+                        <option th:value="${scheduleTime.getScheduleTimeStr()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>
+                    </th:block>
+                </select>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
+    <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
+    <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
+    <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
+    <input type="hidden" th:value="${doctorsDto.getScheduleId()}" th:attr="name='scheduleId'"/>
+    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>
+    <button class="btn_1 full-width" type="submit">Book Now</button>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+</html>

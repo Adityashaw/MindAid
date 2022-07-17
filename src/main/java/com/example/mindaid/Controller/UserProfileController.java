@@ -58,7 +58,44 @@ public class UserProfileController {
     @GetMapping("/user-profile")
     public String getUserProfile(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1);
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("userName",user.getName());
+        String status="Ongoing";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
+        return "userProfile";
+    }
+    @GetMapping("/upcoming_appoinments")
+    public String getUpcomingAppointments(Model model){
+        System.out.println(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2);
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("username",user.getName());
+        String status="Upcoming";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
+        return "userProfile";
+    }
+    @GetMapping("/ongoing_appoinments")
+    public String getOngoingAppointments(Model model){
+        System.out.println(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1);
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("username",user.getName());
+        String status="Ongoing";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
+        return "userProfile";
+    }
+    @GetMapping("/previous_appoinments")
+    public String getPrevAppointments(Model model){
+        System.out.println(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0);
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("username",user.getName());
+        String status="Previous";
+        model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";
     }

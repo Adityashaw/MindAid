@@ -171,25 +171,74 @@ public class SchedulingService {
         paymentDto.setScheduleId(doctorsDto.getScheduleId());
         paymentDto.setContactMedia(doctorsDto.getContactMedia());
         paymentDto.setActiveStatus(2); //future 2
-        if(doctorsDto.contactMedia.equals("message")) paymentDto.setScheduleDuration(3);
-        else paymentDto.setScheduleDuration(1);
-        String generatedString="https://meet.jit.si/mindaid"+schedulingService.randomURLGenerator();
+        String generatedString;
+        if(doctorsDto.contactMedia.equals("message")){
+            generatedString="https://meet.jit.si/mindaid"+schedulingService.randomURLGenerator();
+            paymentDto.setScheduleDuration(3);
+        }
+        else{
+            generatedString="http://localhost:9090/chat";
+            paymentDto.setScheduleDuration(1);
+        }
         paymentDto.setSessionLink(generatedString);
         paymentRepository.save(paymentDto);
     }
 
-    public List<ScheduleDto> getcheduleInfo(Model model){
+    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus){
         List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=new ArrayList<>();
         for (Payment payment: paymentList){
-            ScheduleDto scheduleDto=new ScheduleDto();
-            scheduleDto.setScheduleDate(payment.getScheduleDate());
-            scheduleDto.setScheduleTime(payment.getScheduleTime());
-            scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
-            scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
-            scheduleDto.setScheduleDuration(payment.getScheduleDuration());
-            scheduleInfoList.add(scheduleDto);
+            LocalDate localDate=LocalDate.now();
+            LocalDate localDate1=LocalDate.parse(payment.getScheduleDate());
+            String timeNow=schedulingService.AmPmFormetter(LocalTime.now().toString());
+            String timeTaken=payment.scheduleTime;
+            int timeNowMinInt=schedulingService.TimeStrToMinuteIntConverter(timeNow);
+            int timeNowMinIntScheduled=schedulingService.TimeStrToMinuteIntConverter(timeTaken);
+            if (localDate1.compareTo(localDate)>=0){//upcoming and present days
+                if (localDate1.compareTo(localDate) ==0){ //present day
+                    if (timeNowMinInt>=timeNowMinIntScheduled){//present day present time and pastime
+                        if (timeNowMinInt-timeNowMinIntScheduled<payment.getScheduleDuration()*60){//present day and inside scheduled time
+                            payment.setActiveStatus(1);
+                        }
+                        else {//present day pastime
+                            payment.setActiveStatus(0);
+                        }
+                    }
+                    else {//present day upcoming time
+                        payment.setActiveStatus(2);
+                    }
+                }
+                else {//upcoming day
+                    payment.setActiveStatus(2);
+                }
+            }
+            else {//past day
+                payment.setActiveStatus(0);
+            }
+            paymentRepository.save(payment);
+            if (payment.activeStatus==cStatus){
+                ScheduleDto scheduleDto=new ScheduleDto();
+                scheduleDto.setScheduleDate(payment.getScheduleDate());
+                scheduleDto.setScheduleTime(payment.getScheduleTime());
+                scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
+                scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
+                scheduleDto.setScheduleDuration(payment.getScheduleDuration());
+                scheduleInfoList.add(scheduleDto);
+            }
         }
         return  scheduleInfoList;
+    }
+
+    public int TimeStrToMinuteIntConverter(String timeStr){
+        int minInt=0;
+        String [] splitByAmPm=timeStr.split(" ");
+        String [] splitByHrMin=splitByAmPm[0].split(":");
+        if (splitByAmPm[1].equals("am")){
+            minInt=(Integer.parseInt(splitByHrMin[0]))*60+(Integer.parseInt(splitByHrMin[1]));
+        }
+        else {
+            minInt=(Integer.parseInt(splitByHrMin[0])+12)*60+(Integer.parseInt(splitByHrMin[1]));
+        }
+        return minInt;
     }
 }

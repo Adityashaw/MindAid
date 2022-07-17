@@ -146,3 +146,7 @@ header.a.navbar-brand-custom{
     color: var(--heading-color);
     font-family: serif;
 }
+.custom-h5{
+    color: #e7ca90;
+    font-family: fangsong;
+}

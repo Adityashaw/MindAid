@@ -16,4 +16,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     public User findByResetPasswordToken(String token);
     @Query("SELECT u FROM User u WHERE u.verificationCode = ?1")
     public User findByVerificationCode(String code);
+    @Query("SELECT u FROM User u WHERE u.userId = ?1")
+    public User findByUserId(int userId);
 }
