@@ -1,5 +1,6 @@
 package com.example.mindaid.Controller;
 
+import com.example.mindaid.Model.Login;
 import com.example.mindaid.Model.User;
 import com.example.mindaid.Repository.UserRepository;
 import com.example.mindaid.Service.ExceptionHandlingService.UserNotFoundException;
@@ -20,6 +21,8 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class ForgotPasswordController {
@@ -54,7 +57,7 @@ public class ForgotPasswordController {
             model.addAttribute("error", "Error while sending email");
         }
 
-        return "forgotPassword";
+        return "reset_password_confirm";
     }
 
     public void sendEmail(String recipientEmail, String link) throws MessagingException, UnsupportedEncodingException {
@@ -110,7 +113,13 @@ public class ForgotPasswordController {
             forgotPasswordService.updatePassword(user, password);
 
             //model.addAttribute("message", "You have successfully changed your password.");
-            return "message";
+            Login login=new Login();
+            List<Login> loginList=new ArrayList<>();
+            model.addAttribute(login);
+            login.setMessage("Your password has been updated!");
+            loginList.add(login);
+            model.addAttribute("loginList",loginList);
+            return "login";
         }
 
     }
