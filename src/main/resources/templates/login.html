@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MindAid</title>
     <link rel="stylesheet" href="assets/css/MyStyle.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <!-- login -->
@@ -17,13 +19,16 @@
             M<span class="sub-logo">i</span>ndA</span><span class="sub-logo">i</span>d</span> 
            </a>
           <th:block th:each="loginIterator : ${loginList}">
-          <div class="alert alert-warning alert-dismissible fade show" role="alert">
-<!--              <strong>Holy guacamole!</strong> You should check in on some of those fields below.-->
+          <div class="alert alert-warning alert-dismissible fade show">
               <p th:text="${loginIterator.getMessage()}"></p>
               <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
               </button>
           </div>
+<!--              <div class="alert alert-success alert-dismissible">-->
+<!--                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
+<!--                  <p th:text="${loginIterator.getMessage()}"></p>-->
+<!--              </div>-->
           </th:block>
         <h2>Log in</h2>
         <form method="post" th:action="@{/postLogin}" th:object="${login}">
@@ -35,7 +40,7 @@
             <button class="btn btn-info" type="submit">Login</button>
         </form>
         <h4>Dont have an account?</h4>
-      <p><a href="registered.html"><b>Signup</b></a> (Or) go back to <a href="home.html">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
+      <p><a th:href="@{/register}"><b>Signup</b></a> (Or) go back to <a th:href="@{/home}">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
       </div>
      
     </div>
@@ -44,9 +49,10 @@
 <!--    bootstrap js area start-->
     <script src=”https://code.jquery.com/jquery-3.2.1.slim.min.js” integrity=”sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN” crossorigin=”anonymous”></script>
 
-    <script src=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js integrity=”sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q” crossorigin=”anonymous”></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity=”sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q” crossorigin=”anonymous”></script>
 
     <script src=”https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js” integrity=”sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl” crossorigin=”anonymous”></script>
+
 <!--bootstrap js area end-->
 </body>
 </html>

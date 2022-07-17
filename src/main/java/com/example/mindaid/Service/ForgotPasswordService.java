@@ -33,6 +33,7 @@ public class ForgotPasswordService {
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPassword(encodedPassword);
         user.setResetPasswordToken(null);
+        user.setConfirmPassword(newPassword);
         userRepository.save(user);
     }
 }
