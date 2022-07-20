@@ -4,28 +4,28 @@
     <meta charset="UTF-8">
     <title>Dropdown</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script>
-        ("#selectedScheduleDay").change(function(){
-            var categoryId = $(this).val();
-            $.ajax({
-                type: 'GET',
-                url: "/schedule-time/",
-                success: function(data){
-                    var selectedScheduleTime=$('#selectedScheduleTime'), option="";
-                    selectedScheduleTime.empty();
+<!--    <script>-->
+<!--        $("#selectedScheduleDay").change(function(){-->
+<!--            var categoryId = $(this).val();-->
+<!--            $.ajax({-->
+<!--                type: 'GET',-->
+<!--                url: "/schedule-time/",-->
+<!--                success: function(data){-->
+<!--                    var selectedScheduleTime=$('#selectedScheduleTime'), option="";-->
+<!--                    selectedScheduleTime.empty();-->
 
-                    for(var i=0; i<data.length; i++){
-                        option = option + "<option value='"+data[i] + "'>"+data[i] + "</option>";
-                    }
-                    selectedScheduleTime.append(option);
-                },
-                error:function(){
-                    alert("error");
-                }
+<!--                    for(var i=0; i<data.length; i++){-->
+<!--                        option = option + "<option value='"+data[i] + "'>"+data[i] + "</option>";-->
+<!--                    }-->
+<!--                    selectedScheduleTime.append(option);-->
+<!--                },-->
+<!--                error:function(){-->
+<!--                    alert("error");-->
+<!--                }-->
 
-            });
-        });
-    </script>
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
 </head>
 <body>
 <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
@@ -63,11 +63,34 @@
     <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
     <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
     <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
-    <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
+    <input type="hidden" id="docId" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
     <input type="hidden" th:value="${doctorsDto.getScheduleId()}" th:attr="name='scheduleId'"/>
     <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>
     <button class="btn_1 full-width" type="submit">Book Now</button>
 </form>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    $("#selectedScheduleDay").change(function(){
+        var date = $(this).val();
+        var docId= $("#docId").val();
+        $.ajax({
+            type: 'GET',
+            url: "/schedule-time/"+date+"/"+docId,
+            success: function(data){
+                var selectedScheduleTime=$('#selectedScheduleTime'), option="";
+                selectedScheduleTime.empty();
+
+                for(var i=0; i<data.length; i++){
+                    option = option + "<option value='"+data[i] + "'>"+data[i] + "</option>";
+                }
+                selectedScheduleTime.append(option);
+            },
+            error:function(){
+                alert("error");
+            }
+
+        });
+    });
+</script>
 </body>
 </html>
