@@ -1,10 +1,13 @@
 package com.example.mindaid.Service;
 
 import com.example.mindaid.Dto.DoctorsDto;
+import com.example.mindaid.Dto.PaymentDto;
 import com.example.mindaid.Dto.ScheduleDto;
+import com.example.mindaid.Model.DynamicScheduling;
 import com.example.mindaid.Model.Payment;
 import com.example.mindaid.Model.Schedule;
 import com.example.mindaid.Repository.DoctorsRepository;
+import com.example.mindaid.Repository.DynamicSchedulingrepository;
 import com.example.mindaid.Repository.PaymentRepository;
 import com.example.mindaid.Repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +33,8 @@ public class SchedulingService {
     DoctorsRepository doctorsRepository;
     @Autowired
     ScheduleRepository scheduleRepository;
+    @Autowired
+    DynamicSchedulingrepository dynamicSchedulingrepository;
 
     public String AmPmFormetter(String strr1){
         String scheduleTimestr1;
@@ -50,48 +55,54 @@ public class SchedulingService {
         for (DoctorsDto doctorsDto : doctorsDtoList){
             if (docDto.docId==doctorsDto.docId){
                 getScheduleDays(doctorsDto,model);
-                if (doctorsDto.contactMedia.equals("live")) {
-                    Time time = doctorsDto.scheduleTimeStart;
-                    LocalTime localTime = time.toLocalTime();
-                    TemporaryObjectHoldService obj1 = new TemporaryObjectHoldService();
-                    TemporaryObjectHoldService obj2 = new TemporaryObjectHoldService();
-                    TemporaryObjectHoldService obj3 = new TemporaryObjectHoldService();
-                    obj1.setScheduleTime(localTime);
-                    obj2.setScheduleTime(localTime.plusHours(1));
-                    obj3.setScheduleTime(localTime.plusHours(2));
-                    String strr1 = localTime.toString();
-                    String strr2 = (localTime.plusHours(1)).toString();
-                    String strr3 = (localTime.plusHours(2)).toString();
-                    String scheduleTimestr1 = schedulingService.AmPmFormetter(strr1);
-                    String scheduleTimestr2 = schedulingService.AmPmFormetter(strr2);
-                    String scheduleTimestr3 = schedulingService.AmPmFormetter(strr3);
-                    obj1.setScheduleTimeStr(scheduleTimestr1);
-                    obj2.setScheduleTimeStr(scheduleTimestr2);
-                    obj3.setScheduleTimeStr(scheduleTimestr3);
-                    Collections.addAll(scheduleTimeAndTimeStr, obj1, obj2, obj3);
-                    doctorsDto.setScheduleTime(scheduleTimestr1+"-"+scheduleTimestr3);
-                    model.addAttribute("doctorsDto",doctorsDto);
-
-                    return scheduleTimeAndTimeStr;
-                }
-                else {
-                    Time time = doctorsDto.scheduleTimeStart;
-                    LocalTime localTime = time.toLocalTime();
-                    TemporaryObjectHoldService obj1 = new TemporaryObjectHoldService();
-                    TemporaryObjectHoldService obj2 = new TemporaryObjectHoldService();
-                    obj1.setScheduleTime(localTime);
-                    obj2.setScheduleTime(localTime.plusHours(3));
-                    String strr1 = localTime.toString();
-                    String strr2 = (localTime.plusHours(3)).toString();
-                    String scheduleTimestr1 = schedulingService.AmPmFormetter(strr1);
-                    String scheduleTimestr2 = schedulingService.AmPmFormetter(strr2);
-                    obj1.setScheduleTimeStr(scheduleTimestr1);
-                    obj2.setScheduleTimeStr(scheduleTimestr2);
-                    Collections.addAll(scheduleTimeAndTimeStr, obj1, obj2);
-                    doctorsDto.setScheduleTime(scheduleTimestr1+"-"+scheduleTimestr2);
+                if (doctorsDto.contactMedia.equals("live") || doctorsDto.contactMedia.equals("message")) {
+//                    Time time = doctorsDto.scheduleTimeStart;
+                    String [] scheduleTimeList=doctorsDto.scheduleTimeStart.split(",");
+                    for (String scheduleTime:scheduleTimeList){
+                        TemporaryObjectHoldService obj = new TemporaryObjectHoldService();
+                        String scheduleTimestr = schedulingService.AmPmFormetter(scheduleTime);
+                        obj.setScheduleTimeStr(scheduleTimestr);
+                        scheduleTimeAndTimeStr.add(obj);
+                    }
+//                    LocalTime localTime = time.toLocalTime();
+//                    TemporaryObjectHoldService obj1 = new TemporaryObjectHoldService();
+//                    TemporaryObjectHoldService obj2 = new TemporaryObjectHoldService();
+//                    TemporaryObjectHoldService obj3 = new TemporaryObjectHoldService();
+//                    obj1.setScheduleTime(localTime);
+//                    obj2.setScheduleTime(localTime.plusHours(1));
+//                    obj3.setScheduleTime(localTime.plusHours(2));
+//                    String strr1 = localTime.toString();
+//                    String strr2 = (localTime.plusHours(1)).toString();
+//                    String strr3 = (localTime.plusHours(2)).toString();
+//                    String scheduleTimestr1 = schedulingService.AmPmFormetter(strr1);
+//                    String scheduleTimestr2 = schedulingService.AmPmFormetter(strr2);
+//                    String scheduleTimestr3 = schedulingService.AmPmFormetter(strr3);
+//                    obj1.setScheduleTimeStr(scheduleTimestr1);
+//                    obj2.setScheduleTimeStr(scheduleTimestr2);
+//                    obj3.setScheduleTimeStr(scheduleTimestr3);
+//                    Collections.addAll(scheduleTimeAndTimeStr, obj1, obj2, obj3);
+                    doctorsDto.setScheduleTime(schedulingService.AmPmFormetter(scheduleTimeList[0])+"-"+schedulingService.AmPmFormetter(scheduleTimeList[scheduleTimeList.length-1]));
                     model.addAttribute("doctorsDto",doctorsDto);
                     return scheduleTimeAndTimeStr;
                 }
+//                else {
+//                    Time time = doctorsDto.scheduleTimeStart;
+//                    LocalTime localTime = time.toLocalTime();
+//                    TemporaryObjectHoldService obj1 = new TemporaryObjectHoldService();
+//                    TemporaryObjectHoldService obj2 = new TemporaryObjectHoldService();
+//                    obj1.setScheduleTime(localTime);
+//                    obj2.setScheduleTime(localTime.plusHours(3));
+//                    String strr1 = localTime.toString();
+//                    String strr2 = (localTime.plusHours(3)).toString();
+//                    String scheduleTimestr1 = schedulingService.AmPmFormetter(strr1);
+//                    String scheduleTimestr2 = schedulingService.AmPmFormetter(strr2);
+//                    obj1.setScheduleTimeStr(scheduleTimestr1);
+//                    obj2.setScheduleTimeStr(scheduleTimestr2);
+//                    Collections.addAll(scheduleTimeAndTimeStr, obj1, obj2);
+//                    doctorsDto.setScheduleTime(scheduleTimestr1+"-"+scheduleTimestr2);
+//                    model.addAttribute("doctorsDto",doctorsDto);
+//                    return scheduleTimeAndTimeStr;
+//                }
             }
         }
         return scheduleTimeAndTimeStr;
@@ -120,6 +131,7 @@ public class SchedulingService {
         obj3.setActiveStatusBool(getActiveStatusBool(doctorsDto,date3));
 
        Collections.addAll(scheduleDays,obj1,obj2,obj3);
+       schedulingService.updateDynamicSchedule(doctorsDto,date1.toString(),date2.toString(),date3.toString());
        model.addAttribute("scheduleDays",scheduleDays);
     }
 
@@ -240,5 +252,131 @@ public class SchedulingService {
             minInt=(Integer.parseInt(splitByHrMin[0])+12)*60+(Integer.parseInt(splitByHrMin[1]));
         }
         return minInt;
+    }
+
+    public void updateDynamicSchedule(DoctorsDto doctorsDto, String date1,String date2,String date3){
+        List<DynamicScheduling>dynamicSchedulingList=dynamicSchedulingrepository.findByScheduleId(doctorsDto.scheduleId);
+        if (dynamicSchedulingList.isEmpty()){
+            DynamicScheduling dynamicScheduling=new DynamicScheduling();
+            dynamicScheduling.setScheduleId(doctorsDto.scheduleId);
+            dynamicScheduling.setDay1(date1.toString()+",000");
+            dynamicScheduling.setDay2(date2.toString()+",000");
+            dynamicScheduling.setDay3(date3.toString()+",000");
+            dynamicSchedulingrepository.save(dynamicScheduling);
+        }
+        else {
+            String [] date1Parsing=dynamicSchedulingList.get(0).day1.split(",");
+            String [] date2Parsing=dynamicSchedulingList.get(0).day2.split(",");
+            String [] date3Parsing=dynamicSchedulingList.get(0).day3.split(",");
+
+            if (date1.equals(date1Parsing[0]));
+            else if (date1.equals(date2Parsing[1])){
+                dynamicSchedulingList.get(0).setDay1(dynamicSchedulingList.get(0).day2);
+                dynamicSchedulingList.get(0).setDay2(dynamicSchedulingList.get(0).day3);
+                dynamicSchedulingList.get(0).setDay1(date3+",000");
+            }
+            else if (date1.equals(date3Parsing[0])){
+                dynamicSchedulingList.get(0).setDay1(dynamicSchedulingList.get(0).day3);
+                dynamicSchedulingList.get(0).setDay2(date2+",000");
+                dynamicSchedulingList.get(0).setDay3(date3+",000");
+            }
+            else {
+                dynamicSchedulingList.get(0).setDay1(date1+",000");
+                dynamicSchedulingList.get(0).setDay2(date2+",000");
+                dynamicSchedulingList.get(0).setDay3(date3+",000");
+            }
+            dynamicSchedulingrepository.save(dynamicSchedulingList.get(0));
+        }
+    }
+
+    public void updateScheduleTimeAvailibility(DoctorsDto doctorsDto, Payment paymentDto){
+        List<Schedule>scheduleList=scheduleRepository.findByScheduleId(paymentDto.getScheduleId());
+        String[]scheduleTimeList=scheduleList.get(0).getScheduleTimeStart().split(",");
+        int index=0;
+        for (int i=0;i<scheduleTimeList.length;i++){
+            if (paymentDto.scheduleTime.equals(schedulingService.AmPmFormetter(scheduleTimeList[i]))){
+                index=i;
+            }
+        }
+        List<DynamicScheduling>dynamicSchedulingList=dynamicSchedulingrepository.findByScheduleId(doctorsDto.getScheduleId());
+        String [] date1Parsing=dynamicSchedulingList.get(0).day1.split(",");
+        String [] date2Parsing=dynamicSchedulingList.get(0).day2.split(",");
+        String [] date3Parsing=dynamicSchedulingList.get(0).day3.split(",");
+        char ch='1';
+        if (date1Parsing[0].equals(paymentDto.scheduleDate)){
+            StringBuilder stringBuilder=new StringBuilder(date1Parsing[1]);
+            stringBuilder.setCharAt(index, ch);
+            String day=date1Parsing[0]+","+stringBuilder.toString();
+            dynamicSchedulingList.get(0).setDay1(day);
+        }
+        else if (date2Parsing[0].equals(paymentDto.scheduleDate)){
+            StringBuilder stringBuilder=new StringBuilder(date1Parsing[1]);
+            stringBuilder.setCharAt(index, ch);
+            String day=date1Parsing[0]+","+stringBuilder.toString();
+            dynamicSchedulingList.get(0).setDay2(day);
+        }
+        else if (date3Parsing[0].equals(paymentDto.scheduleDate)){
+            StringBuilder stringBuilder=new StringBuilder(date1Parsing[1]);
+            stringBuilder.setCharAt(index, ch);
+            String day=date1Parsing[0]+","+stringBuilder.toString();
+            dynamicSchedulingList.get(0).setDay3(day);
+        }
+        dynamicSchedulingrepository.save(dynamicSchedulingList.get(0));
+    }
+
+    public List<TemporaryObjectHoldService> getDynamicScheduleTimeAndActiveStatus(String scheduleIdStr,String date){
+        List<TemporaryObjectHoldService>scheduleTimeAndActiveStatus=new ArrayList<>();
+        int scheduleId=Integer.parseInt(scheduleIdStr);
+        List<Schedule>scheduleList=scheduleRepository.findByScheduleId(scheduleId);
+        List<DynamicScheduling>dynamicSchedulingList=dynamicSchedulingrepository.findByScheduleId(scheduleId);
+        String[]schedules=scheduleList.get(0).scheduleTimeStart.split(",");
+
+        String [] date1Parsing=dynamicSchedulingList.get(0).day1.split(",");
+        String [] date2Parsing=dynamicSchedulingList.get(0).day2.split(",");
+        String [] date3Parsing=dynamicSchedulingList.get(0).day3.split(",");
+
+        if (date1Parsing[0].equals(date)){
+            for (int i=0;i<schedules.length;i++){
+                TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
+                temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
+                if (date1Parsing[1].charAt(i)=='1'){
+                    temporaryObjectHoldService.setActiveStatusBoolTime(true);
+                }
+                else {
+                    temporaryObjectHoldService.setActiveStatusBoolTime(false);
+                }
+                scheduleTimeAndActiveStatus.add(temporaryObjectHoldService);
+            }
+        }
+        else if (date2Parsing[0].equals(date)){
+            for (int i=0;i<schedules.length;i++){
+                TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
+                temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
+                if (date2Parsing[1].charAt(i)=='1'){
+                    temporaryObjectHoldService.setActiveStatusBoolTime(true);
+                }
+                else {
+                    temporaryObjectHoldService.setActiveStatusBoolTime(false);
+                }
+                scheduleTimeAndActiveStatus.add(temporaryObjectHoldService);
+            }
+
+        }
+        else if (date3Parsing[0].equals(date)){
+            for (int i=0;i<schedules.length;i++){
+                TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
+                temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
+                if (date3Parsing[1].charAt(i)=='1'){
+                    temporaryObjectHoldService.setActiveStatusBoolTime(true);
+                }
+                else {
+                    temporaryObjectHoldService.setActiveStatusBoolTime(false);
+                }
+                scheduleTimeAndActiveStatus.add(temporaryObjectHoldService);
+            }
+
+        }
+        return scheduleTimeAndActiveStatus;
+
     }
 }

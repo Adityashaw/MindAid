@@ -32,7 +32,7 @@ public class DoctorListService {
                     doctor.setScheduleTime((String) doctors[4]);
                     doctor.setEducation((String) doctors[5]);
                     doctor.setScheduleDay((String) doctors[6]);
-                    doctor.setScheduleTimeStart((Time) doctors[7]);
+                    doctor.setScheduleTimeStart((String) doctors[7]);
                     doctor.setFee((Integer) doctors[8]);
                     doctor.setContactMedia((String) doctors[9]);
                     doctor.setScheduleday_parameter((String) doctors[10]);

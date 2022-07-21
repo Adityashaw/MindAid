@@ -1,5 +1,6 @@
 package com.example.mindaid.Controller.RestController;
 
+import com.example.mindaid.Service.SchedulingService;
 import com.example.mindaid.Service.TemporaryConcernService;
 import com.example.mindaid.Service.TemporaryObjectHoldService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class PopulateDropdownController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     TemporaryConcernService temporaryConcernService;
+    @Autowired
+    SchedulingService schedulingService;
 
     @GetMapping("/testInt")
     public TemporaryConcernService getInteger(Model model){
@@ -23,13 +26,15 @@ public class PopulateDropdownController {
         Collections.addAll(integerList,1,2,2,3,4,5,6,7);
         return temporaryConcernService;
     }
-    @RequestMapping(value = "/schedule-time/{date}/{docId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/schedule-time/{date}/{scheduleId}", method = RequestMethod.GET)
     public @ResponseBody
-    List<String> getAllSubcategories(@PathVariable("date") String date,@PathVariable("docId") String docId) {
+    List<TemporaryObjectHoldService> getAllSubcategories(@PathVariable("date") String date,@PathVariable("scheduleId") String scheduleId) {
         System.out.println("date:"+date);
-        System.out.println("docId:"+docId);
+        System.out.println("docId:"+scheduleId);
         List<String>times=new ArrayList<>();
         Collections.addAll(times,"3 am","4 am");
-        return times;
+        List<TemporaryObjectHoldService>scheduleTimeAndActiveStatus=schedulingService.getDynamicScheduleTimeAndActiveStatus(scheduleId,date);
+        System.out.println(scheduleTimeAndActiveStatus.get(0).isActiveStatusBoolTime());
+        return scheduleTimeAndActiveStatus;
     }
 }

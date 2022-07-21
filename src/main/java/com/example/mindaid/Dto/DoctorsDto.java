@@ -20,7 +20,7 @@ public class DoctorsDto {
     public String education;
     public int scheduleId;
     public String scheduleDay;
-    public Time scheduleTimeStart;
+    public String scheduleTimeStart;
     public int fee;
     public String selectedScheduleDay;
     public String selectedScheduleTime;
@@ -91,11 +91,11 @@ public class DoctorsDto {
         this.scheduleDay = scheduleDay;
     }
 
-    public Time getScheduleTimeStart() {
+    public String getScheduleTimeStart() {
         return scheduleTimeStart;
     }
 
-    public void setScheduleTimeStart(Time scheduleTimeStart) {
+    public void setScheduleTimeStart(String scheduleTimeStart) {
         this.scheduleTimeStart = scheduleTimeStart;
     }
 

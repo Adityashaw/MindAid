@@ -18,7 +18,7 @@ public class Schedule {
     @Column(name = "schedule_day")
     public String scheduleDay;
     @Column(name = "schedule_time_start")
-    public Time scheduleTimeStart;
+    public String scheduleTimeStart;
     @Column(name = "fee")
     public int fee;
     @Column(name = "scheduleday_parameter")
@@ -64,11 +64,11 @@ public class Schedule {
         this.scheduleDay = scheduleDay;
     }
 
-    public Time getScheduleTimeStart() {
+    public String getScheduleTimeStart() {
         return scheduleTimeStart;
     }
 
-    public void setScheduleTimeStart(Time scheduleTimeStart) {
+    public void setScheduleTimeStart(String scheduleTimeStart) {
         this.scheduleTimeStart = scheduleTimeStart;
     }
 

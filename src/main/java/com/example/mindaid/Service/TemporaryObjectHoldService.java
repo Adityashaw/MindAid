@@ -25,7 +25,16 @@ public class TemporaryObjectHoldService {
     public LocalDate scheduleDate;
     public int activeStatus;
     public boolean activeStatusBool;
+    public boolean activeStatusBoolTime;
     public UserDto userDto;
+
+    public boolean isActiveStatusBoolTime() {
+        return activeStatusBoolTime;
+    }
+
+    public void setActiveStatusBoolTime(boolean activeStatusBoolTime) {
+        this.activeStatusBoolTime = activeStatusBoolTime;
+    }
 
     public boolean isActiveStatusBool() {
         return activeStatusBool;

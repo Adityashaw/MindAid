@@ -50,7 +50,9 @@ public class PaymentController {
     }
     @PostMapping("/booking-confirm")
     public String postBooking(Model model, Payment paymentDto, DoctorsDto doctorsDto){
+
         schedulingService.savePaymentDetails(paymentDto,doctorsDto);
+        schedulingService.updateScheduleTimeAvailibility(doctorsDto,paymentDto);
         model.addAttribute(paymentDto);
         return "paymentConfirm";
     }
