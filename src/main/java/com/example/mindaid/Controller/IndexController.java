@@ -117,5 +117,11 @@ public class IndexController {
             return "verify_fail";
         }
     }
+    @GetMapping("/faq")
+    public String getFaq() {
+        return "faqq";
+    }
+
+
 
 }
