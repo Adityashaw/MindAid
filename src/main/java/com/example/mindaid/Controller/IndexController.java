@@ -119,7 +119,7 @@ public class IndexController {
     }
     @GetMapping("/faq")
     public String getFaq() {
-        return "faq2";
+        return "faqq";
     }
 
 
