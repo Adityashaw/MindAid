@@ -101,8 +101,9 @@ public class UserProfileController {
     }
     @PostMapping("/connect-session")
     public String joinSession(Model model,ScheduleDto scheduleDto){
-        String sessionlink="https://meet.jit.si/tamzid";
+        List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
+        String sessionlink= paymentList.get(0).getSessionLink();
         model.addAttribute("sessionlink",sessionlink);
-        return "dummy";
+        return "live";
     }
 }

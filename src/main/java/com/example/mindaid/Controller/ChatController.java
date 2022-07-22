@@ -26,7 +26,11 @@ public class ChatController {
 
     @GetMapping("/chat")
     public String getChat(){
-        return "index";
+        return "messaging";
+    }
+    @GetMapping("/chatmessage")
+    public String getChatMessage(){
+        return "messaging";
     }
 
 }

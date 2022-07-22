@@ -11,4 +11,6 @@ import java.util.List;
 public interface PaymentRepository extends JpaRepository<Payment,Integer> {
     @Query(value = "select * from payment where user_id=:user_id",nativeQuery = true)
     public List<Payment> findByUserId(int user_id);
+    @Query(value ="select * from payment where payment_id=:payment_id",nativeQuery = true)
+    public List<Payment> findByPaymentId(int payment_id);
 }

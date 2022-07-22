@@ -30,6 +30,7 @@
 
     <!-- YOUR CUSTOM CSS -->
     <link href="assets/css/custom_2.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 </head>
 
@@ -215,10 +216,42 @@
                             <input type="hidden" th:value="${doctorsDto.getName()}" th:attr="name='name'"/>
                             <input type="hidden" th:value="${doctorsDto.getFee()}" th:attr="name='fee'"/>
                             <input type="hidden" th:value="${doctorsDto.getDocId()}" th:attr="name='docId'"/>
-                            <input type="hidden" th:value="${doctorsDto.getScheduleId()}" th:attr="name='scheduleId'"/>
+                            <input type="hidden" id="scheduleId" th:value="${doctorsDto.getScheduleId()}" th:attr="name='scheduleId'"/>
                             <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>
                             <button class="btn_1 full-width" type="submit">Book Now</button>
                         </form>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <script>
+                            $("#selectedScheduleDay").change(function(){
+                                var date = $(this).val();
+                                var scheduleId= $("#scheduleId").val();
+                                $.ajax({
+                                    type: 'GET',
+                                    url: "/schedule-time/"+date+"/"+scheduleId,
+                                    success: function(data){
+                                        var selectedScheduleTime=$('#selectedScheduleTime'), option="<option selected='"+true+"' disabled='"+false+"' value=\"something\">Select Time </option>",disable="";
+                                        selectedScheduleTime.empty();
+
+                                        for(var i=0; i<data.length; i++){
+
+                                            if (data[i].activeStatusBoolTime){
+                                                option = option + "<option th:value='"+data[i].scheduleTimeStr + "' disabled >"+data[i].scheduleTimeStr + "</option>";
+                                            }
+                                            else {
+                                                option = option + "<option th:value='"+data[i].scheduleTimeStr + "'>"+data[i].scheduleTimeStr + "</option>";
+                                            }
+
+                                        }
+                                        selectedScheduleTime.append(option);
+                                    },
+                                    error:function(){
+                                        alert("error");
+                                    }
+
+                                });
+                            });
+                        </script>
+
                     </div>
                     <!-- /box_general -->
                 </aside>

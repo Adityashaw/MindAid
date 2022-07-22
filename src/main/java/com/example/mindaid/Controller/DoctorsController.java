@@ -70,7 +70,7 @@ public class DoctorsController {
         public  String postdoclist(Model model,DoctorsDto docDto){
                 List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=schedulingService.getScheduleTimeAndTimeStr(docDto,temporaryObjectHoldService.getDoctorsDtoList().get(0),model);
                 model.addAttribute("scheduleTimeAndTimeStr",scheduleTimeAndTimeStr);
-                return "poulateDropdown";
+                return "doctorsDetails";
         }
         @PostMapping("/payment")
         public  String postdocDetails(Model model, DoctorsDto doctorsDto){
