@@ -183,6 +183,7 @@ public class SchedulingService {
         paymentDto.setScheduleId(doctorsDto.getScheduleId());
         paymentDto.setContactMedia(doctorsDto.getContactMedia());
         paymentDto.setActiveStatus(2); //future 2
+        paymentDto.setApproval("pending");
         String generatedString;
         if(doctorsDto.contactMedia.equals("message")){
             generatedString="https://meet.jit.si/mindaid"+schedulingService.randomURLGenerator();
@@ -196,7 +197,7 @@ public class SchedulingService {
         paymentRepository.save(paymentDto);
     }
 
-    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus){
+    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus, String approval){
         List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=new ArrayList<>();
         for (Payment payment: paymentList){

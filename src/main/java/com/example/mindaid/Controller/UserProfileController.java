@@ -58,10 +58,10 @@ public class UserProfileController {
     @GetMapping("/user-profile")
     public String getUserProfile(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("userName",user.getName());
-        String status="Ongoing";
+        String status="Pending";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";
@@ -69,7 +69,7 @@ public class UserProfileController {
     @GetMapping("/upcoming_appoinments")
     public String getUpcomingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("username",user.getName());
         String status="Upcoming";
@@ -80,7 +80,7 @@ public class UserProfileController {
     @GetMapping("/ongoing_appoinments")
     public String getOngoingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("username",user.getName());
         String status="Ongoing";
@@ -91,10 +91,21 @@ public class UserProfileController {
     @GetMapping("/previous_appoinments")
     public String getPrevAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("username",user.getName());
         String status="Previous";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
+        return "userProfile";
+    }
+    @GetMapping("/pending_appoinments")
+    public String getPendingAppointments(Model model){
+        System.out.println(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2 ,"pending");
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("username",user.getName());
+        String status="Pending";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";

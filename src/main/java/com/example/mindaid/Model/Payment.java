@@ -50,6 +50,17 @@ public class Payment {
     @Column(name = "active_status")
     public int activeStatus;
 
+    @Column(name = "approval")
+    public String approval;
+
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
+    }
+
     public int getActiveStatus() {
         return activeStatus;
     }
