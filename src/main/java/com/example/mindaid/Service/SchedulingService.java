@@ -235,6 +235,7 @@ public class SchedulingService {
                 scheduleDto.setScheduleDocName((doctorsRepository.findByDocId(payment.getDocId())).get(0).getName());
                 scheduleDto.setScheduleMedia((scheduleRepository.findByScheduleId(payment.getScheduleId())).get(0).getContactMedia());
                 scheduleDto.setScheduleDuration(payment.getScheduleDuration());
+                scheduleDto.setPaymentId(payment.getPaymentId());
                 scheduleInfoList.add(scheduleDto);
             }
         }
