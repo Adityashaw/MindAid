@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Find easily a doctor and book online an appointment">
+  <meta name="author" content="Ansonika">
+  <title>Make Paymeent</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/style-starter.css">
+
+  <!-- Favicons-->
+  <link rel="shortcut icon" href="assets/img/favicon.ico" type="image/x-icon">
+  <link rel="apple-touch-icon" type="image/x-icon" href="assets/img/apple-touch-icon-57x57-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="assets/img/apple-touch-icon-72x72-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="assets/img/apple-touch-icon-114x114-precomposed.png">
+  <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144" href="assets/img/apple-touch-icon-144x144-precomposed.png">
+
+  <!-- GOOGLE WEB FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+
+  <!-- BASE CSS -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link href="assets/css/menu.css" rel="stylesheet">
+  <link href="assets/css/vendors.css" rel="stylesheet">
+  <link href="assets/css/all_icons_min.css" rel="stylesheet">
+
+  <!-- YOUR CUSTOM CSS -->
+  <link href="assets/css/custom_2.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
+  <link rel="stylesheet" href="assets/css/style-starter.css">
+
+</head>
+
+<body>
+
+<div id="preloader" class="Fixed">
+  <div data-loader="circle-side"></div>
+</div>
+<!-- /Preload-->
+<!--header-->
+<header id="site-header" class="header-w3l fixed-top">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg stroke">
+      <a class="brand-logo" href="#">
+        M<span class="sub-logo">i</span>ndA<span class="sub-logo">i</span>d
+      </a>
+
+      <!-- if logo is image enable this -->
+      <!-- <a class="navbar-brand" href="#home.html">
+          <img src="assets/images/MindAid.png" alt="Your logo" title="Your logo" style="height:70px;" />
+      </a>  -->
+      <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
+              data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon fa icon-expand fa-bars"></span>
+        <span class="navbar-toggler-icon fa icon-close fa-times"></span>
+        </span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mx-lg-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="home.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="about.html">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="services.html">Login</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Contact</a>
+          </li>
+          <li class="search-bar ml-lg-3 mr-lg-5 mt-lg-0 mt-4">
+            <!--/search-right-->
+            <form class="search position-relative">
+              <input type="search" class="search__input" name="search" placeholder="Search here.."
+                     onload="equalWidth()" required="">
+              <span class="fa fa-search search__icon"></span>
+            </form>
+
+            <!--//search-right-->
+          </li>
+
+        </ul>
+
+      </div>
+      <!-- toggle switch for light and dark theme -->
+      <div class="mobile-position">
+        <nav class="navigation">
+          <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="checkbox">
+              <input type="checkbox" id="checkbox">
+              <div class="mode-container">
+                <i class="gg-sun"></i>
+                <i class="gg-moon"></i>
+              </div>
+            </label>
+          </div>
+        </nav>
+      </div>
+      <!-- //toggle switch for light and dark theme -->
+    </nav>
+  </div>
+</header>
+</div>
+<!-- //header -->
+
+<!-----main----->
+<main>
+
+  <div class="container margin_120">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div id="confirm">
+          <div class="icon icon--order-success svg add_bottom_15">
+            <svg xmlns="http://www.w3.org/2000/svg" width="72" height="72">
+              <g fill="none" stroke="#8EC343" stroke-width="2">
+                <circle cx="36" cy="36" r="35" style="stroke-dasharray:240px, 240px; stroke-dashoffset: 480px;"></circle>
+                <path d="M17.417,37.778l9.93,9.909l25.444-25.393" style="stroke-dasharray:50px, 50px; stroke-dashoffset: 0px;"></path>
+              </g>
+            </svg>
+          </div>
+          <h2>Thanks for your registering!</h2>
+          <h3> For further details we will contact you though email.</h3>
+          <a th:href="@{/contact}">CONTACT US</a>
+        </div>
+      </div>
+    </div>
+    <!-- /row -->
+  </div>
+  <!-- /container -->
+</main>
+<!-- /main -->
+
+<!-- COMMON SCRIPTS -->
+<script src="assets/js/jquery-3.6.0.min.js"></script>
+<script src="assets/js/common_scripts.min.js"></script>
+<script src="assets/js/functions.js"></script>
+
+</body>
+</html>

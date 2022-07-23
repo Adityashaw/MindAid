@@ -6,6 +6,7 @@ import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.*;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,6 +24,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
+import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 
@@ -60,11 +62,13 @@ public class AdminController {
     @GetMapping("/admin-profile")
     public String getAdminProfile(Model model){
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("pending");
+        List<Doctors> pendingDoctorList=new ArrayList<>();
         int notification= appointmentListAdmin.size();
         String status="Appointments";
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("notification",notification);
         model.addAttribute("status",status);
+        model.addAttribute("pendingDoctorList",pendingDoctorList);
         Payment payment=new Payment();
         model.addAttribute(payment);
 
@@ -96,5 +100,33 @@ public class AdminController {
         model.addAttribute(payment);
 
         return "adminProfile";
+    }
+    @GetMapping("/new-therapist")
+    public String getNewTherapist(Model model){
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="New Therapist Requests";
+        Doctors doctors=new Doctors();
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute(doctors);
+        return "adminProfile";
+
+    }
+    @PostMapping("/appointment-contact")
+    public String postNewTherapist(Model model,Doctors doctors){
+        List<Doctors> findDoctors=doctorsRepository.findByDocId(doctors.getDocId());
+        findDoctors.get(0).setApproval("contacted");
+        doctorsRepository.save(findDoctors.get(0));
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="New Therapist Requests";
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute(doctors);
+        return "adminProfile";
+
     }
 }

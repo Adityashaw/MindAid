@@ -20,11 +20,16 @@
             <h2>Register Here</h2>
             <!-- <h5>Profile information</h5> -->
             <form id="signup_form" method=post class="form" action="action_page.php" th:action="@{/process-doctors-register}" th:object="${doctors}">
-                <input type="text" placeholder="Your Name..." id=signupName name="email" th:field="*{name}" required>
-                <input type="text" placeholder="Your contact number..." id=signupPhone name="email" th:field="*{description}" required> <br>
-                <input type="email" placeholder="Email Address" id=signupEmail name="email" th:field="*{speciality}" required>
-                <input type="password" placeholder="Password" id=signupPassword name="email" th:field="*{schedule}" required>
-                <input type="password" placeholder="Password Confirmation" id=signupconfirmPassword name="email" th:field="*{education}" required>
+                <input type="text" placeholder="Name" id=signupName name="email" th:field="*{name}" required> <br>
+                <input type="text" placeholder="Your speciality" id=speciality name="email" th:field="*{speciality}" required><br>
+                <input type="text" placeholder="Educational qualification" id=education name="email" th:field="*{education}" required><br>
+                <input type="text" placeholder="Experience" id=experience name="email" th:field="*{experience}" required><br>
+                <input type="email" placeholder="Email address" id=email name="email" th:field="*{email}" required><br>
+                <input type="text" placeholder="Contact number" id=number name="email" th:field="*{mobile}" required><br>
+                <input type="text" placeholder="Age" id=age name="email" th:field="*{age}" required><br>
+                <input type="text" placeholder="Gender" id=gender name="email" th:field="*{gender}" required><br>
+                <input type="text" placeholder="Describe yourself" rows="5" cols="50" id=description name="email" th:field="*{description}" required>
+
                 <div class="register-check-box">
                     <!--                        <div class="check">-->
                     <!--                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>-->

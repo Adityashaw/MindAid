@@ -173,3 +173,13 @@ header.a.navbar-brand-custom{
     background: red;
     color: white;
 }
+.button--pan--custom::before {
+    content: '';
+    background: #054807;
+    transition: transform 0.3s cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+.button--pan:hover::before {
+    transform: translate3d(0,-100%,0);
+    background-color: #2F4051;
+}
