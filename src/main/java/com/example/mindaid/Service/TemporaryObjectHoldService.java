@@ -15,6 +15,15 @@ public class TemporaryObjectHoldService {
     public List<List<DoctorsDto>> getDoctorsDtoList() {
         return doctorsDtoList;
     }
+    public List<String>scheduleList=new ArrayList<>();
+
+    public List<String> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<String> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
 
     public void setDoctorsDtoList(List<List<DoctorsDto>> doctorsDtoList) {
         this.doctorsDtoList = doctorsDtoList;

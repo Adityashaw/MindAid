@@ -45,8 +45,26 @@ public class DoctorProfileController {
 
     @GetMapping("/doctor-profile")
     public String getDoctorProfile(Model model){
+        String status="something";
+        model.addAttribute("status","something");
         return "doctorProfile";
     }
+    @GetMapping("/schedule-form")
+    public String getScheduleForm(Model model){
+        TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
+        String status="something";
+        model.addAttribute(temporaryObjectHoldService);
+        model.addAttribute("status","something");
+        return "scheduleform";
+    }
+    @PostMapping("/submitschedule")
+    public String postScheduleForm(Model model,TemporaryObjectHoldService temporaryObjectHoldService){
+        System.out.println(temporaryObjectHoldService.scheduleList.get(0));
+        String status="something";
+        model.addAttribute("status","something");
+        return "scheduleform";
+    }
+
     @GetMapping("/upcoming_doctor_appoinments")
     public String getUpcomingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);

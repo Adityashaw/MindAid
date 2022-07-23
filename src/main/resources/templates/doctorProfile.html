@@ -107,13 +107,13 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointments</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a th:href="@{/ongoing_appoinments}">Ongoing</a>
+                            <a th:href="@{/doctor-profile}">Ongoing</a>
                         </li>
                         <li>
-                            <a th:href="@{/upcoming_appoinments}">Upcoming</a>
+                            <a th:href="@{/doctor-profile}">Upcoming</a>
                         </li>
                         <li>
-                            <a th:href="@{/upcoming_appoinments}">Previous</a>
+                            <a th:href="@{/doctor-profile}">Previous</a>
                         </li>
                         <!--            <li>-->
                         <!--              <a href="#">Home 3</a>-->
@@ -121,7 +121,10 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#">Profile</a>
+                    <a href="/doctor-profile">Your Schedule</a>
+                </li>
+                <li>
+                    <a href="/doctor-profile">Profile</a>
                 </li>
                 <!--        <li>-->
                 <!--          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
@@ -141,23 +144,12 @@
 <!--                    <a th:href="@{/previous_appoinments}">History</a>-->
 <!--                </li>-->
                 <li>
-                    <a href="#">Contact</a>
+                    <a href="/doctor-profile">Contact</a>
                 </li>
             </ul>
             <div class="mb-5">
                 <h4 class="h6">Logout</h4>
-                <!--        <form action="#" class="colorlib-subscribe-form">-->
-                <!--          <div class="form-group d-flex">-->
-                <!--            <div class="icon"><span class="icon-paper-plane"></span></div>-->
-                <!--            <input type="text" class="form-control" placeholder="Enter Email Address">-->
-                <!--          </div>-->
-                <!--        </form>-->
             </div>
-            <!--      <div class="footer">-->
-            <!--        <p>-->
-            <!--          Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com/" target="_blank">Colorlib.com</a>-->
-            <!--        </p>-->
-            <!--      </div>-->
         </div>
     </nav>
 
@@ -168,46 +160,26 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <th:block th:each="scheduleInfo : ${scheduleInfoList}">
-                            <div class="concern_content">
-                                <!--              <h2 class="title">Let us know your concerns</h2><br>-->
-                                <!--              <p>To ensure your therapist can help you, tell us a bit about your concerns by selecting all that apply.</p><br>-->
-                                <!--              <Form th:action="@{/submitconcern}"  th:object="${concernDto}" method="POST">-->
-                                <!--                <div class="checkbox-list">-->
-                                <!--                  <th:block th:each="concern : ${concernList}">-->
-                                <!--                    &lt;!&ndash;label start&ndash;&gt;-->
-                                <!--                    <label class="check-item">-->
-                                <!--                      <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernId}" th:checked="${concernDto.concerns[0]}">-->
-                                <!--                      <span>-->
-                                <!--                             <p th:text="${concern.getConcernName}"></p>-->
-                                <!--                            </span>-->
-                                <!--                    </label>-->
-                                <!--                    &lt;!&ndash;label end&ndash;&gt;-->
-                                <!--                  </th:block>-->
-                                <!--                </div>-->
-                                <!--                <button type="submit" class="btn btn-outline-info mt-5">Submit</button>-->
-                                <!--              </Form>-->
-                                <div class="custom-row-1">
-                                    <!--                <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
-                                    <div class="custom-column-1">
-                                        <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>
-                                        <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>
-                                        <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>
-                                        <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>
-                                    </div>
-                                    <div class="custom-column-2">
-                                        <!--                  <a href="#">Click to join</a>-->
-                                        <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">
-                                            <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
-                                            <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
-                                            <button class="button button--pan"><span>Join Now</span></button>
-                                        </form>
-                                    </div>
-                                    <!--                </th:block>-->
-                                </div>
-                            </div>
-                            <br>
-                        </th:block>
+<!--                        <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
+<!--                            <div class="concern_content">-->
+<!--                                <div class="custom-row-1">-->
+<!--                                    <div class="custom-column-1">-->
+<!--                                        <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>-->
+<!--                                        <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>-->
+<!--                                        <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>-->
+<!--                                        <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>-->
+<!--                                    </div>-->
+<!--                                    <div class="custom-column-2">-->
+<!--                                        <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">-->
+<!--                                            <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>-->
+<!--                                            &lt;!&ndash;                    <button class="custom-join-btn" type="submit">Join Now</button>&ndash;&gt;-->
+<!--                                            <button class="button button&#45;&#45;pan"><span>Join Now</span></button>-->
+<!--                                        </form>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            <br>-->
+<!--                        </th:block>-->
                     </div><!-- col-lg-12 end-->
                 </div>
                 <!-- row end-->

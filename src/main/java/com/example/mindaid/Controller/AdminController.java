@@ -58,6 +58,8 @@ public class AdminController {
     ScheduleRepository scheduleRepository;
     @Autowired
     AdminService adminService;
+    @Autowired
+    MailSendingService mailSendingService;
 
     @GetMapping("/admin-profile")
     public String getAdminProfile(Model model){
@@ -115,8 +117,9 @@ public class AdminController {
 
     }
     @PostMapping("/appointment-contact")
-    public String postNewTherapist(Model model,Doctors doctors){
+    public String postNewTherapist(Model model,Doctors doctors) throws MessagingException, UnsupportedEncodingException {
         List<Doctors> findDoctors=doctorsRepository.findByDocId(doctors.getDocId());
+        mailSendingService.sendEmailToNewApplicant(findDoctors.get(0).getEmail(),findDoctors.get(0).getName());
         findDoctors.get(0).setApproval("contacted");
         doctorsRepository.save(findDoctors.get(0));
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
