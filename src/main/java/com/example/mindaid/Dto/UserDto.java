@@ -9,8 +9,19 @@ public class UserDto extends User {
     public String name;
     public String phone;
     public String email;
+    public String userType;
     public UserDto userDto;
     public UserDto [] userDtoArray=new UserDto[1];
+
+    @Override
+    public String getUserType() {
+        return userType;
+    }
+
+    @Override
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public int getUserId() {
         return userId;

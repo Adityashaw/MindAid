@@ -124,7 +124,11 @@
                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Approvals</a>
                     <ul class="collapse list-unstyled" id="pageSubmenu">
                         <li>
-                            <a th:href="@{/new-therapist}">New Therapist</a>
+                            <a th:href="@{/new-therapist}" class="notification">
+                                <span>New Therapist</span>
+                                <span class="badge" th:if="${notification>0}" th:text="${notification}"></span>
+                            </a>
+
                         </li>
                         <li>
                             <a href="#">Edit Requests</a>

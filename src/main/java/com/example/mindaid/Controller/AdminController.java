@@ -65,10 +65,10 @@ public class AdminController {
     public String getAdminProfile(Model model){
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("pending");
         List<Doctors> pendingDoctorList=new ArrayList<>();
-        int notification= appointmentListAdmin.size();
         String status="Appointments";
-        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        int notification= pendingDoctorList.size();
         model.addAttribute("notification",notification);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status",status);
         model.addAttribute("pendingDoctorList",pendingDoctorList);
         Payment payment=new Payment();
@@ -109,6 +109,8 @@ public class AdminController {
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
         Doctors doctors=new Doctors();
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status", status);
@@ -125,6 +127,8 @@ public class AdminController {
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status", status);

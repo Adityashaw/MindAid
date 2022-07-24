@@ -15,9 +15,15 @@ public class DoctorsDto {
     public String name;
     public String description;
     public String speciality;
+    public String education;
+    public String experience;
+    public String email;
+    public String mobile;
+    public String age;
+    public String gender;
+    public String appliedDate;
     public String scheduleTime;
     public String contactMedia;
-    public String education;
     public int scheduleId;
     public String scheduleDay;
     public String scheduleTimeStart;
@@ -26,6 +32,54 @@ public class DoctorsDto {
     public String selectedScheduleTime;
     public String scheduleday_parameter;
     List<Doctors> DoctorsList=new ArrayList<>();
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAppliedDate() {
+        return appliedDate;
+    }
+
+    public void setAppliedDate(String appliedDate) {
+        this.appliedDate = appliedDate;
+    }
 
     public String getScheduleday_parameter() {
         return scheduleday_parameter;

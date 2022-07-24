@@ -14,4 +14,7 @@ public interface DoctorsRepository extends JpaRepository<Doctors, Integer> {
 
     @Query(value = "select * from doctors where approval=:approval",nativeQuery = true)
     public List<Doctors>findByApproval(String approval);
+
+    @Query(value = "select * from doctors where login_email=:email and login_password=:password",nativeQuery = true)
+    public List<Doctors>findByEmailPassword(String email,String password);
 }

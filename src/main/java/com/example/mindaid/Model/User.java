@@ -25,6 +25,16 @@ public class User {
     private boolean enabled;
     @Column(name = "reset_password_token", length = 30)
     private String resetPasswordToken;
+    @Column(name="user_type")
+    public String userType;
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
 
     public String getVerificationCode() {
         return verificationCode;

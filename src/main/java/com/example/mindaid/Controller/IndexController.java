@@ -70,8 +70,17 @@ public class IndexController {
         List<Login> loginList=new ArrayList<>();
         int loginValidate=userService.loginValidationAndUserIdTransfer(login,model);
         if (loginValidate==1) {
-            concernService.getAndSetConcernList(model);
-            return "concern";
+            if(temporaryObjectHoldService.getUserDto().getUserType().equals("doctor")){
+                String status="something";
+                model.addAttribute("status","something");
+                return "doctorProfile";
+            }
+            else{
+                concernService.getAndSetConcernList(model);
+                return "concern";
+
+            }
+
         }
         else if(loginValidate==2){
             login.setMessage("Please verify your account from email!!");
@@ -100,6 +109,7 @@ public class IndexController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             String encodedPassword = passwordEncoder.encode(user.getPassword());
             user.setPassword(encodedPassword);
+            user.setUserType("user");
             userRepository.save(user);
             emailVerificationService.register(user, getSiteURL(request));
             return "register_success";

@@ -29,14 +29,19 @@ public class DoctorListService {
                     doctor.setName((String) doctors[1]);
                     doctor.setDescription((String) doctors[2]);
                     doctor.setSpeciality((String) doctors[3]);
-                    doctor.setScheduleTime((String) doctors[4]);
-                    doctor.setEducation((String) doctors[5]);
-                    doctor.setScheduleDay((String) doctors[6]);
-                    doctor.setScheduleTimeStart((String) doctors[7]);
-                    doctor.setFee((Integer) doctors[8]);
-                    doctor.setContactMedia((String) doctors[9]);
-                    doctor.setScheduleday_parameter((String) doctors[10]);
-                    doctor.setScheduleId((int)doctors[11]);
+                    doctor.setEducation((String) doctors[4]);
+                    doctor.setExperience((String) doctors[5]);
+                    doctor.setEmail((String) doctors[6]);
+                    doctor.setMobile((String) doctors[7]);
+                    doctor.setAge((String) doctors[8]);
+                    doctor.setGender((String) doctors[9]);
+                    doctor.setAppliedDate((String) doctors[13]);
+                    doctor.setScheduleId((int)doctors[14]);
+                    doctor.setScheduleDay((String) doctors[15]);
+                    doctor.setScheduleTimeStart((String) doctors[16]);
+                    doctor.setFee((int) doctors[17]);
+                    doctor.setContactMedia((String) doctors[18]);
+                    doctor.setScheduleday_parameter((String) doctors[19]);
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;
