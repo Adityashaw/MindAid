@@ -107,7 +107,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Appointments</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
-                            <a th:href="@{/doctor-profile}">Ongoing</a>
+                            <a th:href="@{/ongoing_doctor_appoinments}">Ongoing</a>
                         </li>
                         <li>
                             <a th:href="@{/doctor-profile}">Upcoming</a>
@@ -160,26 +160,26 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-<!--                        <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
-<!--                            <div class="concern_content">-->
-<!--                                <div class="custom-row-1">-->
-<!--                                    <div class="custom-column-1">-->
-<!--                                        <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>-->
-<!--                                        <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>-->
-<!--                                        <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>-->
+                        <th:block th:each="scheduleInfo : ${scheduleInfoList}">
+                            <div class="concern_content">
+                                <div class="custom-row-1">
+                                    <div class="custom-column-1">
+                                        <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>
+                                        <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>
+                                        <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>
 <!--                                        <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>-->
-<!--                                    </div>-->
-<!--                                    <div class="custom-column-2">-->
-<!--                                        <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">-->
-<!--                                            <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>-->
-<!--                                            &lt;!&ndash;                    <button class="custom-join-btn" type="submit">Join Now</button>&ndash;&gt;-->
-<!--                                            <button class="button button&#45;&#45;pan"><span>Join Now</span></button>-->
-<!--                                        </form>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                            <br>-->
-<!--                        </th:block>-->
+                                    </div>
+                                    <div class="custom-column-2">
+                                        <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">
+                                            <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
+                                            <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
+                                            <button class="button button--pan"><span>Join Now</span></button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        </th:block>
                     </div><!-- col-lg-12 end-->
                 </div>
                 <!-- row end-->

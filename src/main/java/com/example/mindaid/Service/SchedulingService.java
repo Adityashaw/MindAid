@@ -197,8 +197,14 @@ public class SchedulingService {
         paymentRepository.save(paymentDto);
     }
 
-    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus, String approval){
-        List<Payment>paymentList=paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus, String approval,String userType){
+        List<Payment>paymentList=new ArrayList<>();
+        if (userType.equals("user")) {
+            paymentList = paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        }
+        else {
+           paymentList = paymentRepository.findByDocId(temporaryObjectHoldService.userDto.userId);
+        }
         List <ScheduleDto>scheduleInfoList=new ArrayList<>();
         for (Payment payment: paymentList){
             LocalDate localDate=LocalDate.now();

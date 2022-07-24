@@ -45,8 +45,12 @@ public class DoctorProfileController {
 
     @GetMapping("/doctor-profile")
     public String getDoctorProfile(Model model){
-        String status="something";
-        model.addAttribute("status","something");
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","doctor");
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("username",user.getName());
+        String status="Upcoming";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "doctorProfile";
     }
     @GetMapping("/schedule-form")
@@ -68,35 +72,35 @@ public class DoctorProfileController {
     @GetMapping("/upcoming_doctor_appoinments")
     public String getUpcomingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved");
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("username",user.getName());
         String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        return "userProfile";
+        return "doctorProfile";
     }
     @GetMapping("/ongoing_doctor_appoinments")
     public String getOngoingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        model.addAttribute("username",user.getName());
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","doctor");
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
+        model.addAttribute("username",doctorsList.get(0).getName());
         String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        return "userProfile";
+        return "doctorProfile";
     }
     @GetMapping("/previous_doctor_appoinments")
     public String getPrevAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved");
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved","doctor");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("username",user.getName());
         String status="Previous";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        return "userProfile";
+        return "doctorProfile";
     }
 
     @GetMapping("/doctor-form")

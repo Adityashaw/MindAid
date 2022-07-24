@@ -34,12 +34,16 @@ public class UserService {
     public EntityManager entityManager;
     public int loginValidationAndUserIdTransfer(Login login, Model model) throws UnsupportedEncodingException {
         List<User> userList = userRepository.findByEmail(login.email);
+        List<Doctors>doctorsList=doctorsRepository.findByEmailPassword(login.email,login.password);
         if (userList.size() > 0) {
             if (login.password.equals(userList.get(0).confirmPassword)) {
                 if (userList.get(0).isEnabled()) {
                     UserDto userDto=new UserDto();
                     userDto.setUserId(userList.get(0).userId);
                     userDto.setUserType(userList.get(0).getUserType());
+                    if (userList.get(0).getUserType().equals("doctor")){
+                        userDto.setUserId(doctorsList.get(0).getDocId());
+                    }
                     temporaryObjectHoldService.setUserDto(userDto);
                     userDto.setUserDto(userDto);
                     model.addAttribute(userDto);
@@ -62,9 +66,8 @@ public class UserService {
                 user.setName(doctorList.get(0).getName());
                 userRepository.save(user);
                 UserDto userDto=new UserDto();
-                userDto.setUserId(user.getUserId());
+                userDto.setUserId(doctorList.get(0).getDocId());
                 userDto.setUserType("doctor");
-
                 temporaryObjectHoldService.setUserDto(userDto);
                 return 1;
             }
