@@ -117,4 +117,10 @@ public class DoctorProfileController {
         doctorsRepository.save(doctors);
         return "doctorFormProcess";
     }
+    @GetMapping("/your-schedule")
+    public String getYourSchedule(Model model){
+        DoctorsDto doctorsDto=new DoctorsDto();
+        model.addAttribute(doctorsDto);
+        return "doctorSchedule";
+    }
 }

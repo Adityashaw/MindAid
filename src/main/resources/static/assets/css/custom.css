@@ -183,3 +183,19 @@ header.a.navbar-brand-custom{
     transform: translate3d(0,-100%,0);
     background-color: #2F4051;
 }
+.row-custom {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+    flex-wrap: nowrap;
+}
+.custom-custom-select-option{
+    word-wrap: inherit;
+    text-align: center;
+    width: 100%;
+    padding: 2px 6px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
