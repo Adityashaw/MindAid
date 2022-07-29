@@ -199,3 +199,60 @@ header.a.navbar-brand-custom{
     box-sizing: border-box;
     border-radius: 10px;
 }
+.col-6-custom{
+    position: relative;
+    width: 100%;
+    padding-right: 1px;
+    padding-left: 10px;
+    flex: 0 0 37%;
+    max-width: 50%;
+}
+.custom-custom-column-1{
+    background-color: #6cce5f;
+    text-align: center;
+    /*margin-left: 10px;*/
+    /*margin-right: 100px;*/
+    padding-top: 60px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+    padding-right: 180px;
+}
+.custom-custom-column-2{
+    background-color: #ebedf0;
+    text-align: center;
+    /*padding: 90px;*/
+    padding-top: 60px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+    padding-right: 180px;
+}
+.h3-custom{
+    margin: 0;
+    padding: 0;
+    color: var(--heading-color);
+}
+.col-6-custom-custom {
+    position: relative;
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 20px;
+    flex: 0 0 10%;
+    max-width: 50%;
+}
+.p-custom{
+    margin: 0;
+    padding-top: 1px;
+    font-size: 23px;
+    /*line-height: 28px;*/
+    color: #991818;
+    font-family: serif;
+}
+.h3-custom{
+    padding-left: 20px;
+    margin-left: 90px;
+    font-size: 20px;
+    font-family: serif;
+    color: #086591;
+}
+.title-custom{
+}
