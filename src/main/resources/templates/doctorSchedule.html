@@ -159,24 +159,67 @@
         <section class="login service-1 section-padding-1 section--padding">
             <div class="container">
                 <div class="custom-row-1">
+                    <div class="custom-custom-column-3">
+                        <!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
+                        <div class="box_general_3 booking">
+                            <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Sunday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Monday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Tuesday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Wednesday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Thursday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Friday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Saturday: </b></p>
+                                    <br>
+                                </div>
+                                <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
+                                <!--                                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>-->
+                                <!--                                        <button class="btn_1 full-width" type="submit">Submit</button>-->
+                            </form>
+
+                        </div>
+                        <!-- /box_general -->
+                        <!--                            </aside>-->
+                    </div>
 <!--                <div class="row-custom">-->
 <!--                    <div class="col-lg-12">-->
                         <div class="custom-custom-column-1">
 <!--                        <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
                             <div class="box_general_3 booking">
-                                <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
+                                <form method=post th:action="@{/payment}" th:object="${doctorsScheduleDto}">
                                     <div class="row-custom">
                                         <h3 class="h3-custom"><b>Schedule for Message Session</b></h3>
                                         <br>
 <!--                                        <small th:utext="${doctorsDto.getScheduleDay()}+','+${doctorsDto.getScheduleTime()}"></small>-->
                                     </div>
                                     <br>
+                                    <th:block th:each="scheduleDay: ${doctorsScheduleDtoList}">
                                     <div class="row-custom">
-                                        <div class="col-6-custom-custom">
-                                            <div class="form-group">
-                                                <p class="p-custom"><b>Sunday: </b></p>
-                                            </div>
-                                        </div>
+<!--                                        <div class="col-6-custom-custom">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <p class="p-custom"><b th:text="${scheduleDay.getDay()}"> </b></p>-->
+<!--                                            </div>-->
+
+<!--                                        </div>-->
                                         <div class="col-6-custom">
                                             <div class="form-group">
                                                 <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
@@ -214,6 +257,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    </th:block>
                                     <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
 <!--                                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>-->
 <!--                                    <button class="btn_1 full-width" type="submit">Submit</button>-->
@@ -223,73 +267,125 @@
                             <!-- /box_general -->
 <!--                        </aside>-->
                         </div>
-                        <!-- /asdide -->
-                        <div class="custom-custom-column-2">
-<!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
-                                <div class="box_general_3 booking">
-                                    <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
-                                        <div class="row-custom">
-                                            <h3 class="h3-custom" ><b>Schedule for Live Session</b></h3>
-                                            <br>
-                                            <!--                                        <small th:utext="${doctorsDto.getScheduleDay()}+','+${doctorsDto.getScheduleTime()}"></small>-->
-                                        </div>
-                                        <br>
-                                        <div class="row-custom">
-                                            <div class="col-6-custom-custom">
-                                                <div class="form-group">
-                                                    <p class="p-custom"> <b>Sunday: </b></p>
-                                                </div>
-                                            </div>
-                                            <div class="col-6-custom">
-                                                <div class="form-group">
-                                                    <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
-                                                    <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-custom-select-option" required>
-                                                        <!--                                            th:field="*{selectedScheduleDay}"-->
-                                                        <option th:selected="true" th:disabled="disabled" value="something">Select Slot-1 ▼</option>
-                                                        <!--                                                    <th:block th:each="scheduleDay : ${scheduleDays}">-->
-                                                        <!--                                                        <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>-->
-                                                        <!--                                                    </th:block>-->
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-6-custom">
-                                                <div class="form-group">
-                                                    <!--                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
-                                                    <select th:name="selectedScheduleTime" id="selectedScheduleTime" class="custom-custom-select-option" required>
-                                                        <!--                                            th:field="*{selectedScheduleDay}"-->
-                                                        <option th:selected="true" th:disabled="disabled" value="something">Select Slot-2 ▼</option>
-                                                        <!--                                                    <th:block th:each="scheduleTime : ${scheduleTimeAndTimeStr}">-->
-                                                        <!--                                                        <option th:value="${scheduleTime.getScheduleTimeStr()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>-->
-                                                        <!--                                                    </th:block>-->
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-6-custom">
-                                                <div class="form-group">
-                                                    <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
-                                                    <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-custom-select-option" required>
-                                                        <!--                                            th:field="*{selectedScheduleDay}"-->
-                                                        <option th:selected="true" th:disabled="disabled" value="something">Select Slot-3 ▼</option>
-                                                        <!--                                                    <th:block th:each="scheduleDay : ${scheduleDays}">-->
-                                                        <!--                                                        <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>-->
-                                                        <!--                                                    </th:block>-->
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
-                                        <!--                                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>-->
-<!--                                        <button class="btn_1 full-width" type="submit">Submit</button>-->
-                                    </form>
 
+
+
+
+                    <div class="custom-custom-column-4">
+                        <!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
+                        <div class="box_general_3 booking">
+                            <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Sunday: </b></p>
+                                    <br>
                                 </div>
-                                <!-- /box_general -->
-<!--                            </aside>-->
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Monday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Tuesday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Wednesday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Thursday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Friday: </b></p>
+                                    <br>
+                                </div>
+                                <div class="row-custom">
+                                    <p class="p-custom"> <b>Saturday: </b></p>
+                                    <br>
+                                </div>
+                                <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
+                                <!--                                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>-->
+                                <!--                                        <button class="btn_1 full-width" type="submit">Submit</button>-->
+                            </form>
+
                         </div>
+                        <!-- /box_general -->
+                        <!--                            </aside>-->
+                    </div>
+
+
+
+
+
+
+
+
                         <!-- /asdide -->
-<!--                    </div>&lt;!&ndash; col-lg-12 end&ndash;&gt;-->
+                <div class="custom-custom-column-2">
+                    <!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
+                    <div class="box_general_3 booking">
+                        <form method=post th:action="@{/payment}" th:object="${doctorsDto}">
+                            <div class="row-custom">
+                                <h3 class="h3-custom" ><b>Schedule for Live Session</b></h3>
+                                <br>
+                                <!--                                        <small th:utext="${doctorsDto.getScheduleDay()}+','+${doctorsDto.getScheduleTime()}"></small>-->
+                            </div>
+                            <br>
+                            <th:block th:each="scheduleDay: ${doctorsScheduleDtoList}">
+                            <div class="row-custom">
+<!--                                <div class="col-6-custom-custom">-->
+<!--                                    <div class="form-group">-->
+<!--                                        <p class="p-custom"> <b>Sunday: </b></p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="col-6-custom">
+                                    <div class="form-group">
+                                        <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
+                                        <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-custom-select-option" required>
+                                            <!--                                            th:field="*{selectedScheduleDay}"-->
+                                            <option th:selected="true" th:disabled="disabled" value="something">Select Slot-1 ▼</option>
+                                            <!--                                                    <th:block th:each="scheduleDay : ${scheduleDays}">-->
+                                            <!--                                                        <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>-->
+                                            <!--                                                    </th:block>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6-custom">
+                                    <div class="form-group">
+                                        <!--                                        <input class="form-control" type="text" id="booking_time" value="9:00 am">-->
+                                        <select th:name="selectedScheduleTime" id="selectedScheduleTime" class="custom-custom-select-option" required>
+                                            <!--                                            th:field="*{selectedScheduleDay}"-->
+                                            <option th:selected="true" th:disabled="disabled" value="something">Select Slot-2 ▼</option>
+                                            <!--                                                    <th:block th:each="scheduleTime : ${scheduleTimeAndTimeStr}">-->
+                                            <!--                                                        <option th:value="${scheduleTime.getScheduleTimeStr()}" th:text="${scheduleTime.getScheduleTimeStr()}"> </option>-->
+                                            <!--                                                    </th:block>-->
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-6-custom">
+                                    <div class="form-group">
+                                        <!--                                        <input class="form-control" type="text" id="booking_date" data-lang="en" data-min-year="2020" data-max-year="2024" data-disabled-days="10/17/2021,11/18/2021">-->
+                                        <select th:name="selectedScheduleDay" id="selectedScheduleDay" class="custom-custom-select-option" required>
+                                            <!--                                            th:field="*{selectedScheduleDay}"-->
+                                            <option th:selected="true" th:disabled="disabled" value="something">Select Slot-3 ▼</option>
+                                            <!--                                                    <th:block th:each="scheduleDay : ${scheduleDays}">-->
+                                            <!--                                                        <option th:value="${scheduleDay.getScheduleDate()}" th:disabled="${scheduleDay.isActiveStatusBool()}" th:text="${scheduleDay.getScheduleDate()}"> </option>-->
+                                            <!--                                                    </th:block>-->
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            </th:block>
+                            <!--                            <a type="submit" th:href="@{/payment}" class="btn_1 full-width">Book Now</a>-->
+                            <!--                                    <input type="hidden" th:value="${doctorsDto.getContactMedia()}" th:attr="name='contactMedia'"/>-->
+                            <!--                                        <button class="btn_1 full-width" type="submit">Submit</button>-->
+                        </form>
+
+                    </div>
+                    <!-- /box_general -->
+                    <!--                            </aside>-->
                 </div>
-<!--                </div>-->
+
                 <!-- row end-->
             </div><!-- container end-->
         </section><!-- section end-->

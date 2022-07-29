@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -119,8 +120,23 @@ public class DoctorProfileController {
     }
     @GetMapping("/your-schedule")
     public String getYourSchedule(Model model){
-        DoctorsDto doctorsDto=new DoctorsDto();
-        model.addAttribute(doctorsDto);
+        DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
+        List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
+        for(int i=0;i<7;i++){
+            DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
+            doctorsScheduleDto1.setDayParameter(Integer.toString(i));
+            if(i==0) doctorsScheduleDto1.setDay("Sun");
+            else if(i==1) doctorsScheduleDto1.setDay("Mon");
+            else if(i==2) doctorsScheduleDto1.setDay("Tue");
+            else if(i==3) doctorsScheduleDto1.setDay("Wed");
+            else if(i==4) doctorsScheduleDto1.setDay("Thu");
+            else if(i==5) doctorsScheduleDto1.setDay("Fri");
+            else doctorsScheduleDto1.setDay("Sat");
+            doctorsScheduleDtoList.add(doctorsScheduleDto1);
+        }
+        model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
+
+        model.addAttribute(doctorsScheduleDto);
         return "doctorSchedule";
     }
 }

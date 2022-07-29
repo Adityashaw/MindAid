@@ -198,17 +198,18 @@ header.a.navbar-brand-custom{
     border: 1px solid #ccc;
     box-sizing: border-box;
     border-radius: 10px;
+    font-size: 12px;
 }
 .col-6-custom{
     position: relative;
     width: 100%;
     padding-right: 1px;
     padding-left: 10px;
-    flex: 0 0 37%;
+    flex: 0 0 42%;
     max-width: 50%;
 }
 .custom-custom-column-1{
-    background-color: #6cce5f;
+    background-color: #a5b4c9;
     text-align: center;
     /*margin-left: 10px;*/
     /*margin-right: 100px;*/
@@ -218,7 +219,7 @@ header.a.navbar-brand-custom{
     padding-right: 180px;
 }
 .custom-custom-column-2{
-    background-color: #ebedf0;
+    background-color: #828d97;
     text-align: center;
     /*padding: 90px;*/
     padding-top: 60px;
@@ -244,15 +245,37 @@ header.a.navbar-brand-custom{
     padding-top: 1px;
     font-size: 23px;
     /*line-height: 28px;*/
-    color: #991818;
+    color: #782433;
     font-family: serif;
+    font-size: 17px;
 }
 .h3-custom{
-    padding-left: 20px;
-    margin-left: 90px;
+    /*padding-left: 20px;*/
+    /*margin-left: 90px;*/
     font-size: 20px;
     font-family: serif;
-    color: #086591;
+    color: #02014f;
 }
 .title-custom{
+}
+
+.custom-custom-column-3 {
+    background-color: #a5b4c9;
+    text-align: center;
+    /* padding: 90px; */
+    padding-top: 115px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+    padding-right: 15px;
+    line-height: 46px;
+}
+.custom-custom-column-4 {
+    background-color: #828d97;
+    text-align: center;
+    /* padding: 90px; */
+    padding-top: 115px;
+    padding-left: 50px;
+    padding-bottom: 60px;
+    padding-right: 15px;
+    line-height: 46px;
 }
