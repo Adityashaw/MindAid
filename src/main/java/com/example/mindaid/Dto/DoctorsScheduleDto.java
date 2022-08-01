@@ -11,7 +11,16 @@ public class DoctorsScheduleDto {
     public String slot2;
     public String slot3;
     public List<String>chosenConcernList=new ArrayList<>();
+    public String [] concerns=new String[20];
 
+
+    public String[] getConcerns() {
+        return concerns;
+    }
+
+    public void setConcerns(String[] concerns) {
+        this.concerns = concerns;
+    }
 
     public List<String> getChosenConcernList() {
         return chosenConcernList;

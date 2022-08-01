@@ -347,3 +347,65 @@ header.a.navbar-brand-custom{
     color:#fff;
 }
 /*doctor concern choice end*/
+
+/*============================ Concern Page Start ===========================*/
+@media screen and (min-width: 767px){
+    .service-1{
+        /*margin-left: 200px;*/
+    }
+}
+.concern_content{
+
+    padding: 30px 40px;
+    box-shadow: 2px 3px 10px rgb(185 185 190);
+    background-color: #ebedf0;
+    border-radius: 15px;
+}
+
+.checkbox-list{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /*margin-bottom: 45px;*/
+}
+
+.check-item input{
+    display: none;
+}
+
+.check-item span{
+    display: table;
+    padding: 8px 16px;
+    border: 2px solid #6c757d;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.check-item input[type=checkbox]:checked~span{
+    color: #ffffff;
+    background-color: #17a2b8;
+}
+
+.check-item input[type=radio]:checked~span{
+    color: #ffffff;
+    background-color: #17a2b8;
+}
+
+@media screen and (max-width: 767px){
+    .concern_content{
+        padding: 30px 15px;
+    }
+
+}
+h2.custom-title{
+    font-size: 22px;
+    font-family: serif;
+    color: #02014f;
+    text-align: center;
+}
+.custom-concern-p{
+    font-size: 13px;
+    font-family: serif;
+}
+
+/*============================ Concern Page End ===========================*/

@@ -10956,7 +10956,7 @@ a[data-toggle=collapse] {
 }
 
 #content {
-    width: 100%;
+    /*width: 100%;*/
     padding: 0;
     min-height: 100vh;
     -webkit-transition: all .3s;
