@@ -1,5 +1,8 @@
 package com.example.mindaid.Dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DoctorsScheduleDto {
     public int docId;
     public String day;
@@ -7,6 +10,16 @@ public class DoctorsScheduleDto {
     public String slot1;
     public String slot2;
     public String slot3;
+    public List<String>chosenConcernList=new ArrayList<>();
+
+
+    public List<String> getChosenConcernList() {
+        return chosenConcernList;
+    }
+
+    public void setChosenConcernList(List<String> chosenConcernList) {
+        this.chosenConcernList = chosenConcernList;
+    }
 
     public int getDocId() {
         return docId;

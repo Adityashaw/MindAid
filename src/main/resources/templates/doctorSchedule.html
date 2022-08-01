@@ -17,6 +17,104 @@
     <script nonce="ccb4f610-5582-4505-9fad-a0d60af7ec7e">(function(w,d){!function(a,e,t,r){a.zarazData=a.zarazData||{};a.zarazData.executed=[];a.zaraz={deferred:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var t=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:t})}};for(const e of["track","set","ecommerce","debug"])a.zaraz[e]=a.zaraz._f(e);a.zaraz.init=()=>{var t=e.getElementsByTagName(r)[0],z=e.createElement(r),n=e.getElementsByTagName("title")[0];n&&(a.zarazData.t=e.getElementsByTagName("title")[0].text);a.zarazData.x=Math.random();a.zarazData.w=a.screen.width;a.zarazData.h=a.screen.height;a.zarazData.j=a.innerHeight;a.zarazData.e=a.innerWidth;a.zarazData.l=a.location.href;a.zarazData.r=e.referrer;a.zarazData.k=a.screen.colorDepth;a.zarazData.n=e.characterSet;a.zarazData.o=(new Date).getTimezoneOffset();a.zarazData.q=[];for(;a.zaraz.q.length;){const e=a.zaraz.q.shift();a.zarazData.q.push(e)}z.defer=!0;for(const e of[localStorage,sessionStorage])Object.keys(e||{}).filter((a=>a.startsWith("_zaraz_"))).forEach((t=>{try{a.zarazData["z_"+t.slice(7)]=JSON.parse(e.getItem(t))}catch{a.zarazData["z_"+t.slice(7)]=e.getItem(t)}}));z.referrerPolicy="origin";z.src="../../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(a.zarazData)));t.parentNode.insertBefore(z,t)};["complete","interactive"].includes(e.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,0,"script");})(window,document);</script>
     <script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this demo in a modern browser that supports CSS Variables.");</script>
     <script src="//tympanus.net/codrops/adpacks/analytics.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#test").CreateMultiCheckBox({ width: '230px', defaultText : 'Select Concerns', height:'250px' });
+        });
+
+        $(document).ready(function () {
+            $(document).on("click", ".MultiCheckBox", function () {
+                var detail = $(this).next();
+                detail.show();
+            });
+
+            $(document).on("click", ".MultiCheckBoxDetailHeader input", function (e) {
+                e.stopPropagation();
+                var hc = $(this).prop("checked");
+                $(this).closest(".MultiCheckBoxDetail").find(".MultiCheckBoxDetailBody input").prop("checked", hc);
+                $(this).closest(".MultiCheckBoxDetail").next().UpdateSelect();
+            });
+
+            $(document).on("click", ".MultiCheckBoxDetailHeader", function (e) {
+                var inp = $(this).find("input");
+                var chk = inp.prop("checked");
+                inp.prop("checked", !chk);
+                $(this).closest(".MultiCheckBoxDetail").find(".MultiCheckBoxDetailBody input").prop("checked", !chk);
+                $(this).closest(".MultiCheckBoxDetail").next().UpdateSelect();
+            });
+
+            $(document).on("click", ".MultiCheckBoxDetail .cont input", function (e) {
+                e.stopPropagation();
+                $(this).closest(".MultiCheckBoxDetail").next().UpdateSelect();
+
+                var val = ($(".MultiCheckBoxDetailBody input:checked").length == $(".MultiCheckBoxDetailBody input").length)
+                $(".MultiCheckBoxDetailHeader input").prop("checked", val);
+            });
+
+            $(document).on("click", ".MultiCheckBoxDetail .cont", function (e) {
+                var inp = $(this).find("input");
+                var chk = inp.prop("checked");
+                inp.prop("checked", !chk);
+
+                var multiCheckBoxDetail = $(this).closest(".MultiCheckBoxDetail");
+                var multiCheckBoxDetailBody = $(this).closest(".MultiCheckBoxDetailBody");
+                multiCheckBoxDetail.next().UpdateSelect();
+
+                var val = ($(".MultiCheckBoxDetailBody input:checked").length == $(".MultiCheckBoxDetailBody input").length)
+                $(".MultiCheckBoxDetailHeader input").prop("checked", val);
+            });
+
+            $(document).mouseup(function (e) {
+                var container = $(".MultiCheckBoxDetail");
+                if (!container.is(e.target) && container.has(e.target).length === 0) {
+                    container.hide();
+                }
+            });
+        });
+
+        var defaultMultiCheckBoxOption = { width: '220px', defaultText: 'Select Below', height: '200px' };
+
+        jQuery.fn.extend({
+            CreateMultiCheckBox: function (options) {
+
+                var localOption = {};
+                localOption.width = (options != null && options.width != null && options.width != undefined) ? options.width : defaultMultiCheckBoxOption.width;
+                localOption.defaultText = (options != null && options.defaultText != null && options.defaultText != undefined) ? options.defaultText : defaultMultiCheckBoxOption.defaultText;
+                localOption.height = (options != null && options.height != null && options.height != undefined) ? options.height : defaultMultiCheckBoxOption.height;
+
+                this.hide();
+                this.attr("multiple", "multiple");
+                var divSel = $("<div class='MultiCheckBox'>" + localOption.defaultText + "<span class='k-icon k-i-arrow-60-down'><svg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='sort-down' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512' class='svg-inline--fa fa-sort-down fa-w-10 fa-2x'><path fill='currentColor' d='M41 288h238c21.4 0 32.1 25.9 17 41L177 448c-9.4 9.4-24.6 9.4-33.9 0L24 329c-15.1-15.1-4.4-41 17-41z' class=''></path></svg></span></div>").insertBefore(this);
+                divSel.css({ "width": localOption.width });
+
+                var detail = $("<div class='MultiCheckBoxDetail'><div class='MultiCheckBoxDetailHeader'><input type='checkbox' class='mulinput' value='-1982' /><div>Select All</div></div><div class='MultiCheckBoxDetailBody'></div></div>").insertAfter(divSel);
+                detail.css({ "width": parseInt(options.width) + 10, "max-height": localOption.height });
+                var multiCheckBoxDetailBody = detail.find(".MultiCheckBoxDetailBody");
+
+                this.find("option").each(function () {
+                    var val = $(this).attr("value");
+                    // var nam = $(this).attr("name");
+
+                    if (val == undefined)
+                        val = '';
+
+                    multiCheckBoxDetailBody.append("<div class='cont'><div><input type='checkbox' class='mulinput' value='" + val + "' /></div><div>" + $(this).text() + "</div></div>");
+                });
+
+                multiCheckBoxDetailBody.css("max-height", (parseInt($(".MultiCheckBoxDetail").css("max-height")) - 28) + "px");
+            },
+            UpdateSelect: function () {
+                var arr = [];
+
+                this.prev().find(".mulinput:checked").each(function () {
+                    arr.push($(this).val());
+                });
+
+                this.val(arr);
+            },
+        });
+    </script>
 </head>
 
 <body>
@@ -28,10 +126,6 @@
             <a class="brand-logo" href="#">
                 M<span class="sub-logo">i</span>ndA<span class="sub-logo">i</span>d
             </a>
-            <!-- if logo is image enable this -->
-            <!-- <a class="navbar-brand" href="#home.html">
-                <img src="assets/images/MindAid.png" alt="Your logo" title="Your logo" style="height:70px;" />
-            </a>  -->
             <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
                     data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
                     aria-label="Toggle navigation">
@@ -87,7 +181,6 @@
         </nav>
     </div>
 </header>
-</div>
 <!-- //header -->
 
 <div class="wrapper d-flex align-items-stretch">
@@ -152,12 +245,35 @@
             </div>
         </div>
     </nav>
+</div>
 
     <div id="content" class="p-4 p-md-5 pt-5 custom-middle">
         <h3 class="custom-h3">Your Schedule</h3>
         <br>
         <section class="login service-1 section-padding-1 section--padding">
             <div class="container">
+<!--                Schedule Area Start-->
+<!--                <form th:action="@{/submitschedule}"  th:object="${temporaryObjectHoldService}" method="POST">-->
+                <form method=post th:action="@{/payment}" th:object="${doctorsScheduleDto}">
+                    <select id="test" th:field="*{chosenConcernList}">
+                        <option th:each="concern : ${concernList}" th:value="${concern.getConcernId}" th:text="${concern.getConcernName}"></option>
+<!--                        <option  th:value="1">Monday</option>-->
+<!--                        <option  th:value="2">Tuesday</option>-->
+<!--                        <option  th:value="3">Wednesday</option>-->
+<!--                        <option  th:value="4">Thursday</option>-->
+<!--                        <option  th:value="5">Friday</option>-->
+<!--                        <option  th:value="6">Saturday</option>-->
+                        <!--    <option  th:value="8">Spectacled Bear</option>-->
+                        <!--    <option  th:value="9">Giant Panda</option>-->
+                        <!--    <option  th:value="10">Sloth Bear</option>-->
+                        <!--    <option  th:value="11">Sun Bear</option>-->
+                        <!--    <option  th:value="12">Polar Bear</option>-->
+                    </select>
+                </form>
+                <br><br>
+<!--                    <button type="submit">Submit</button>-->
+<!--                </form>-->
+<!--                Schedule Area End-->
                 <div class="custom-row-1">
                     <div class="custom-custom-column-3">
                         <!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
@@ -388,12 +504,14 @@
 
                 <!-- row end-->
             </div><!-- container end-->
-        </section><!-- section end-->
+        <!-- section end-->
     </div>
+        </section>
+
 
 
 </div>
-<script src="assets/Profile/js/jquery.min.js"></script>
+<!--<script src="assets/Profile/js/jquery.min.js"></script>-->
 <script src="assets/Profile/js/popper.js"></script>
 <script src="assets/Profile/js/bootstrap.min.js"></script>
 <script src="assets/Profile/js/main.js"></script>

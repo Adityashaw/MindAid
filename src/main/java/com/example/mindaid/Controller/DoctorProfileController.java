@@ -122,6 +122,7 @@ public class DoctorProfileController {
     public String getYourSchedule(Model model){
         DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
         List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
+        List<Concern>concernList=concernRepository.findAll();
         for(int i=0;i<7;i++){
             DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
             doctorsScheduleDto1.setDayParameter(Integer.toString(i));
@@ -134,6 +135,7 @@ public class DoctorProfileController {
             else doctorsScheduleDto1.setDay("Sat");
             doctorsScheduleDtoList.add(doctorsScheduleDto1);
         }
+        model.addAttribute("concernList",concernList);
         model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
 
         model.addAttribute(doctorsScheduleDto);
