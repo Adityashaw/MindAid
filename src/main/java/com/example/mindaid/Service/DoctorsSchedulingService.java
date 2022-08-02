@@ -6,6 +6,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class DoctorsSchedulingService {
     public void updateSchedule(DoctorsScheduleDto doctorsScheduleDto){
-        doctorsScheduleDto
     }
 }

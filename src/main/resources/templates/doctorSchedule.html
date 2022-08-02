@@ -273,7 +273,7 @@
                                 <br>
                             </div>
                             <div class="row-custom">
-                                <p class="p-custom"><b>Fee: </b></p>
+                                <p class="p-custom"><b>Enter Fee: </b></p>
                                 <br>
                             </div>
 
@@ -329,9 +329,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="text" placeholder="Fee per Session" th:field="*{}">
                             </th:block>
+
                         </div>
+                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{fee}">
                     </div>
 
 
@@ -363,6 +364,10 @@
                             </div>
                             <div class="row-custom">
                                 <p class="p-custom"><b>Saturday: </b></p>
+                                <br>
+                            </div>
+                            <div class="row-custom">
+                                <p class="p-custom"><b>Enter Fee: </b></p>
                                 <br>
                             </div>
                         </div>
@@ -426,6 +431,7 @@
                             </th:block>
 
                         </div>
+                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{fee}">
                     </div>
 
                     <!-- row end-->
