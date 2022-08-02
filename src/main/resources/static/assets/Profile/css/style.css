@@ -10829,7 +10829,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     -o-transition: all .3s;
     transition: all .3s;
     position: fixed;
-    padding-bottom: 350px;
+    padding-bottom: 500px;
 }
 
 #sidebar .h6 {
@@ -10956,7 +10956,7 @@ a[data-toggle=collapse] {
 }
 
 #content {
-    /*width: 100%;*/
+    width: 100%;
     padding: 0;
     min-height: 100vh;
     -webkit-transition: all .3s;
