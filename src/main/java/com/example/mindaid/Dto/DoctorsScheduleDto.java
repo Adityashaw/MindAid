@@ -10,6 +10,16 @@ public class DoctorsScheduleDto {
     public String slot1;
     public String slot2;
     public String slot3;
+    public int fee;
+
+    public int getFee() {
+        return fee;
+    }
+
+    public void setFee(int fee) {
+        this.fee = fee;
+    }
+
     public List<String>chosenConcernList=new ArrayList<>();
     public String [] concerns=new String[20];
     public List<String> selectedSlotMessage=new ArrayList<>();

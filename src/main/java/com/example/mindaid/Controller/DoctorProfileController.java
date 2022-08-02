@@ -43,6 +43,8 @@ public class DoctorProfileController {
     ScheduleRepository scheduleRepository;
     @Autowired
     AdminService adminService;
+    @Autowired
+    DoctorsSchedulingService doctorsSchedulingService;
 
     @GetMapping("/doctor-profile")
     public String getDoctorProfile(Model model){
@@ -121,6 +123,7 @@ public class DoctorProfileController {
     @GetMapping("/your-schedule")
     public String getYourSchedule(Model model){
         DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
+        doctorsScheduleDto.setDocId(temporaryObjectHoldService.getUserDto().getUserId());
         List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
         List<Concern>concernList=concernRepository.findAll();
         for(int i=0;i<7;i++){
@@ -155,7 +158,10 @@ public class DoctorProfileController {
     }
     @PostMapping("/submit-schedule")
     public String postYourSchedule(Model model, DoctorsScheduleDto doctorsScheduleDto){
-        System.out.println(doctorsScheduleDto.getSelectedSlotMessage());
+//        System.out.println(doctorsScheduleDto.getSelectedSlotMessage());
+//        System.out.println(doctorsScheduleDto.getSelectedSlotLive());
+//        System.out.println(doctorsScheduleDto.getDocId());
+        doctorsSchedulingService.updateSchedule(doctorsScheduleDto);
         return "dummy";
     }
 }
