@@ -158,9 +158,6 @@ public class DoctorProfileController {
     }
     @PostMapping("/submit-schedule")
     public String postYourSchedule(Model model, DoctorsScheduleDto doctorsScheduleDto){
-//        System.out.println(doctorsScheduleDto.getSelectedSlotMessage());
-//        System.out.println(doctorsScheduleDto.getSelectedSlotLive());
-//        System.out.println(doctorsScheduleDto.getDocId());
         doctorsSchedulingService.updateSchedule(doctorsScheduleDto);
         return "dummy";
     }

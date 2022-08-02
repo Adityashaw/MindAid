@@ -10,27 +10,27 @@ public class DoctorsScheduleDto {
     public String slot1;
     public String slot2;
     public String slot3;
-    public int feeMessage;
-    public int feeLive;
+    public String feeMessage;
+    public String feeLive;
 
-    public int getFeeMessage() {
+    public String getFeeMessage() {
         return feeMessage;
     }
 
-    public void setFeeMessage(int feeMessage) {
+    public void setFeeMessage(String feeMessage) {
         this.feeMessage = feeMessage;
     }
 
-    public int getFeeLive() {
+    public String getFeeLive() {
         return feeLive;
     }
 
-    public void setFeeLive(int feeLive) {
+    public void setFeeLive(String feeLive) {
         this.feeLive = feeLive;
     }
 
     public List<String>chosenConcernList=new ArrayList<>();
-    public String [] concerns=new String[20];
+    public int [] concerns= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     public List<String> selectedSlotMessage=new ArrayList<>();
     public List<String> selectedSlotLive=new ArrayList<>();
 
@@ -50,11 +50,11 @@ public class DoctorsScheduleDto {
         this.selectedSlotLive = selectedSlotLive;
     }
 
-    public String[] getConcerns() {
+    public int[] getConcerns() {
         return concerns;
     }
 
-    public void setConcerns(String[] concerns) {
+    public void setConcerns(int[] concerns) {
         this.concerns = concerns;
     }
 

@@ -71,6 +71,7 @@ public class ConcernController {
         temporaryConcernService.chooseList.add(concernDto);
         //test
         System.out.println(userDto.userId);
+        System.out.println(concernDto.getConcerns()[3]);
         //test end
         model.addAttribute(concernDto);
         model.addAttribute(chooseDto);

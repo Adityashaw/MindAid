@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="en">
-<!-- Added by HTTrack -->
+<html xmlns:th="http://www.springframework.org/schema/data/jaxb">
+
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
@@ -219,15 +219,15 @@
                                 <h2 class="custom-title"><b>Let us know your speciality</b></h2><br>
                                 <p>To ensure people to find you, select concerns of your speciality.</p><br>
                                 <div class="checkbox-list">
+
                                     <th:block th:each="concern : ${concernList}">
                                         <!--label start-->
                                         <label class="check-item">
-                                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]"
-                                                   th:value="${concern.getConcernId}">
+                                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernId}">
                                             <!--                                                    th:checked="${doctorsScheduleDto.concerns[0]}"-->
                                             <span>
-                                                    <p class="custom-concern-p" th:text="${concern.getConcernName}"></p>
-                                                </span>
+                                                <p class="custom-concern-p" th:text="${concern.getConcernName}"></p>
+                                            </span>
                                         </label>
                                         <!--label end-->
                                     </th:block>
@@ -273,7 +273,7 @@
                                 <br>
                             </div>
                             <div class="row-custom">
-                                <p class="p-custom"><b>Enter Fee: </b></p>
+                                <p class="p-custom"><b>Fee(in Taka): </b></p>
                                 <br>
                             </div>
 
@@ -332,7 +332,7 @@
                             </th:block>
 
                         </div>
-                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{fee}">
+                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{feeMessage}">
                     </div>
 
 
@@ -367,7 +367,7 @@
                                 <br>
                             </div>
                             <div class="row-custom">
-                                <p class="p-custom"><b>Enter Fee: </b></p>
+                                <p class="p-custom"><b>Fee(in Taka): </b></p>
                                 <br>
                             </div>
                         </div>
@@ -431,7 +431,7 @@
                             </th:block>
 
                         </div>
-                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{fee}">
+                        <input type="text" class="custom-custom-select-option" placeholder="Enter Fee per Session" th:field="*{feeLive}">
                     </div>
 
                     <!-- row end-->
@@ -457,6 +457,93 @@
         integrity="sha512-Gi7xpJR8tSkrpF7aordPZQlW2DLtzUlZcumS8dMQjwDHEnw9I7ZLyiOj/6tZStRBGtGgN6ceN6cMH8z7etPGlw=="
         data-cf-beacon='{"rayId":"72a89e5acffd18c6","token":"cd0b4b3a733644fc843ef0b185f98241","version":"2022.6.0","si":100}'
         crossorigin="anonymous"></script>
+<!--=============Custom JS========================-->
+<!-- Template JavaScript -->
+<script src="assets/js/jquery-3.3.1.min.js"></script>
+<script src="assets/js/theme-change.js"></script>
+<!-- owl carousel -->
+<script src="assets/js/owl.carousel.js"></script>
+<!-- script for tesimonials carousel slider -->
+<script>
+    $(document).ready(function () {
+        $("#owl-demo2").owlCarousel({
+            loop: true,
+            nav: false,
+            margin: 50,
+            responsiveClass: true,
+            responsive: {
+                0: {
+                    items: 1,
+                    nav: false
+                },
+                736: {
+                    items: 1,
+                    nav: false
+                },
+                991: {
+                    items: 2,
+                    margin: 30,
+                    nav: false
+                },
+                1080: {
+                    items: 3,
+                    nav: false
+                }
+            }
+        })
+    })
+</script>
+<!-- //script for tesimonials carousel slider -->
+<!-- stats number counter-->
+<script src="assets/js/jquery.waypoints.min.js"></script>
+<script src="assets/js/jquery.countup.js"></script>
+<script>
+    $('.counter').countUp();
+</script>
+<!-- //stats number counter -->
+<!-- disable body scroll which navbar is in active -->
+<script>
+    $(function () {
+        $('.navbar-toggler').click(function () {
+            $('body').toggleClass('noscroll');
+        })
+    });
+</script>
+<!-- disable body scroll which navbar is in active -->
+
+<!--/MENU-JS-->
+<script>
+    $(window).on("scroll", function () {
+        var scroll = $(window).scrollTop();
+
+        if (scroll >= 80) {
+            $("#site-header").addClass("nav-fixed");
+        } else {
+            $("#site-header").removeClass("nav-fixed");
+        }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+        $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+        if ($(window).width() > 991) {
+            $("header").removeClass("active");
+        }
+        $(window).on("resize", function () {
+            if ($(window).width() > 991) {
+                $("header").removeClass("active");
+            }
+        });
+    });
+</script>
+<!--//MENU-JS-->
+
+
+<script src="assets/js/bootstrap.min.js"></script>
+<!--=============Custom JS END====================-->
+
 </body>
 
 </html>

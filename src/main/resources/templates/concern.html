@@ -152,7 +152,8 @@
                         <th:block th:each="concern : ${concernList}">
                         <!--label start-->
                         <label class="check-item">
-                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernId}" th:checked="${concernDto.concerns[0]}">
+                            <input type="checkbox" th:name="concerns[__${concern.getConcernId}__]" th:value="${concern.getConcernId}">
+<!--                            th:checked="${concernDto.concerns[0]}"-->
                             <span>
                              <p th:text="${concern.getConcernName}"></p>
                             </span>
