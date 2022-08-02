@@ -10,14 +10,23 @@ public class DoctorsScheduleDto {
     public String slot1;
     public String slot2;
     public String slot3;
-    public int fee;
+    public int feeMessage;
+    public int feeLive;
 
-    public int getFee() {
-        return fee;
+    public int getFeeMessage() {
+        return feeMessage;
     }
 
-    public void setFee(int fee) {
-        this.fee = fee;
+    public void setFeeMessage(int feeMessage) {
+        this.feeMessage = feeMessage;
+    }
+
+    public int getFeeLive() {
+        return feeLive;
+    }
+
+    public void setFeeLive(int feeLive) {
+        this.feeLive = feeLive;
     }
 
     public List<String>chosenConcernList=new ArrayList<>();
