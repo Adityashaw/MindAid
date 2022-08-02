@@ -12,7 +12,24 @@ public class DoctorsScheduleDto {
     public String slot3;
     public List<String>chosenConcernList=new ArrayList<>();
     public String [] concerns=new String[20];
+    public List<String> selectedSlotMessage=new ArrayList<>();
+    public List<String> selectedSlotLive=new ArrayList<>();
 
+    public List<String> getSelectedSlotMessage() {
+        return selectedSlotMessage;
+    }
+
+    public void setSelectedSlotMessage(List<String> selectedSlotMessage) {
+        this.selectedSlotMessage = selectedSlotMessage;
+    }
+
+    public List<String> getSelectedSlotLive() {
+        return selectedSlotLive;
+    }
+
+    public void setSelectedSlotLive(List<String> selectedSlotLive) {
+        this.selectedSlotLive = selectedSlotLive;
+    }
 
     public String[] getConcerns() {
         return concerns;

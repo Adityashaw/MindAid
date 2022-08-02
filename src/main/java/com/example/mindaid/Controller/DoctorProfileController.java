@@ -126,19 +126,36 @@ public class DoctorProfileController {
         for(int i=0;i<7;i++){
             DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
             doctorsScheduleDto1.setDayParameter(Integer.toString(i));
-            if(i==0) doctorsScheduleDto1.setDay("Sun");
-            else if(i==1) doctorsScheduleDto1.setDay("Mon");
-            else if(i==2) doctorsScheduleDto1.setDay("Tue");
-            else if(i==3) doctorsScheduleDto1.setDay("Wed");
-            else if(i==4) doctorsScheduleDto1.setDay("Thu");
-            else if(i==5) doctorsScheduleDto1.setDay("Fri");
-            else doctorsScheduleDto1.setDay("Sat");
+            if(i==0) doctorsScheduleDto1.setDay("Sunday");
+            else if(i==1) doctorsScheduleDto1.setDay("Monday");
+            else if(i==2) doctorsScheduleDto1.setDay("Tuesday");
+            else if(i==3) doctorsScheduleDto1.setDay("Wednesday");
+            else if(i==4) doctorsScheduleDto1.setDay("Thursday");
+            else if(i==5) doctorsScheduleDto1.setDay("Friday");
+            else doctorsScheduleDto1.setDay("Saturday");
             doctorsScheduleDtoList.add(doctorsScheduleDto1);
         }
+        List<String> slotListMessage=new ArrayList<>();
+        List<String> slotListLive=new ArrayList<>();
+        for(int message=10;message<=19;message+=3){
+            String m_time=message+":00:00";
+            slotListMessage.add(m_time);
+        }
+        for(int live=10;live<=21;live++){
+            String l_time=live+":00:00";
+            slotListLive.add(l_time);
+        }
+        model.addAttribute("slotListMessage",slotListMessage);
+        model.addAttribute("slotListLive",slotListLive);
         model.addAttribute("concernList",concernList);
         model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
 
         model.addAttribute(doctorsScheduleDto);
         return "doctorSchedule";
+    }
+    @PostMapping("/submit-schedule")
+    public String postYourSchedule(Model model, DoctorsScheduleDto doctorsScheduleDto){
+        System.out.println(doctorsScheduleDto.getSelectedSlotMessage());
+        return "dummy";
     }
 }

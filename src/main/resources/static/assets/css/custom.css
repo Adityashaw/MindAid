@@ -263,21 +263,21 @@ header.a.navbar-brand-custom{
     background-color: #a5b4c9;
     text-align: center;
     /* padding: 90px; */
-    padding-top: 115px;
+    padding-top: 105px;
     padding-left: 50px;
     padding-bottom: 60px;
     padding-right: 15px;
-    line-height: 46px;
+    line-height: 42px;
 }
 .custom-custom-column-4 {
     background-color: #828d97;
     text-align: center;
     /* padding: 90px; */
-    padding-top: 115px;
+    padding-top: 105px;
     padding-left: 50px;
     padding-bottom: 60px;
     padding-right: 15px;
-    line-height: 46px;
+    line-height: 42px;
 }
 
 /*doctor concern choice start*/
@@ -409,3 +409,4 @@ h2.custom-title{
 }
 
 /*============================ Concern Page End ===========================*/
+
