@@ -2,6 +2,7 @@ package com.example.mindaid.Repository;
 
 import com.example.mindaid.Model.DoctorConcern;
 import com.example.mindaid.Model.Doctors;
+import com.example.mindaid.Model.Schedule;
 import com.example.mindaid.Model.User;
 import net.minidev.json.JSONUtil;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,7 @@ public interface DoctorConcernRepository extends JpaRepository<DoctorConcern , I
             " ORDER BY d.name ASC ",
             nativeQuery = true)
     public List<Object[]> findByConcernId( int[] concerns,String contactMedia);
+
+    @Query(value = "select  * from doctorconcern where doc_id=:DocId and approval=:approval",nativeQuery = true)
+    public List<DoctorConcern> findByDocIdAndApproval(int DocId, String approval);
 }

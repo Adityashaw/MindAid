@@ -19,16 +19,19 @@ public class DoctorsSchedulingService {
     ScheduleRepository scheduleRepository;
     @Autowired
     DoctorConcernRepository doctorConcernRepository;
+    @Autowired
+    DoctorsSchedulingService doctorsSchedulingService;
     public void updateSchedule(DoctorsScheduleDto doctorsScheduleDto) {
-        DoctorsSchedulingService doctorsSchedulingService=new DoctorsSchedulingService();
-
         doctorsSchedulingService.concernUpdater(doctorsScheduleDto);
-
         doctorsSchedulingService.scheduleUpdater(doctorsScheduleDto,doctorsScheduleDto.selectedSlotMessage,"message");
         doctorsSchedulingService.scheduleUpdater(doctorsScheduleDto,doctorsScheduleDto.selectedSlotLive,"live");
 
     }
     public void scheduleUpdater(DoctorsScheduleDto doctorsScheduleDto,List<String>schedules,String type){
+        List<Schedule>existingPendings=scheduleRepository.findByDocIdAndApprovalAndMedia(doctorsScheduleDto.getDocId(),"pending",type);
+        for (Schedule schedule:existingPendings){
+            scheduleRepository.delete(schedule);
+        }
         List<List<String>>days=new ArrayList();
         List<String>sunday=new ArrayList<>();
         sunday.add("0");
@@ -83,7 +86,7 @@ public class DoctorsSchedulingService {
                 Schedule schedule1=new Schedule();
                 String times=day.get(2);
                 for (int i=3;i<day.size();i++){
-                    times=","+times;
+                    times=times+","+day.get(i);
                 }
                 schedule1.setScheduleDay(day.get(1));
                 schedule1.setDoc_id(doctorsScheduleDto.getDocId());
@@ -91,13 +94,17 @@ public class DoctorsSchedulingService {
                 schedule1.setScheduleTimeStart(times);
                 schedule1.setScheduleday_parameter(day.get(0));
                 schedule1.setFee(Integer.parseInt(doctorsScheduleDto.getFeeMessage()));
+                schedule1.setApproval("pending");
                 scheduleRepository.save(schedule1);
             }
         }
 
     }
-    public void concernUpdater (DoctorsScheduleDto doctorsScheduleDto) throws NullPointerException{
-
+    public void concernUpdater (DoctorsScheduleDto doctorsScheduleDto){
+        List<DoctorConcern>existingDocConcerns=doctorConcernRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"pending");
+        for (DoctorConcern doctorConcern:existingDocConcerns){
+            doctorConcernRepository.delete(doctorConcern);
+        }
         for(int i=0;i<doctorsScheduleDto.concerns.length;i++){
             DoctorConcern doctorConcern=new DoctorConcern();
             if(doctorsScheduleDto.concerns[i]!=0){
@@ -106,8 +113,8 @@ public class DoctorsSchedulingService {
                 System.out.println(doctorsScheduleDto.concerns[i]);
                 System.out.println(doctorConcern.getConcern_id());
                 System.out.println(doctorConcern.getDoc_id());
+                doctorConcern.setApproval("pending");
                 doctorConcernRepository.save(doctorConcern);
-
             }
         }
     }

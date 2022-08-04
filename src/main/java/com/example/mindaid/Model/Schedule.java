@@ -23,6 +23,8 @@ public class Schedule {
     public int fee;
     @Column(name = "scheduleday_parameter")
     public String scheduleday_parameter;
+    @Column(name = "approval")
+    public String approval;
 
     public String getScheduleday_parameter() {
         return scheduleday_parameter;
@@ -78,5 +80,13 @@ public class Schedule {
 
     public void setFee(int fee) {
         this.fee = fee;
+    }
+
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
     }
 }

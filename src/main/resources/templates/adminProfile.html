@@ -131,7 +131,7 @@
 
                         </li>
                         <li>
-                            <a href="#">Edit Requests</a>
+                            <a th:href="@{/edit-requests}">Edit Requests</a>
                         </li>
                         <li>
                             <a href="#">Remove Therapist</a>
@@ -241,6 +241,51 @@
                             </div>
                             <br>
                         </th:block>
+<!--                   ==============Schedule Area Start==========-->
+                        <th:block th:each="doctor : ${DoctorScheduleList}">
+                            <div class="concern_content">
+                                <div class="custom-row-1">
+                                    <!--                <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
+                                    <div class="custom-column-1">
+                                        <p th:text="'Thrapist Name: '+${doctor.getDoctors().getName()}"></p>
+                                        <p th:text="'Speciality: '+${doctor.getDoctors().getSpeciality}"></p>
+                                        <p th:text="'Qualification: '+${doctor.getDoctors().getEducation}"></p>
+                                        <p th:text="'Experience: '+${doctor.getDoctors().getExperience}"></p>
+                                    </div>
+                                    <div class="custom-column-2">
+                                        <!--                  <a href="#">Click to join</a>-->
+                                        <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
+                                            <input type="hidden" th:value="${doctor.getDoctors().getDocId()}" th:attr="name='docId'"/>
+                                            <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
+                                            <button class="button button--pan"><span>Approve</span></button>
+                                        </form>
+                                        <!--                                        <form method="post" th:action="@{/pending-appointment/rejected}" th:object="${payment}">-->
+                                        <!--                                            <input type="hidden" th:value="${appointment.getPaymentId}" th:attr="name='paymentId'"/>-->
+                                        <!--                                            &lt;!&ndash;                    <button class="custom-join-btn" type="submit">Join Now</button>&ndash;&gt;-->
+                                        <!--                                            <button class="button button&#45;&#45;pan"><span>Join Now</span></button>-->
+                                        <!--                                        </form>-->
+                                    </div>
+                                    <!--                </th:block>-->
+                                </div>
+                                <br>
+                                <table id="customers">
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Contact Media</th>
+                                        <th>Times</th>
+                                    </tr>
+                                    <th:block th:each="schedule : ${doctor.getScheduleList()}">
+                                    <tr>
+                                        <td th:text="${schedule.getScheduleDay()}"></td>
+                                        <td th:text="${schedule.getContactMedia()}"></td>
+                                        <td th:text="${schedule.getScheduleTimeStart()}"></td>
+                                    </tr>
+                                    </th:block>
+                                </table>
+                            </div>
+                            <br>
+                        </th:block>
+<!--                        ================Schedule Area End===============-->
                     </div><!-- col-lg-12 end-->
                 </div>
                 <!-- row end-->
