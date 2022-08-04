@@ -38,6 +38,16 @@ public class Doctors {
     public String loginPassword;
     @Column(name = "applied_date")
     public String appliedDate;
+    @Column(nullable = true, length = 64)
+    public String photos;
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
 
     public String getAppliedDate() {
         return appliedDate;

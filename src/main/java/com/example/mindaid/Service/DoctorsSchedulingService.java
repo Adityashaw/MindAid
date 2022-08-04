@@ -99,14 +99,17 @@ public class DoctorsSchedulingService {
     public void concernUpdater (DoctorsScheduleDto doctorsScheduleDto) throws NullPointerException{
 
         for(int i=0;i<doctorsScheduleDto.concerns.length;i++){
-            DoctorConcern doctorConcern=new DoctorConcern();
+            DoctorConcern d=new DoctorConcern();
             if(doctorsScheduleDto.concerns[i]!=0){
-                doctorConcern.setConcern_id(i);
-                doctorConcern.setDoc_id(doctorsScheduleDto.getDocId());
+                d.setConcern_id(i);
+                d.setDoc_id(doctorsScheduleDto.getDocId());
+                d.setDocconcern_id(1050);
+
                 System.out.println(doctorsScheduleDto.concerns[i]);
-                System.out.println(doctorConcern.getConcern_id());
-                System.out.println(doctorConcern.getDoc_id());
-                doctorConcernRepository.save(doctorConcern);
+                System.out.println(d.getConcern_id());
+                System.out.println(d.getDoc_id());
+
+                doctorConcernRepository.save(d);
 
             }
         }

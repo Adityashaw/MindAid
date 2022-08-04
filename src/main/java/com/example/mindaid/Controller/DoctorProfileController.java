@@ -4,11 +4,15 @@ import com.example.mindaid.Model.*;
 import com.example.mindaid.Repository.*;
 import com.example.mindaid.Request.Signup_request;
 import com.example.mindaid.Service.*;
+import com.example.mindaid.Util.FileUploadUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -113,11 +117,15 @@ public class DoctorProfileController {
         return "doctorForm";
     }
     @PostMapping("/process-doctors-register")
-    public String postDoctorProfile(Model model,Doctors doctors){
+    public String postDoctorProfile(Model model,Doctors doctors, @RequestParam("image") MultipartFile multipartFile) throws IOException {
         doctors.setApproval("pending");
         LocalDate date=LocalDate.now();
         doctors.setAppliedDate(date.toString());
-        doctorsRepository.save(doctors);
+        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+        doctors.setPhotos(fileName);
+        Doctors savedDoctors= doctorsRepository.save(doctors);
+        String uploadDir = "D:\\THERAPjavafest\\MindAid\\Gitversion\\MindAid\\src\\main\\resources\\static\\assets\\user-photos\\" + savedDoctors.getDocId();
+        FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
         return "doctorFormProcess";
     }
     @GetMapping("/your-schedule")
