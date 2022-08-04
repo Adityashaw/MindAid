@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
           rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/Profile/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/Profile/css/style.css">
     <link rel="stylesheet" href="/assets/Profile/css/bootstrap.min.css">
@@ -256,16 +257,31 @@
                                     </div>
                                     <div class="custom-column-2">
                                         <!--                  <a href="#">Click to join</a>-->
-                                        <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
+<!--                                        <form method="post" th:action="@{/approve-request}" th:object="${doctors}">-->
                                             <input type="hidden" th:value="${doctor.getDoctors().getDocId()}" th:attr="name='docId'"/>
+                                        <div class="button-flex">
+                                        <button class="btn-green"><i class="fa fa-check"></i> Approve</button>
+                                        <button class="btn-red" onclick="openForm()"><i class="fa fa-close"></i> Deny</button>
+                                        </div>
+
                                             <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
-                                            <button class="button button--pan"><span>Approve</span></button>
-                                        </form>
-                                        <!--                                        <form method="post" th:action="@{/pending-appointment/rejected}" th:object="${payment}">-->
-                                        <!--                                            <input type="hidden" th:value="${appointment.getPaymentId}" th:attr="name='paymentId'"/>-->
-                                        <!--                                            &lt;!&ndash;                    <button class="custom-join-btn" type="submit">Join Now</button>&ndash;&gt;-->
-                                        <!--                                            <button class="button button&#45;&#45;pan"><span>Join Now</span></button>-->
-                                        <!--                                        </form>-->
+<!--                                            <button class="button button&#45;&#45;pan" onclick="openForm()"><span>Approve</span></button>-->
+<!--                                        </form>-->
+                                        <!--==========================pop upAreaStart================-->
+                                            <div class="form-popup" id="myForm">
+                                                <form action="/action_page.php" class="form-container">
+                                                    <h6><b>Add your comment</b></h6><br>
+<!--                                                    <label for="email"><b>Email</b></label>-->
+                                                    <textarea rows="7" cols="60" type="text" placeholder="Enter the reasons of denial...." name="email"  required></textarea>
+
+<!--                                                    <label for="psw"><b>Password</b></label>-->
+<!--                                                    <input type="password" placeholder="Enter Password" name="psw" required>-->
+
+                                                    <button type="submit" class="btn">Proceed</button>
+                                                    <button type="button" id="x" onclick="closeForm()"><i class="fa fa-close"></i></button>
+                                                </form>
+                                            </div>
+                                        <!--==========================pop upAreaEnd================-->
                                     </div>
                                     <!--                </th:block>-->
                                 </div>
@@ -297,6 +313,17 @@
 
 
 </div>
+
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
 <script src="/assets/Profile/js/jquery.min.js"></script>
 <script src="/assets/Profile/js/popper.js"></script>
 <script src="/assets/Profile/js/bootstrap.min.js"></script>
