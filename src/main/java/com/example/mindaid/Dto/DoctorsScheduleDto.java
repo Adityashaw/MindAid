@@ -1,5 +1,8 @@
 package com.example.mindaid.Dto;
 
+import com.example.mindaid.Model.Doctors;
+import com.example.mindaid.Model.Schedule;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,8 +13,48 @@ public class DoctorsScheduleDto {
     public String slot1;
     public String slot2;
     public String slot3;
+    public String slots;
     public String feeMessage;
     public String feeLive;
+    public List<String>chosenConcernList=new ArrayList<>();
+    public int [] concerns= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    public List<String> selectedSlotMessage=new ArrayList<>();
+    public List<String> selectedSlotLive=new ArrayList<>();
+    Doctors doctors;
+    Schedule schedule;
+    List<Schedule>scheduleList;
+
+    public List<Schedule> getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(List<Schedule> scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+
+    public Schedule getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Schedule schedule) {
+        this.schedule = schedule;
+    }
+
+    public String getSlots() {
+        return slots;
+    }
+
+    public void setSlots(String slots) {
+        this.slots = slots;
+    }
+
+    public Doctors getDoctors() {
+        return doctors;
+    }
+
+    public void setDoctors(Doctors doctors) {
+        this.doctors = doctors;
+    }
 
     public String getFeeMessage() {
         return feeMessage;
@@ -28,12 +71,6 @@ public class DoctorsScheduleDto {
     public void setFeeLive(String feeLive) {
         this.feeLive = feeLive;
     }
-
-    public List<String>chosenConcernList=new ArrayList<>();
-    public int [] concerns= {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
-    public List<String> selectedSlotMessage=new ArrayList<>();
-    public List<String> selectedSlotLive=new ArrayList<>();
-
     public List<String> getSelectedSlotMessage() {
         return selectedSlotMessage;
     }

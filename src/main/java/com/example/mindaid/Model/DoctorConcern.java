@@ -15,6 +15,8 @@ public class DoctorConcern {
     public int concern_id;
     @Column(name = "doc_id")
     public int doc_id;
+    @Column(name = "approval")
+    public String approval;
 
     public int getDocconcern_id() {
         return docconcern_id;
@@ -38,5 +40,13 @@ public class DoctorConcern {
 
     public void setDoc_id(int doc_id) {
         this.doc_id = doc_id;
+    }
+
+    public String getApproval() {
+        return approval;
+    }
+
+    public void setApproval(String approval) {
+        this.approval = approval;
     }
 }

@@ -73,7 +73,6 @@ public class AdminController {
         model.addAttribute("pendingDoctorList",pendingDoctorList);
         Payment payment=new Payment();
         model.addAttribute(payment);
-
         return "adminProfile";
     }
     @RequestMapping(value = "/pending-appointment/{status}", method = RequestMethod.POST)
@@ -135,5 +134,28 @@ public class AdminController {
         model.addAttribute(doctors);
         return "adminProfile";
 
+    }
+    @GetMapping("/edit-requests")
+    public String getEditRequests(Model model){
+        List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
+        List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
+        for (int schedule:scheduleDocIds){
+            List<Doctors>doctorsList=doctorsRepository.findByDocId(schedule);
+            DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
+            doctorsScheduleDto.setDoctors(doctorsList.get(0));
+            List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            doctorsScheduleDto.setScheduleList(schedules);
+            DoctorScheduleList.add(doctorsScheduleDto);
+        }
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="New Therapist Requests";
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("DoctorScheduleList",DoctorScheduleList);
+        return "adminProfile";
     }
 }
