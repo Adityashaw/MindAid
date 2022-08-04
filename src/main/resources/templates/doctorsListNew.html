@@ -123,7 +123,7 @@
                 <div class="box_list home">
                     <figure>
 
-                        <a href="detail-page.html"><img src="assets/img/doctor_listing_1.jpg" class="img-fluid" alt=""></a>
+                        <a href="detail-page.html"><img th:src="@{${docName.getPhotos()}}" class="img-fluid" alt=""></a>
                         <div class="preview"><span>Read more</span></div>
                     </figure>
                     <form method=post th:action="@{/postdoctorlist}" th:object="${doctorDto}">

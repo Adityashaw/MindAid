@@ -45,6 +45,7 @@ public class AdminService {
             User getUser=userRepository.findByUserId(payment.getUserId());
             appointmentDto.setUserName(getUser.getName());
             appointmentDto.setPaymentId(payment.getPaymentId());
+            appointmentDto.setPhotos(getDoctors.get(0).getPhotos());
             appointmentDtoList.add(appointmentDto);
 
         }

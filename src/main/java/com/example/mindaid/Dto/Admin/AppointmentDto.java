@@ -9,6 +9,15 @@ public class AppointmentDto {
     public int fee;
     public String userCard;
     public int paymentId;
+    public String photos;
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
 
     public int getPaymentId() {
         return paymentId;

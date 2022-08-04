@@ -210,8 +210,11 @@
                         <th:block th:each="doctor : ${pendingDoctorList}">
                             <div class="concern_content">
                                 <div class="custom-row-1">
+                                    <div class="custom-column-admin-1">
+                                        <img th:src="@{${doctor.getPhotos()}}" alt="" class="img-fluid-custom ">
+                                    </div>
                                     <!--                <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
-                                    <div class="custom-column-1">
+                                    <div class="custom-column-admin-2">
                                         <p th:text="'Applicant: '+${doctor.getName}"></p>
                                         <p th:text="'Speciality: '+${doctor.getSpeciality}"></p>
                                         <p th:text="'Qualification: '+${doctor.getEducation}"></p>
@@ -221,9 +224,8 @@
                                         <p th:text="'Gender: '+${doctor.getGender}"></p>
                                         <p th:text="'Age: '+${doctor.getAge}"></p>
                                         <p th:text="'Applied on: '+${doctor.getAppliedDate}"></p>
-
                                     </div>
-                                    <div class="custom-column-2">
+                                    <div class="custom-column-admin-3">
                                         <!--                  <a href="#">Click to join</a>-->
                                                                                 <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
                                                                                     <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>

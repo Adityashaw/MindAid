@@ -36,12 +36,14 @@ public class DoctorListService {
                     doctor.setAge((String) doctors[8]);
                     doctor.setGender((String) doctors[9]);
                     doctor.setAppliedDate((String) doctors[13]);
-                    doctor.setScheduleId((int)doctors[14]);
-                    doctor.setScheduleDay((String) doctors[15]);
-                    doctor.setScheduleTimeStart((String) doctors[16]);
-                    doctor.setFee((int) doctors[17]);
-                    doctor.setContactMedia((String) doctors[18]);
-                    doctor.setScheduleday_parameter((String) doctors[19]);
+                    doctor.setPhotos("\\assets\\user-photos\\"+doctor.getDocId()+ "\\"+(String)doctors[14]);
+                    doctor.setScheduleId((int)doctors[15]);
+                    doctor.setScheduleDay((String) doctors[16]);
+                    doctor.setScheduleTimeStart((String) doctors[17]);
+                    doctor.setFee((int) doctors[18]);
+                    doctor.setContactMedia((String) doctors[19]);
+                    doctor.setScheduleday_parameter((String) doctors[20]);
+
                     finalDoctorList.add(doctor);
                 }
         return finalDoctorList;

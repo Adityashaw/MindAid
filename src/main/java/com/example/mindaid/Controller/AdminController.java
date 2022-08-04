@@ -105,6 +105,9 @@ public class AdminController {
     @GetMapping("/new-therapist")
     public String getNewTherapist(Model model){
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
+        for (Doctors doctors:pendingDoctorList){
+            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+        }
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
         Doctors doctors=new Doctors();

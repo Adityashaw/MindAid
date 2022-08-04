@@ -31,6 +31,16 @@ public class DoctorsDto {
     public String selectedScheduleDay;
     public String selectedScheduleTime;
     public String scheduleday_parameter;
+    public String photos;
+
+    public String getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(String photos) {
+        this.photos = photos;
+    }
+
     List<Doctors> DoctorsList=new ArrayList<>();
 
     public String getExperience() {
