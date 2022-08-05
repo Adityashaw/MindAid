@@ -159,10 +159,30 @@ public class AdminController {
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status", status);
         model.addAttribute("DoctorScheduleList",DoctorScheduleList);
+        DoctorsScheduleDto doctorsScheduleDto2=new DoctorsScheduleDto();
+        model.addAttribute("doctorsScheduleDto",doctorsScheduleDto2);
         return "adminProfile";
     }
     @PostMapping("/approve-request")
-    public String postEditRequests(Model model){
+    public String postEditRequests(Model model,DoctorsScheduleDto doctorsScheduleDto1){
+        List<DoctorConcern>doctorConcernList=doctorConcernRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
+        for(DoctorConcern doctorConcern:doctorConcernList){
+            doctorConcernRepository.delete(doctorConcern);
+        }
+        List<DoctorConcern>doctorConcernList1=doctorConcernRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
+        for(DoctorConcern doctorConcern:doctorConcernList1){
+            doctorConcern.setApproval("approved");
+            doctorConcernRepository.save(doctorConcern);
+        }
+        List<Schedule>scheduleList=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
+        for (Schedule schedule:scheduleList){
+            scheduleRepository.delete(schedule);
+        }
+        List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
+        for (Schedule schedule:scheduleList1){
+            schedule.setApproval("approved");
+            scheduleRepository.save(schedule);
+        }
         List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
         List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
         for (int schedule:scheduleDocIds){
@@ -182,6 +202,39 @@ public class AdminController {
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status", status);
         model.addAttribute("DoctorScheduleList",DoctorScheduleList);
+        DoctorsScheduleDto doctorsScheduleDto2=new DoctorsScheduleDto();
+        model.addAttribute("doctorsScheduleDto",doctorsScheduleDto2);
+        return "adminProfile";
+    }
+    @PostMapping("/deny-request")
+    public String postDenyRequest(Model model,DoctorsScheduleDto doctorsScheduleDto1){
+
+        List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
+        for (Schedule schedule:scheduleList1){
+            schedule.setApproval("denied");
+            scheduleRepository.save(schedule);
+        }
+        List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
+        List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
+        for (int schedule:scheduleDocIds){
+            List<Doctors>doctorsList=doctorsRepository.findByDocId(schedule);
+            DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
+            doctorsScheduleDto.setDoctors(doctorsList.get(0));
+            List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            doctorsScheduleDto.setScheduleList(schedules);
+            DoctorScheduleList.add(doctorsScheduleDto);
+        }
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="New Therapist Requests";
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("DoctorScheduleList",DoctorScheduleList);
+        DoctorsScheduleDto doctorsScheduleDto2=new DoctorsScheduleDto();
+        model.addAttribute("doctorsScheduleDto",doctorsScheduleDto2);
         return "adminProfile";
     }
 

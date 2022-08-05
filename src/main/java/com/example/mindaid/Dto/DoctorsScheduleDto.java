@@ -23,6 +23,15 @@ public class DoctorsScheduleDto {
     Doctors doctors;
     Schedule schedule;
     List<Schedule>scheduleList;
+    public String denialComment;
+
+    public String getDenialComment() {
+        return denialComment;
+    }
+
+    public void setDenialComment(String denialComment) {
+        this.denialComment = denialComment;
+    }
 
     public List<Schedule> getScheduleList() {
         return scheduleList;
