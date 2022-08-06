@@ -642,7 +642,7 @@ h2.custom-title{
     background-color:#dd4747;
     border: none;
     color: white;
-    padding: 12px 16px;
+    padding: 1px 16px;
     font-size: 16px;
     cursor: pointer;
 }
@@ -661,3 +661,72 @@ h2.custom-title{
 }
 
 /*============================ pop up area  end===========================*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*============================ faq area  start===========================*/
+.col-lg-12-custom.faq-area {
+    max-width: 100%;
+    /* padding-top: 20px; */
+    padding-bottom: 10px;
+    background-color: #e5e5e5;
+    margin-right: 100px;
+    margin-left: 100px;
+}
+
+/*============================ faq area  end===========================*/

@@ -258,9 +258,13 @@
                                     <div class="custom-column-2">
                                         <!--                  <a href="#">Click to join</a>-->
 <!--                                        <form method="post" th:action="@{/approve-request}" th:object="${doctors}">-->
-                                            <input type="hidden" th:value="${doctor.getDoctors().getDocId()}" th:attr="name='docId'"/>
+
                                         <div class="button-flex">
-                                        <button class="btn-green"><i class="fa fa-check"></i> Approve</button>
+                                            <form th:action="@{/approve-request}" th:object="${doctorsScheduleDto}" method="post">
+                                                <input type="hidden" th:value="${doctor.getDoctors().getDocId()}" th:attr="name='docId'"/>
+                                                <button class="btn-green"><i class="fa fa-check"></i> Approve</button>
+                                            </form>
+                                            <br>
                                         <button class="btn-red" onclick="openForm()"><i class="fa fa-close"></i> Deny</button>
                                         </div>
 
@@ -269,16 +273,18 @@
 <!--                                        </form>-->
                                         <!--==========================pop upAreaStart================-->
                                             <div class="form-popup" id="myForm">
-                                                <form action="/action_page.php" class="form-container">
+                                                <form th:action="@{/deny-request}" th:object="${doctorsScheduleDto}" class="form-container">
                                                     <h6><b>Add your comment</b></h6><br>
 <!--                                                    <label for="email"><b>Email</b></label>-->
-                                                    <textarea rows="7" cols="60" type="text" placeholder="Enter the reasons of denial...." name="email"  required></textarea>
+                                                    <textarea rows="7" cols="60" type="text" placeholder="Enter the reasons of denial...." th:field="*{denialComment}"  required></textarea>
 
 <!--                                                    <label for="psw"><b>Password</b></label>-->
 <!--                                                    <input type="password" placeholder="Enter Password" name="psw" required>-->
 
                                                     <button type="submit" class="btn">Proceed</button>
-                                                    <button type="button" id="x" onclick="closeForm()"><i class="fa fa-close"></i></button>
+                                                </form>
+                                                <form action="/action_page.php" class="form-container">
+                                                <button type="button" id="x" onclick="closeForm()"><i class="fa fa-close"></i></button>
                                                 </form>
                                             </div>
                                         <!--==========================pop upAreaEnd================-->

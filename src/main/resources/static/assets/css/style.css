@@ -696,18 +696,17 @@ ul {
 
 /*============================ FAQ Start ===========================*/
 .faq-area{
-    background-color: #15899c47;
-    padding: 100px;
+    background-color: #e5e5e5;
 }
 
 .faq-area h2, .faq-icon{
-    color: #0c5460;
+    color: #e1e8ed;
+    background-color: #658b91;
 }
 
 .accordion {
-    color: #444;
+    color: #000000;
     background-color: transparent;
-    cursor: pointer;
     padding: 20px;
     width: 100%;
     border: none;
@@ -715,8 +714,9 @@ ul {
     text-align: left;
     outline: none;
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     transition: 0.4s;
+    font-family: serif;
 }
 
 .accordion:after {

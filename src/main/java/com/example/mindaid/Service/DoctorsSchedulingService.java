@@ -110,14 +110,11 @@ public class DoctorsSchedulingService {
             if(doctorsScheduleDto.concerns[i]!=0){
                 d.setConcern_id(i);
                 d.setDoc_id(doctorsScheduleDto.getDocId());
-                System.out.println(doctorsScheduleDto.concerns[i]);
-
-                System.out.println(d.getConcern_id());
-                System.out.println(d.getDoc_id());
-
-                doctorConcernRepository.save(d);
+                d.setDocconcern_id(1050);
                 d.setApproval("pending");
                 doctorConcernRepository.save(d);
+
+
             }
         }
     }
