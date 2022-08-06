@@ -273,7 +273,7 @@
 <!--                                        </form>-->
                                         <!--==========================pop upAreaStart================-->
                                             <div class="form-popup" id="myForm">
-                                                <form th:action="@{/deny-request}" th:object="${doctorsScheduleDto}" class="form-container">
+                                                <form th:action="@{/deny-request}" th:object="${doctorsScheduleDto}" class="form-container" method="post">
                                                     <h6><b>Add your comment</b></h6><br>
 <!--                                                    <label for="email"><b>Email</b></label>-->
                                                     <textarea rows="7" cols="60" type="text" placeholder="Enter the reasons of denial...." th:field="*{denialComment}"  required></textarea>
