@@ -147,6 +147,20 @@ public class AdminController {
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            for (Schedule schedule1:schedules){
+                String scheduleTimestrts="";
+                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
+                for (String st:schedulesList){
+                    String[]spliTedSchedule=st.split("~");
+                    if (scheduleTimestrts.equals("")){
+                        scheduleTimestrts=spliTedSchedule[1];
+                    }
+                    else {
+                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
+                    }
+                }
+                schedule1.setScheduleTimeStart(scheduleTimestrts);
+            }
             doctorsScheduleDto.setScheduleList(schedules);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
@@ -190,6 +204,20 @@ public class AdminController {
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            for (Schedule schedule1:schedules){
+                String scheduleTimestrts="";
+                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
+                for (String st:schedulesList){
+                    String[]spliTedSchedule=st.split("~");
+                    if (scheduleTimestrts.equals("")){
+                        scheduleTimestrts=spliTedSchedule[1];
+                    }
+                    else {
+                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
+                    }
+                }
+                schedule1.setScheduleTimeStart(scheduleTimestrts);
+            }
             doctorsScheduleDto.setScheduleList(schedules);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
@@ -221,6 +249,20 @@ public class AdminController {
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            for (Schedule schedule1:schedules){
+                String scheduleTimestrts="";
+                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
+                for (String st:schedulesList){
+                    String[]spliTedSchedule=st.split("~");
+                    if (scheduleTimestrts.equals("")){
+                        scheduleTimestrts=spliTedSchedule[1];
+                    }
+                    else {
+                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
+                    }
+                }
+                schedule1.setScheduleTimeStart(scheduleTimestrts);
+            }
             doctorsScheduleDto.setScheduleList(schedules);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
