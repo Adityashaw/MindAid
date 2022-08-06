@@ -132,7 +132,7 @@
                         <h5 th:utext="${docName.getName()}"></h5>
                         <p class="education-custom" th:utext="${docName.getEducation()}"> </p>
 
-                        <p>Available On: <span th:utext="${docName.getScheduleDay()}+' | '+${docName.getScheduleTimeStart()}"></span></p>
+                        <p>Available On: <span th:utext="${docName.getScheduleDay()}"></span></p>
 
 <!--                        <p th:utext="'Available On: '+${docName.getScheduleDay()}+' | '+${docName.getScheduleTime()}"></p>-->
                         <p th:utext="'Fee: '+${docName.getFee()}"> </p>

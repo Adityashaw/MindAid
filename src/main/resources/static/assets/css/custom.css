@@ -91,6 +91,12 @@ header.a.navbar-brand-custom{
     background-color: #ebedf0;
     border-radius: 15px;
 }
+.concern_content_custom {
+    padding: 30px 40px;
+    /*box-shadow: 2px 3px 10px rgb(185 185 190);*/
+    background-color: #ebedf0;
+    /*border-radius: 15px;*/
+}
 .brand-logo {
     margin: 0;
     padding: 0;
@@ -145,6 +151,18 @@ header.a.navbar-brand-custom{
     background-color: #05282e;
     border-radius: .5rem;
     font-family: sans-serif;
+}
+.custom-custon-h3 {
+    /*margin-bottom: 5px;*/
+    /*margin-left: 70px;*/
+    /*margin-right: 70px;*/
+    padding-bottom: 10px;
+    padding-top: 10px;
+    color: #ffffff;
+    text-align: center;
+    background-color: #05282e;
+    /*border-radius: .5rem;*/
+    font-family: serif;
 }
 
 .custom-forgot-password{

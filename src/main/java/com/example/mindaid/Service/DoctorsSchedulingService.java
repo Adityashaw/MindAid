@@ -81,23 +81,46 @@ public class DoctorsSchedulingService {
             }
         }
         Collections.addAll(days,sunday,monday,tuesday,wednesday,thursday,friday,saturday);
+        String UltimateDays="";
+        String UltimateTimes="";
+        String UltimateScheduleDayParam="";
+
         for (List<String>day:days){
             if (day.size()>2){
-                Schedule schedule1=new Schedule();
-                String times=day.get(2);
-                for (int i=3;i<day.size();i++){
-                    times=times+","+day.get(i);
+                if (UltimateDays.equals("")){
+                    UltimateDays=day.get(1);
                 }
-                schedule1.setScheduleDay(day.get(1));
-                schedule1.setDoc_id(doctorsScheduleDto.getDocId());
-                schedule1.setContactMedia(type);
-                schedule1.setScheduleTimeStart(times);
-                schedule1.setScheduleday_parameter(day.get(0));
-                schedule1.setFee(Integer.parseInt(doctorsScheduleDto.getFeeMessage()));
-                schedule1.setApproval("pending");
-                scheduleRepository.save(schedule1);
+                else {
+                    UltimateDays = UltimateDays + "," + day.get(1);
+                }
+                UltimateScheduleDayParam=UltimateScheduleDayParam+day.get(0);
+                String times=day.get(0)+"~"+day.get(2);
+                for (int i=3;i<day.size();i++){
+                    times=times+","+day.get(0)+"~"+day.get(i);
+                }
+                if (UltimateTimes.equals("")){
+                    UltimateTimes=times;
+                }
+                else {
+                    UltimateTimes=UltimateTimes+","+times;
+                }
+
             }
         }
+        Schedule schedule=new Schedule();
+        schedule.setApproval("pending");
+        schedule.setScheduleDay(UltimateDays);
+        schedule.setDoc_id(doctorsScheduleDto.getDocId());
+        schedule.setScheduleTimeStart(UltimateTimes);
+        schedule.setScheduleday_parameter(UltimateScheduleDayParam);
+        schedule.setContactMedia(type);
+        if (type.equals("message")) {
+            schedule.setFee(Integer.parseInt(doctorsScheduleDto.getFeeMessage()));
+        }
+        else {
+            schedule.setFee(Integer.parseInt(doctorsScheduleDto.getFeeLive()));
+        }
+        scheduleRepository.save(schedule);
 
     }
     public void concernUpdater (DoctorsScheduleDto doctorsScheduleDto){

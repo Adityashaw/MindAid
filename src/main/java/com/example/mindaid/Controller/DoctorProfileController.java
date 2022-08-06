@@ -162,6 +162,33 @@ public class DoctorProfileController {
         model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
 
         model.addAttribute(doctorsScheduleDto);
+
+
+        //Display current Schedule
+        List<Schedule>scheduleList=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"approved");
+        for (Schedule schedule1:scheduleList){
+            String scheduleTimestrts="";
+            String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
+            for (String st:schedulesList){
+                String[]spliTedSchedule=st.split("~");
+                if (scheduleTimestrts.equals("")){
+                    scheduleTimestrts=spliTedSchedule[1];
+                }
+                else {
+                    scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
+                }
+            }
+            schedule1.setScheduleTimeStart(scheduleTimestrts);
+        }
+        if (scheduleList.size()>1){
+            model.addAttribute("flag",1);
+        }
+        else {
+            model.addAttribute("flag",0);
+        }
+        model.addAttribute("scheduleList",scheduleList);
+        //Display end
+
         return "doctorSchedule";
     }
     @PostMapping("/submit-schedule")

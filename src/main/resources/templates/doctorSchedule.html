@@ -205,17 +205,49 @@
 </div>
 
 <div id="content-custom" class="p-4 p-md-5 pt-5 custom-middle">
-    <h3 class="custom-h3">Your Schedule</h3>
+<!--    <h3 class="custom-h3">Your Schedule</h3>-->
     <br>
     <section class="login service-1 section-padding-1 section--padding">
         <form th:action="@{/submit-schedule}" th:object="${doctorsScheduleDto}" method="POST">
             <div class="container">
+                <!--===========================View Schedule area Start======================-->
+                <h3 class="custom-custon-h3">Your  Schedule</h3>
+                <section class="login service-1 section-padding-1 section--padding">
+                    <!--                    <div class="container">-->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="concern_content_custom">
+<!--                                <h2 class="custom-title"><b>Your Current Schedule</b></h2><br>-->
+                                <p th:if="${flag==0}">You haven't select your schedule.Please update first from below..</p><br>
+                                <table id="customers">
+                                    <tr>
+                                        <th>Day</th>
+                                        <th>Contact Media</th>
+                                        <th>Times</th>
+                                    </tr>
+                                    <th:block th:each="schedule : ${scheduleList}">
+                                        <tr>
+                                            <td th:text="${schedule.getScheduleDay()}"></td>
+                                            <td th:text="${schedule.getContactMedia()}"></td>
+                                            <td th:text="${schedule.getScheduleTimeStart()}"></td>
+                                        </tr>
+                                    </th:block>
+                                </table>
+
+                            </div>
+                        </div><!-- col-lg-12 end-->
+                    </div><!-- row end-->
+                </section><!-- section end-->
+                <!--===========================View Schedule area Start======================-->
+                <br>
+                <br>
+                <h3 class="custom-custon-h3">Update Your Schedule</h3>
                 <!--=========== Concern Area Start ==========-->
                 <section class="login service-1 section-padding-1 section--padding">
                     <!--                    <div class="container">-->
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="concern_content">
+                            <div class="concern_content_custom">
                                 <h2 class="custom-title"><b>Let us know your speciality</b></h2><br>
                                 <p>To ensure people to find you, select concerns of your speciality.</p><br>
                                 <div class="checkbox-list">
@@ -238,7 +270,6 @@
                     </div><!-- row end-->
                 </section><!-- section end-->
                 <!--=========== Concern Area End ==========-->
-                <br>
                 <!--                Schedule Area start-->
                 <div class="custom-row-1">
                     <div class="custom-custom-column-3">
