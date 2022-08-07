@@ -120,7 +120,8 @@ public class DoctorsSchedulingService {
         else {
             schedule.setFee(Integer.parseInt(doctorsScheduleDto.getFeeLive()));
         }
-        scheduleRepository.save(schedule);
+        if(schedule.getScheduleDay().equals("")){}
+        else scheduleRepository.save(schedule);
 
     }
     public void concernUpdater (DoctorsScheduleDto doctorsScheduleDto){
