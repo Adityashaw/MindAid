@@ -165,20 +165,34 @@ public class DoctorProfileController {
 
 
         //Display current Schedule
-        List<Schedule>scheduleList=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"approved");
-        for (Schedule schedule1:scheduleList){
-            String scheduleTimestrts="";
-            String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
-            for (String st:schedulesList){
-                String[]spliTedSchedule=st.split("~");
-                if (scheduleTimestrts.equals("")){
-                    scheduleTimestrts=spliTedSchedule[1];
+        List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"approved");
+        List<Schedule> scheduleList=new ArrayList<>();
+        for (Schedule schedule1:schedules){
+            char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
+            String[] scheduleDay=schedule1.getScheduleDay().split(",");
+            for(int i=0;i<scheduleDay.length;i++) {
+                char c=scheduleDayParam[i];
+                Schedule schedule2=new Schedule();
+                String scheduleTimestrts = "";
+
+                String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
+                for (String st : schedulesList) {
+                    String[] spliTedSchedule = st.split("~");
+                    if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
+                        scheduleTimestrts = spliTedSchedule[1];
+                    } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
+                        scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
+                    }
                 }
-                else {
-                    scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
-                }
+                schedule2.setScheduleTimeStart(scheduleTimestrts);
+                schedule2.setScheduleDay(scheduleDay[i]);
+                schedule2.setContactMedia(schedule1.getContactMedia());
+
+
+                scheduleList.add(schedule2);
+
+
             }
-            schedule1.setScheduleTimeStart(scheduleTimestrts);
         }
         if (scheduleList.size()>1){
             model.addAttribute("flag",1);

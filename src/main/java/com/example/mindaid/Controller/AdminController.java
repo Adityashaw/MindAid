@@ -139,7 +139,7 @@ public class AdminController {
 
     }
     @GetMapping("/edit-requests")
-    public String getEditRequests(Model model){
+    public String getEditRequests(Model model) throws NumberFormatException{
         List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
         List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
         for (int schedule:scheduleDocIds){
@@ -147,21 +147,31 @@ public class AdminController {
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            List<Schedule> scheduleList=new ArrayList<>();
             for (Schedule schedule1:schedules){
-                String scheduleTimestrts="";
-                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
-                for (String st:schedulesList){
-                    String[]spliTedSchedule=st.split("~");
-                    if (scheduleTimestrts.equals("")){
-                        scheduleTimestrts=spliTedSchedule[1];
+                char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
+                String[] scheduleDay=schedule1.getScheduleDay().split(",");
+                for(int i=0;i<scheduleDay.length;i++) {
+                    char c=scheduleDayParam[i];
+                    Schedule schedule2=new Schedule();
+                    String scheduleTimestrts = "";
+
+                    String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
+                    for (String st : schedulesList) {
+                        String[] spliTedSchedule = st.split("~");
+                        if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
+                            scheduleTimestrts = spliTedSchedule[1];
+                        } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
+                            scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
+                        }
                     }
-                    else {
-                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
-                    }
+                    schedule2.setScheduleTimeStart(scheduleTimestrts);
+                    schedule2.setScheduleDay(scheduleDay[i]);
+                    schedule2.setContactMedia(schedule1.getContactMedia());
+                    scheduleList.add(schedule2);
                 }
-                schedule1.setScheduleTimeStart(scheduleTimestrts);
             }
-            doctorsScheduleDto.setScheduleList(schedules);
+            doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
@@ -188,8 +198,8 @@ public class AdminController {
             doctorConcern.setApproval("approved");
             doctorConcernRepository.save(doctorConcern);
         }
-        List<Schedule>scheduleList=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
-        for (Schedule schedule:scheduleList){
+        List<Schedule>scheduleList2=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
+        for (Schedule schedule:scheduleList2){
             scheduleRepository.delete(schedule);
         }
         List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
@@ -199,26 +209,40 @@ public class AdminController {
         }
         List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
         List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
+        List<Schedule> scheduleList=new ArrayList<>();
         for (int schedule:scheduleDocIds){
             List<Doctors>doctorsList=doctorsRepository.findByDocId(schedule);
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
             for (Schedule schedule1:schedules){
-                String scheduleTimestrts="";
-                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
-                for (String st:schedulesList){
-                    String[]spliTedSchedule=st.split("~");
-                    if (scheduleTimestrts.equals("")){
-                        scheduleTimestrts=spliTedSchedule[1];
+                char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
+                String[] scheduleDay=schedule1.getScheduleDay().split(",");
+                for(int i=0;i<scheduleDay.length;i++) {
+                    char c=scheduleDayParam[i];
+                    Schedule schedule2=new Schedule();
+                    String scheduleTimestrts = "";
+
+                    String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
+                    for (String st : schedulesList) {
+                        String[] spliTedSchedule = st.split("~");
+                        if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
+                            scheduleTimestrts = spliTedSchedule[1];
+                        } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
+                            scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
+                        }
                     }
-                    else {
-                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
-                    }
+                    schedule2.setScheduleTimeStart(scheduleTimestrts);
+                    schedule2.setScheduleDay(scheduleDay[i]);
+                    schedule2.setContactMedia(schedule1.getContactMedia());
+
+
+                    scheduleList.add(schedule2);
+
+
                 }
-                schedule1.setScheduleTimeStart(scheduleTimestrts);
             }
-            doctorsScheduleDto.setScheduleList(schedules);
+            doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
@@ -249,21 +273,36 @@ public class AdminController {
             DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
             doctorsScheduleDto.setDoctors(doctorsList.get(0));
             List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(schedule,"pending");
+            List<Schedule> scheduleList=new ArrayList<>();
+
             for (Schedule schedule1:schedules){
-                String scheduleTimestrts="";
-                String [] schedulesList=schedule1.getScheduleTimeStart().split(",");
-                for (String st:schedulesList){
-                    String[]spliTedSchedule=st.split("~");
-                    if (scheduleTimestrts.equals("")){
-                        scheduleTimestrts=spliTedSchedule[1];
+                char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
+                String[] scheduleDay=schedule1.getScheduleDay().split(",");
+                for(int i=0;i<scheduleDay.length;i++) {
+                    char c=scheduleDayParam[i];
+                    Schedule schedule2=new Schedule();
+                    String scheduleTimestrts = "";
+
+                    String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
+                    for (String st : schedulesList) {
+                        String[] spliTedSchedule = st.split("~");
+                        if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
+                            scheduleTimestrts = spliTedSchedule[1];
+                        } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
+                            scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
+                        }
                     }
-                    else {
-                        scheduleTimestrts=scheduleTimestrts+","+spliTedSchedule[1];
-                    }
+                    schedule2.setScheduleTimeStart(scheduleTimestrts);
+                    schedule2.setScheduleDay(scheduleDay[i]);
+                    schedule2.setContactMedia(schedule1.getContactMedia());
+
+
+                    scheduleList.add(schedule2);
+
+
                 }
-                schedule1.setScheduleTimeStart(scheduleTimestrts);
             }
-            doctorsScheduleDto.setScheduleList(schedules);
+            doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");

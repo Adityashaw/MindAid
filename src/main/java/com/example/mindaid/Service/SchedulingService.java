@@ -337,14 +337,30 @@ public class SchedulingService {
         dynamicSchedulingrepository.save(dynamicSchedulingList.get(0));
     }
 
-    public List<TemporaryObjectHoldService> getDynamicScheduleTimeAndActiveStatus(String scheduleIdStr,String date){
+    public List<TemporaryObjectHoldService>getDynamicScheduleTimeAndActiveStatus(String scheduleIdStr,String date){
         List<TemporaryObjectHoldService>scheduleTimeAndActiveStatus=new ArrayList<>();
         int scheduleId=Integer.parseInt(scheduleIdStr);
         List<Schedule>scheduleList=scheduleRepository.findByScheduleId(scheduleId);
         List<DynamicScheduling>dynamicSchedulingList=dynamicSchedulingrepository.findByScheduleId(scheduleId);
-        String[]schedules=scheduleList.get(0).scheduleTimeStart.split(",");
+        String[]schedulesList=scheduleList.get(0).scheduleTimeStart.split(",");
 
         int day=LocalDate.parse(date).getDayOfWeek().getValue();
+        System.out.println(day);
+        String timestarts="";
+        for (int i=0;i<schedulesList.length;i++){
+            TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
+            String [] spiltedScheduleList=schedulesList[i].split("~");
+            if (day==Integer.parseInt(spiltedScheduleList[0])) {
+                if (timestarts.equals("")){
+                timestarts=spiltedScheduleList[1];
+                }
+                else {
+                    timestarts=timestarts+","+spiltedScheduleList[1];
+                }
+            }
+            }
+        String[]schedules=timestarts.split(",");
+        System.out.println(schedules.length);
 
         String [] date1Parsing=dynamicSchedulingList.get(0).day1.split(",");
         String [] date2Parsing=dynamicSchedulingList.get(0).day2.split(",");
@@ -353,10 +369,7 @@ public class SchedulingService {
         if (date1Parsing[0].equals(date)){
             for (int i=0;i<schedules.length;i++){
                 TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
-                String [] spiltedScheduleList=schedules[i].split("~");
-                if (day==Integer.parseInt(spiltedScheduleList[0])) {
-                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(spiltedScheduleList[1]));
-                }
+                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
                 if (date1Parsing[1].charAt(i)=='1'){
                     temporaryObjectHoldService.setActiveStatusBoolTime(true);
                 }
@@ -369,10 +382,8 @@ public class SchedulingService {
         else if (date2Parsing[0].equals(date)){
             for (int i=0;i<schedules.length;i++){
                 TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
-                String [] spiltedScheduleList=schedules[i].split("~");
-                if (day==Integer.parseInt(spiltedScheduleList[0])) {
-                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(spiltedScheduleList[1]));
-                }
+
+                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
                 if (date2Parsing[1].charAt(i)=='1'){
                     temporaryObjectHoldService.setActiveStatusBoolTime(true);
                 }
@@ -386,10 +397,7 @@ public class SchedulingService {
         else if (date3Parsing[0].equals(date)){
             for (int i=0;i<schedules.length;i++){
                 TemporaryObjectHoldService temporaryObjectHoldService=new TemporaryObjectHoldService();
-                String [] spiltedScheduleList=schedules[i].split("~");
-                if (day==Integer.parseInt(spiltedScheduleList[0])) {
-                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(spiltedScheduleList[1]));
-                }
+                    temporaryObjectHoldService.setScheduleTimeStr(schedulingService.AmPmFormetter(schedules[i]));
                 if (date3Parsing[1].charAt(i)=='1'){
                     temporaryObjectHoldService.setActiveStatusBoolTime(true);
                 }
