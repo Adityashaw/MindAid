@@ -337,4 +337,38 @@ public class AdminController {
         model.addAttribute(doctors);
         return "adminProfile";
     }
+    @PostMapping("/doctor-remove")
+    public String removeDoctor(Model model,Doctors doctor){
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(doctor.getDocId());
+        for (Doctors doctors:doctorsList){
+            doctorsRepository.delete(doctors);
+        }
+        List<Schedule>scheduleList=scheduleRepository.findByDocIdAndApproval(doctor.getDocId(),"approved");
+        for (Schedule schedule:scheduleList){
+            scheduleRepository.delete(schedule);
+        }
+        List<User>userList=userRepository.findByEmail(doctorsList.get(0).getEmail());
+        for (User user:userList){
+            userRepository.delete(user);
+        }
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        ButtonFlagAllDoctors.add(1);
+        for (Doctors doctors:pendingDoctorList){
+            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+        }
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="All Therapists";
+        Doctors doctors=new Doctors();
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
+        model.addAttribute(doctors);
+        return "adminProfile";
+    }
 }

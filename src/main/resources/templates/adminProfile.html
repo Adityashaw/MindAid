@@ -234,7 +234,7 @@
                                         </form>
                                         </th:block>
                                         <th:block th:each="flag : ${flag2}">
-                                        <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
+                                        <form method="post" th:action="@{/doctor-remove}" th:object="${doctors}">
                                             <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>
                                             <button class="button button--pan"><span>Remove</span></button>
                                         </form>
