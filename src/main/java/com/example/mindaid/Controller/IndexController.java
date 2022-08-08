@@ -137,6 +137,11 @@ public class IndexController {
     public String getFaq() {
         return "faq";
     }
+    @GetMapping("/contact")
+    public String getContact() {
+        return "contact";
+    }
+
 
 
 

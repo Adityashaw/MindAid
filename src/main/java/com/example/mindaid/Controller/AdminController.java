@@ -105,6 +105,9 @@ public class AdminController {
     @GetMapping("/new-therapist")
     public String getNewTherapist(Model model){
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        ButtonFlagNewTherapist.add(1);
         for (Doctors doctors:pendingDoctorList){
             doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
         }
@@ -116,6 +119,8 @@ public class AdminController {
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
         model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
         model.addAttribute(doctors);
         return "adminProfile";
 
@@ -235,12 +240,8 @@ public class AdminController {
                     schedule2.setScheduleTimeStart(scheduleTimestrts);
                     schedule2.setScheduleDay(scheduleDay[i]);
                     schedule2.setContactMedia(schedule1.getContactMedia());
-
-
                     scheduleList.add(schedule2);
-
-
-                }
+               }
             }
             doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
@@ -295,11 +296,7 @@ public class AdminController {
                     schedule2.setScheduleTimeStart(scheduleTimestrts);
                     schedule2.setScheduleDay(scheduleDay[i]);
                     schedule2.setContactMedia(schedule1.getContactMedia());
-
-
                     scheduleList.add(schedule2);
-
-
                 }
             }
             doctorsScheduleDto.setScheduleList(scheduleList);
@@ -318,5 +315,26 @@ public class AdminController {
         model.addAttribute("doctorsScheduleDto",doctorsScheduleDto2);
         return "adminProfile";
     }
-
+    @GetMapping("/all-doctors")
+    public String getAllDoctors(Model model){
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        ButtonFlagAllDoctors.add(1);
+        for (Doctors doctors:pendingDoctorList){
+            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+        }
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="All Therapists";
+        Doctors doctors=new Doctors();
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
+        model.addAttribute(doctors);
+        return "adminProfile";
+    }
 }

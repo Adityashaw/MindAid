@@ -146,7 +146,7 @@
                     <a th:href="@{/admin-profile}">Appointments</a>
                 </li>
                 <li>
-                    <a href="#">Review</a>
+                    <a th:href="@{/all-doctors}">All Doctors</a>
                 </li>
                 <li>
                     <a href="#">Contact</a>
@@ -227,17 +227,18 @@
                                         <p th:text="'Applied on: '+${doctor.getAppliedDate}"></p>
                                     </div>
                                     <div class="custom-column-admin-3">
-                                        <!--                  <a href="#">Click to join</a>-->
-                                                                                <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
-                                                                                    <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>
-                                                                                    <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
-                                                                                    <button class="button button--pan"><span>Contact</span></button>
-                                                                                </form>
-                                        <!--                                        <form method="post" th:action="@{/pending-appointment/rejected}" th:object="${payment}">-->
-                                        <!--                                            <input type="hidden" th:value="${appointment.getPaymentId}" th:attr="name='paymentId'"/>-->
-                                        <!--                                            &lt;!&ndash;                    <button class="custom-join-btn" type="submit">Join Now</button>&ndash;&gt;-->
-                                        <!--                                            <button class="button button&#45;&#45;pan"><span>Join Now</span></button>-->
-                                        <!--                                        </form>-->
+                                        <th:block th:each="flag : ${flag1}">
+                                        <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
+                                            <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>
+                                            <button class="button button--pan"><span>Contact</span></button>
+                                        </form>
+                                        </th:block>
+                                        <th:block th:each="flag : ${flag2}">
+                                        <form method="post" th:action="@{/appointment-contact}" th:object="${doctors}">
+                                            <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>
+                                            <button class="button button--pan"><span>Remove</span></button>
+                                        </form>
+                                        </th:block>
                                     </div>
                                     <!--                </th:block>-->
                                 </div>

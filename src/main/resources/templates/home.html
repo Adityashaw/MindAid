@@ -38,19 +38,23 @@
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav mx-lg-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="home.html">Home</a>
+              <a class="nav-link" th:href="@{/home}">Home</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="about.html">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="services.html">Login</a>
+              <a class="nav-link" th:href="@{/login}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/faq}">FAQs</a>
             </li>
             
             <li class="nav-item">
-              <a class="nav-link" href="contact.html">Contact</a>
+              <a class="nav-link" th:href="@{/contact}">Contact</a>
             </li>
             <li class="search-bar ml-lg-3 mr-lg-5 mt-lg-0 mt-4">
+
               <!--/search-right-->
               <form class="search position-relative">
                 <input type="search" class="search__input" name="search" placeholder="Search here.."
