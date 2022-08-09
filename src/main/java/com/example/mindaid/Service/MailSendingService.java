@@ -52,7 +52,7 @@ public class MailSendingService {
         String subject = contact.getSubject();
 
         String content = "<p>Hello,</p>"
-                + "<p>PLease reply to the following query: </p>"+
+                + "<p>PLease reply to the following query: </p>"
                 + "<p>"+ contact.getText()+"</p>"
                 +"<p>From: </p>"+ "<p>"+ contact.getName()+"</p>"
                 +"<p>Email: </p>"+ "<p>"+ contact.getEmail()+"</p>"
