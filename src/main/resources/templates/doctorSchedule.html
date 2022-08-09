@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 
 <head>
-    <title>Sidebar 02</title>
+    <title>MindAid</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -211,6 +211,14 @@
         <form th:action="@{/submit-schedule}" th:object="${doctorsScheduleDto}" method="POST">
             <div class="container">
                 <!--===========================View Schedule area Start======================-->
+                <th:block th:each="loginIterator : ${schedulemessageList}">
+                    <div class="alert alert-warning alert-dismissible fade show">
+                        <p th:text="${loginIterator.getMessage()}"></p>
+                        <button type="submit" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </th:block>
                 <h3 class="custom-custon-h3">Your  Schedule</h3>
                 <section class="login service-1 section-padding-1 section--padding">
                     <!--                    <div class="container">-->

@@ -748,3 +748,36 @@ h2.custom-title{
 }
 
 /*============================ faq area  end===========================*/
+.form-input.custom-text-area{
+    height: 50px;
+}
+
+/*============================ button home ===========================*/
+.custom-button-home{
+    padding: 10px 36px;
+    font-size: 18px;
+    line-height: 30px;
+    font-weight: 600;
+    transition: 0.3s ease-in;
+    border-radius: var(--border-radius-full);
+    background: var(--primary-color);
+    border: 2px solid transparent;
+    color: #fff;
+    margin-left: 500px;
+}
+.custom-p-home{
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    line-height: 28px;
+    color: black;
+    font-family: 'Hind Siliguri';
+    text-align: center;
+}
+.custom-h3-home{
+    font-size: 40px;
+    line-height: 50px;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}

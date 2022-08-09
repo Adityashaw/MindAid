@@ -42,8 +42,16 @@
                     <button type="submit" style="background: #17a2b8; color: #FFFFFF">Send</button>
                 </div>
             </div>
-        </form>
+        </form><br>
+        <div class="wrap-custom">
+            <a th:if="${usertype=='user'}" th:href="@{/user-profile}" class="button-custom">⇚ Go Back</a>
+            <a th:if="${usertype=='doctor'}" th:href="@{/doctor-profile}" class="button-custom">⇚ Go Back</a>
+            <!--            <button class="button-custom" type="submit">Go Back</button>-->
+        </div>
+
+
     </div>
+
 </div>
 
 <script

@@ -6,6 +6,7 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -25,7 +26,9 @@ public class ChatController {
     }
 
     @GetMapping("/chat")
-    public String getChat(){
+    public String getChat(Model model){
+        String usertype="doctor";
+        model.addAttribute("usertype",usertype);
         return "messaging";
     }
     @GetMapping("/chatmessage")

@@ -2,7 +2,7 @@
 <html lang="en">
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-  <title>Sidebar 02</title>
+  <title>MindAid</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
@@ -21,11 +21,10 @@
 
 <body>
 <!--header-->
-
-<header id="site-header" class="header-w3l fixed-top-custom">
+<header id="site-header" class="header-w3l fixed-top">
   <div class="container">
     <nav class="navbar navbar-expand-lg stroke">
-      <a class="brand-logo" href="#">
+      <a class="brand-logo" th:href="@{/home}">
         M<span class="sub-logo">i</span>ndA<span class="sub-logo">i</span>d
       </a>
       <!-- if logo is image enable this -->
@@ -43,17 +42,17 @@
       <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
         <ul class="navbar-nav mx-lg-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="home.html">Home</a>
+            <a class="nav-link" th:href="@{/home}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" th:href="@{/login}">Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="services.html">Login</a>
+            <a class="nav-link" th:href="@{/faq}">FAQs</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" th:href="@{/contact}">Contact</a>
           </li>
           <li class="search-bar ml-lg-3 mr-lg-5 mt-lg-0 mt-4">
             <!--/search-right-->
@@ -64,6 +63,9 @@
             </form>
 
             <!--//search-right-->
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" th:href="@{/user-profile}"><i class='fas fa-user-alt' style='font-size:28px;color:white'></i></a>
           </li>
 
         </ul>
@@ -89,6 +91,7 @@
 </header>
 </div>
 <!-- //header -->
+
 
 <div class="wrapper d-flex align-items-stretch">
   <nav id="sidebar">
@@ -139,7 +142,7 @@
           <a th:href="@{/previous_appoinments}">History</a>
         </li>
         <li>
-          <a href="#">Contact</a>
+          <a th:href="@{/concern}">Book a session</a>
         </li>
       </ul>
       <div class="mb-5">

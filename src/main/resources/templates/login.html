@@ -15,7 +15,7 @@
   <div class="login">
     <div class="container">
       <div class="login-form-grids animated wow slideInUp" data-wow-delay=".5s">
-        <a class="brand-logo" href="home.html">
+        <a class="brand-logo" th:href="@{/home}">
             M<span class="sub-logo">i</span>ndA</span><span class="sub-logo">i</span>d</span> 
            </a>
           <th:block th:each="loginIterator : ${loginList}">
@@ -25,10 +25,6 @@
                   <span aria-hidden="true">&times;</span>
               </button>
           </div>
-<!--              <div class="alert alert-success alert-dismissible">-->
-<!--                  <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>-->
-<!--                  <p th:text="${loginIterator.getMessage()}"></p>-->
-<!--              </div>-->
           </th:block>
         <h2>Log in</h2>
         <form method="post" th:action="@{/postLogin}" th:object="${login}">

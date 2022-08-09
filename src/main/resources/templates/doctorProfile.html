@@ -2,7 +2,7 @@
 <html lang="en">
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-    <title>Sidebar 02</title>
+    <title>MindAid</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="//fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
@@ -110,10 +110,10 @@
                             <a th:href="@{/ongoing_doctor_appoinments}">Ongoing</a>
                         </li>
                         <li>
-                            <a th:href="@{/doctor-profile}">Upcoming</a>
+                            <a th:href="@{/upcoming_doctor_appoinments}">Upcoming</a>
                         </li>
                         <li>
-                            <a th:href="@{/doctor-profile}">Previous</a>
+                            <a th:href="@{/previous_doctor_appoinments}">Previous</a>
                         </li>
                         <!--            <li>-->
                         <!--              <a href="#">Home 3</a>-->
@@ -170,7 +170,7 @@
 <!--                                        <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>-->
                                     </div>
                                     <div class="custom-column-2">
-                                        <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">
+                                        <form method="post" th:action="@{/connect-session-doc}" th:object="${scheduleDto}">
                                             <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
                                             <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
                                             <button class="button button--pan"><span>Join Now</span></button>

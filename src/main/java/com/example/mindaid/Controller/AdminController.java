@@ -60,6 +60,8 @@ public class AdminController {
     AdminService adminService;
     @Autowired
     MailSendingService mailSendingService;
+    @Autowired
+    DynamicSchedulingrepository dynamicSchedulingrepository;
 
     @GetMapping("/admin-profile")
     public String getAdminProfile(Model model){
@@ -205,6 +207,10 @@ public class AdminController {
         }
         List<Schedule>scheduleList2=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
         for (Schedule schedule:scheduleList2){
+            List<DynamicScheduling> dynamicSchedulingList= dynamicSchedulingrepository.findByScheduleId(schedule.getScheduleId());
+            for(DynamicScheduling dynamicScheduling:dynamicSchedulingList){
+                dynamicSchedulingrepository.delete(dynamicScheduling);
+            }
             scheduleRepository.delete(schedule);
         }
         List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");

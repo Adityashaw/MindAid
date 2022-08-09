@@ -54,8 +54,8 @@ public class DoctorProfileController {
     public String getDoctorProfile(Model model){
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","doctor");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        model.addAttribute("username",user.getName());
-        String status="Upcoming";
+//        model.addAttribute("username",user.getName());
+        String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "doctorProfile";
@@ -80,8 +80,8 @@ public class DoctorProfileController {
     public String getUpcomingAppointments(Model model){
         System.out.println(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        model.addAttribute("username",user.getName());
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
+        model.addAttribute("username",doctorsList.get(0).getName());
         String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
@@ -103,7 +103,8 @@ public class DoctorProfileController {
         System.out.println(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved","doctor");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        model.addAttribute("username",user.getName());
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
+        model.addAttribute("username",doctorsList.get(0).getName());
         String status="Previous";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
@@ -130,84 +131,28 @@ public class DoctorProfileController {
     }
     @GetMapping("/your-schedule")
     public String getYourSchedule(Model model){
-        DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
-        doctorsScheduleDto.setDocId(temporaryObjectHoldService.getUserDto().getUserId());
-        List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
-        List<Concern>concernList=concernRepository.findAll();
-        for(int i=0;i<7;i++){
-            DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
-            doctorsScheduleDto1.setDayParameter(Integer.toString(i));
-            if(i==0) doctorsScheduleDto1.setDay("Sunday");
-            else if(i==1) doctorsScheduleDto1.setDay("Monday");
-            else if(i==2) doctorsScheduleDto1.setDay("Tuesday");
-            else if(i==3) doctorsScheduleDto1.setDay("Wednesday");
-            else if(i==4) doctorsScheduleDto1.setDay("Thursday");
-            else if(i==5) doctorsScheduleDto1.setDay("Friday");
-            else doctorsScheduleDto1.setDay("Saturday");
-            doctorsScheduleDtoList.add(doctorsScheduleDto1);
-        }
-        List<String> slotListMessage=new ArrayList<>();
-        List<String> slotListLive=new ArrayList<>();
-        for(int message=10;message<=19;message+=3){
-            String m_time=message+":00:00";
-            slotListMessage.add(m_time);
-        }
-        for(int live=10;live<=21;live++){
-            String l_time=live+":00:00";
-            slotListLive.add(l_time);
-        }
-        model.addAttribute("slotListMessage",slotListMessage);
-        model.addAttribute("slotListLive",slotListLive);
-        model.addAttribute("concernList",concernList);
-        model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
+        List<Login> schedulemessageList= new ArrayList<>();
+        model.addAttribute("schedulemessageList",schedulemessageList);
+        return doctorsSchedulingService.getSetDoctorsSchedule(model);
 
-        model.addAttribute(doctorsScheduleDto);
-
-
-        //Display current Schedule
-        List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"approved");
-        List<Schedule> scheduleList=new ArrayList<>();
-        for (Schedule schedule1:schedules){
-            char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
-            String[] scheduleDay=schedule1.getScheduleDay().split(",");
-            for(int i=0;i<scheduleDay.length;i++) {
-                char c=scheduleDayParam[i];
-                Schedule schedule2=new Schedule();
-                String scheduleTimestrts = "";
-
-                String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
-                for (String st : schedulesList) {
-                    String[] spliTedSchedule = st.split("~");
-                    if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
-                        scheduleTimestrts = spliTedSchedule[1];
-                    } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
-                        scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
-                    }
-                }
-                schedule2.setScheduleTimeStart(scheduleTimestrts);
-                schedule2.setScheduleDay(scheduleDay[i]);
-                schedule2.setContactMedia(schedule1.getContactMedia());
-
-
-                scheduleList.add(schedule2);
-
-
-            }
-        }
-        if (scheduleList.size()>1){
-            model.addAttribute("flag",1);
-        }
-        else {
-            model.addAttribute("flag",0);
-        }
-        model.addAttribute("scheduleList",scheduleList);
-        //Display end
-
-        return "doctorSchedule";
     }
     @PostMapping("/submit-schedule")
     public String postYourSchedule(Model model, DoctorsScheduleDto doctorsScheduleDto){
         doctorsSchedulingService.updateSchedule(doctorsScheduleDto);
-        return "dummy";
+        List<Login> schedulemessageList= new ArrayList<>();
+        Login login=new Login();
+        login.setMessage("Your request has been sent for admin verification! Please wait for a while");
+        model.addAttribute("schedulemessageList",schedulemessageList);
+        return doctorsSchedulingService.getSetDoctorsSchedule(model);
+    }
+    @PostMapping("/connect-session-doc")
+    public String joinSession(Model model,ScheduleDto scheduleDto){
+        List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
+        String sessionlink= paymentList.get(0).getSessionLink();
+        String usertype="doctor";
+        model.addAttribute("usertype",usertype);
+        model.addAttribute("sessionlink",sessionlink);
+        if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";
+        else return "live";
     }
 }

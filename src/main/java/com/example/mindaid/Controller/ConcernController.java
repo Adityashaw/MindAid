@@ -60,7 +60,10 @@ public class ConcernController {
 
     @GetMapping("/concern")
     public String getConcern(Model model) {
+        UserDto userDto=new UserDto();
+        userDto=temporaryObjectHoldService.getUserDto();
         concernService.getAndSetConcernList(model);
+        model.addAttribute("userDto",userDto);
         return "concern";
     }
     @PostMapping("/submitconcern")

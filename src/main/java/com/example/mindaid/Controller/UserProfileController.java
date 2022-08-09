@@ -61,7 +61,7 @@ public class UserProfileController {
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("userName",user.getName());
-        String status="Pending";
+        String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
         return "userProfile";
@@ -114,7 +114,10 @@ public class UserProfileController {
     public String joinSession(Model model,ScheduleDto scheduleDto){
         List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
         String sessionlink= paymentList.get(0).getSessionLink();
+        String usertype="user";
+        model.addAttribute("usertype",usertype);
         model.addAttribute("sessionlink",sessionlink);
-        return "live";
+        if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";
+        else return "live";
     }
 }

@@ -1,12 +1,15 @@
 package com.example.mindaid.Service;
 
 import com.example.mindaid.Dto.DoctorsScheduleDto;
+import com.example.mindaid.Model.Concern;
 import com.example.mindaid.Model.DoctorConcern;
 import com.example.mindaid.Model.Schedule;
+import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
 import com.example.mindaid.Repository.ScheduleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -21,6 +24,10 @@ public class DoctorsSchedulingService {
     DoctorConcernRepository doctorConcernRepository;
     @Autowired
     DoctorsSchedulingService doctorsSchedulingService;
+    @Autowired
+    TemporaryObjectHoldService temporaryObjectHoldService;
+    @Autowired
+    ConcernRepository concernRepository;
     public void updateSchedule(DoctorsScheduleDto doctorsScheduleDto) {
         doctorsSchedulingService.concernUpdater(doctorsScheduleDto);
         doctorsSchedulingService.scheduleUpdater(doctorsScheduleDto,doctorsScheduleDto.selectedSlotMessage,"message");
@@ -141,5 +148,81 @@ public class DoctorsSchedulingService {
 
             }
         }
+    }
+    public String getSetDoctorsSchedule(Model model){
+        DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
+        doctorsScheduleDto.setDocId(temporaryObjectHoldService.getUserDto().getUserId());
+        List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
+        List<Concern>concernList=concernRepository.findAll();
+        for(int i=0;i<7;i++){
+            DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
+            doctorsScheduleDto1.setDayParameter(Integer.toString(i));
+            if(i==0) doctorsScheduleDto1.setDay("Sunday");
+            else if(i==1) doctorsScheduleDto1.setDay("Monday");
+            else if(i==2) doctorsScheduleDto1.setDay("Tuesday");
+            else if(i==3) doctorsScheduleDto1.setDay("Wednesday");
+            else if(i==4) doctorsScheduleDto1.setDay("Thursday");
+            else if(i==5) doctorsScheduleDto1.setDay("Friday");
+            else doctorsScheduleDto1.setDay("Saturday");
+            doctorsScheduleDtoList.add(doctorsScheduleDto1);
+        }
+        List<String> slotListMessage=new ArrayList<>();
+        List<String> slotListLive=new ArrayList<>();
+        for(int message=10;message<=19;message+=3){
+            String m_time=message+":00:00";
+            slotListMessage.add(m_time);
+        }
+        for(int live=10;live<=21;live++){
+            String l_time=live+":00:00";
+            slotListLive.add(l_time);
+        }
+        model.addAttribute("slotListMessage",slotListMessage);
+        model.addAttribute("slotListLive",slotListLive);
+        model.addAttribute("concernList",concernList);
+        model.addAttribute("doctorsScheduleDtoList",doctorsScheduleDtoList);
+
+        model.addAttribute(doctorsScheduleDto);
+
+
+        //Display current Schedule
+        List<Schedule>schedules=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto.getDocId(),"approved");
+        List<Schedule> scheduleList=new ArrayList<>();
+        for (Schedule schedule1:schedules){
+            char[] scheduleDayParam=schedule1.getScheduleday_parameter().toCharArray();
+            String[] scheduleDay=schedule1.getScheduleDay().split(",");
+            for(int i=0;i<scheduleDay.length;i++) {
+                char c=scheduleDayParam[i];
+                Schedule schedule2=new Schedule();
+                String scheduleTimestrts = "";
+
+                String[] schedulesList = schedule1.getScheduleTimeStart().split(",");
+                for (String st : schedulesList) {
+                    String[] spliTedSchedule = st.split("~");
+                    if (scheduleTimestrts.equals("") && Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))) {
+                        scheduleTimestrts = spliTedSchedule[1];
+                    } else if(Integer.parseInt(spliTedSchedule[0])==(Character.getNumericValue(c))){
+                        scheduleTimestrts = scheduleTimestrts + "," + spliTedSchedule[1];
+                    }
+                }
+                schedule2.setScheduleTimeStart(scheduleTimestrts);
+                schedule2.setScheduleDay(scheduleDay[i]);
+                schedule2.setContactMedia(schedule1.getContactMedia());
+
+
+                scheduleList.add(schedule2);
+
+
+            }
+        }
+        if (scheduleList.size()>1){
+            model.addAttribute("flag",1);
+        }
+        else {
+            model.addAttribute("flag",0);
+        }
+        model.addAttribute("scheduleList",scheduleList);
+        //Display end
+
+        return "doctorSchedule";
     }
 }

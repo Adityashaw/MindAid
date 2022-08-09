@@ -186,13 +186,13 @@ public class SchedulingService {
         paymentDto.setActiveStatus(2); //future 2
         paymentDto.setApproval("pending");
         String generatedString;
-        if(doctorsDto.contactMedia.equals("message")){
+        if(doctorsDto.contactMedia.equals("live")){
             generatedString="https://meet.jit.si/mindaid"+schedulingService.randomURLGenerator();
-            paymentDto.setScheduleDuration(3);
+            paymentDto.setScheduleDuration(1);
         }
         else{
             generatedString="http://localhost:9090/chat";
-            paymentDto.setScheduleDuration(1);
+            paymentDto.setScheduleDuration(3);
         }
         paymentDto.setSessionLink(generatedString);
         paymentRepository.save(paymentDto);
