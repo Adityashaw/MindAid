@@ -46,6 +46,8 @@ public class IndexController {
     SchedulingService schedulingService;
     @Autowired
     ConcernService concernService;
+    @Autowired
+    MailSendingService mailSendingService;
 
 
 
@@ -138,11 +140,16 @@ public class IndexController {
         return "faq";
     }
     @GetMapping("/contact")
-    public String getContact() {
+    public String getContact(Model model) {
+        Contact contact=new Contact();
+        model.addAttribute(contact);
         return "contact";
     }
-
-
-
-
+    @PostMapping("/postContact")
+    public String postContact(Model model,Contact contact1) throws MessagingException, UnsupportedEncodingException {
+        mailSendingService.contactMail(contact1);
+        Contact contact=new Contact();
+        model.addAttribute(contact);
+        return "contact";
+    }
 }
