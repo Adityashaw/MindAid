@@ -781,3 +781,69 @@ h2.custom-title{
     text-align: center;
     color: white;
 }
+
+/*============================ button doctor profile ===========================*/
+
+.btn-info-custom-custom {
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+.btn-custom-custom {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.card-custom {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    border: 1px solid rgba(0, 0, 0, .05);
+    border-radius: .375rem;
+    background-color: #fff;
+    background-clip: border-box;
+}
+.card-header:first-child {
+    border-radius: calc(.375rem - 1px) calc(.375rem - 1px) 0 0;
+}
+.card-header-custom {
+    margin-bottom: 0;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, .05);
+    background-color: #fff;
+}
+.heading-small {
+    font-size: .75rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+.card-body-custom {
+    padding: 1.5rem;
+    flex: 1 1 auto;
+    background: aliceblue;
+}
+.custom-div{
+    margin-left: 190px;
+}
+/*============================ button doc profile end===========================*/

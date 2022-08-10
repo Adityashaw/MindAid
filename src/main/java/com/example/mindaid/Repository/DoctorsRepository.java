@@ -17,4 +17,6 @@ public interface DoctorsRepository extends JpaRepository<Doctors, Integer> {
 
     @Query(value = "select * from doctors where login_email=:email and login_password=:password",nativeQuery = true)
     public List<Doctors>findByEmailPassword(String email,String password);
+    @Query(value = "select * from doctors where login_email=:email",nativeQuery = true)
+    public List<Doctors>findByEmail(String email);
 }

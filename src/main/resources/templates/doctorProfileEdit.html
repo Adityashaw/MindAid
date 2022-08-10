@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/Profile/css/style.css">
     <link rel="stylesheet" href="assets/Profile/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="assets/css/Mystyles.css">
     <link href="assets/css/custom.css" rel="stylesheet">
     <link href="assets/css/button.css" rel="stylesheet">
     <meta name="robots" content="noindex, follow">
@@ -124,7 +125,7 @@
                     <a th:href="@{/your-schedule}">Your Schedule</a>
                 </li>
                 <li>
-                    <a href="/doc-profile">Profile</a>
+                    <a href="/doctor-profile">Profile</a>
                 </li>
                 <!--        <li>-->
                 <!--          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
@@ -140,9 +141,9 @@
                 <!--            </li>-->
                 <!--          </ul>-->
                 <!--        </li>-->
-<!--                <li>-->
-<!--                    <a th:href="@{/previous_appoinments}">History</a>-->
-<!--                </li>-->
+                <!--                <li>-->
+                <!--                    <a th:href="@{/previous_appoinments}">History</a>-->
+                <!--                </li>-->
                 <li>
                     <a href="/doctor-profile">Contact</a>
                 </li>
@@ -153,85 +154,128 @@
         </div>
     </nav>
 </div>
-
-    <div id="content-custom" class="p-4 p-md-5 pt-5 custom-middle">
-        <h3 class="custom-h3" th:text="'Your ' +${status}+ ' Appointments'"></h3>
-        <br>
-        <section class="login service-1 section-padding-1 section--padding">
-            <div class="container">
-
-                <br>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <th:block th:each="scheduleInfo : ${scheduleInfoList}">
-                            <div class="concern_content">
-                                <div class="custom-row-1">
-                                    <div class="custom-column-1">
-                                        <p th:text="'Your appointment is On: '+${scheduleInfo.getScheduleDate}"></p>
-                                        <p th:text="'Time: '+${scheduleInfo.getScheduleTime}"></p>
-                                        <p th:text="'Medium: '+${scheduleInfo.getScheduleMedia()}"></p>
-<!--                                        <p th:text="'Appointed to: '+${scheduleInfo.getScheduleDocName}"></p>-->
-                                    </div>
-                                    <div class="custom-column-2">
-                                        <form method="post" th:action="@{/connect-session-doc}" th:object="${scheduleDto}">
-                                            <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
-                                            <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
-                                            <button class="button button--pan"><span>Join Now</span></button>
-                                        </form>
-                                    </div>
+<!--==================profile start===========-->
+<div id="content" class="p-4 p-md-5 pt-5 custom-middle">
+<!--    <h3 class="custom-h3" th:text="'Your ' +${status}+ ' Appointments'">Your Appointments</h3>-->
+    <br>
+        <div class="custom-div">
+            <div class="col-xl-8 order-xl-1">
+                <form  method="post"  action="action_page.php" th:action="@{/postEdit}" th:object="${profile}">
+                    <div class="card-custom shadow">
+                        <div class="card-header-custom">
+                            <div class="row align-items-center">
+                                <div class="col-8">
+                                    <h3 class="mb-0">My account</h3>
+                                </div>
+                                <div class="col-4 text-right">
+                                    <input type="submit" value="Edit" class="button btn-custom-custom btn-info-custom-custom"/>
                                 </div>
                             </div>
-                            <br>
-                        </th:block>
-                    </div><!-- col-lg-12 end-->
-                </div>
-                <!-- row end-->
-            </div><!-- container end-->
-        </section><!-- section end-->
-    </div>
-
-
+                        </div>
+                        <div class="card-body-custom">
+                            <form>
+                                <h6 class="heading-small text-muted mb-4">User information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-username">Username</label>
+                                                <input type="text" id="input-username" class="form-control form-control-alternative" th:placeholder="${profile.getName()}" th:field="*{name}" required=" ">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Speciality</label>
+                                                <input type="email" id="input-email" class="form-control form-control-alternative" th:placeholder="${profile.getSpeciality()}">
+                                                <input type="hidden" th:value="${profile.getSpeciality()}" th:attr="name='speciality'"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Age</label>
+                                                <input type="text" id="input-first-name" class="form-control form-control-alternative"  th:placeholder="${profile.getAge()}" th:field="*{age}" required=" ">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Gender</label>
+                                                <input type="text" id="input-last-name" class="form-control form-control-alternative" th:placeholder="${profile.getGender()}" th:field="*{gender}" required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Education</label>
+                                                <input type="text" id="input-first-name" class="form-control form-control-alternative"  th:placeholder="${profile.getEducation()}" th:field="*{education}" required=" ">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-last-name">Experience</label>
+                                                <input type="text" id="input-last-name" class="form-control form-control-alternative" th:placeholder="${profile.getExperience()}" th:field="*{experience}" required=" ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Address -->
+                                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                                <div class="pl-lg-4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="form-control-label" for="input-email">Email address</label>
+                                                <input type="email" id="input-email" class="form-control form-control-alternative" th:placeholder="${profile.getLoginEmail()}">
+                                                <input type="hidden" th:value="${profile.getEmail()}" th:attr="name='loginEmail'"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group focused">
+                                                <label class="form-control-label" for="input-first-name">Number</label>
+                                                <input type="text" id="input-first-name" class="form-control form-control-alternative"  th:placeholder="${profile.getMobile()}" th:field="*{mobile}" required=" ">
+                                            </div>
+                                        </div>
+<!--                                        <div class="col-lg-4">-->
+<!--                                            <div class="form-group focused">-->
+<!--                                                <label class="form-control-label" for="input-country">Country</label>-->
+<!--                                                <input type="text" id="input-country" class="form-control form-control-alternative" th:placeholder="${profile.getCountry()}" th:field="*{country}" required=" ">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                        <div class="col-lg-4">-->
+<!--                                            <div class="form-group">-->
+<!--                                                <label class="form-control-label" for="input-country">Postal code</label>-->
+<!--                                                <input type="text" id="input-postal-code" class="form-control form-control-alternative" th:placeholder="${profile.getPostalcode()}" th:field="*{postalcode}" required=" ">-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+                                    </div>
+                                </div>
+                                <hr class="my-4">
+                                <!-- Description -->
+                                <h6 class="heading-small text-muted mb-4">About me</h6>
+                                <div class="pl-lg-4">
+                                    <div class="form-group focused">
+                                        <label>About Me</label>
+                                        <textarea rows="4" class="form-control form-control-alternative" th:placeholder="${profile.getDescription()}" th:field="*{description}" required=" "></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </form>
+<!--                <form  method="post"  action="action_page.php" th:action="@{/postLogout}" th:object="${profile}">-->
+<!--                    <input type="submit" value="Log Out" class="button btn btn-info"/>-->
+<!--                </form>-->
+            </div>
+        </div><!-- container end-->
 </div>
 
 
 
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        /*
-            var defaults = {
-            containerID: 'toTop', // fading element id
-            containerHoverID: 'toTopHover', // fading element hover id
-            scrollSpeed: 1200,
-            easingType: 'linear'
-            };
-        */
-
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
-
-    });
-</script>
-<!-- //here ends scrolling icon -->
-<!-- main slider-banner -->
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery('#demo1').skdslider({
-            'delay': 1500,
-            'animationSpeed': 2000,
-            'showNextPrev': true,
-            'showPlayButton': true,
-            'autoSlide': true,
-            'animationType': 'fading'
-        });
-
-        jQuery('#responsive').change(function() {
-            $('#responsive_wrapper').width(jQuery(this).val());
-        });
-
-    });
-</script>
 
 
 <script src="assets/Profile/js/jquery.min.js"></script>

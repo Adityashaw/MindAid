@@ -155,4 +155,28 @@ public class DoctorProfileController {
         if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";
         else return "live";
     }
+    @GetMapping("/doc-profile")
+    public String getDoctorProfileEdit(Model model){
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
+        model.addAttribute("profile",doctorsList.get(0));
+        return "doctorProfileEdit";
+    }
+
+    @PostMapping("/postEdit")
+    public String postEdit(Model model,Doctors doctors){
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
+        doctorsList.get(0).setSpeciality(doctors.getSpeciality());
+        doctorsList.get(0).setDescription(doctors.getDescription());
+        doctorsList.get(0).setName(doctors.getName());
+        doctorsList.get(0).setMobile(doctors.getMobile());
+        doctorsList.get(0).setLoginEmail(doctors.getLoginEmail());
+        doctorsList.get(0).setEducation(doctors.getEducation());
+        doctorsList.get(0).setExperience(doctors.getExperience());
+        doctorsList.get(0).setAge(doctors.getAge());
+        doctorsList.get(0).setGender(doctors.getGender());
+        doctorsRepository.save(doctorsList.get(0));
+        model.addAttribute("profile",doctorsList.get(0));
+        return "doctorProfileEdit";
+    }
+
 }
