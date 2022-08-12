@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/Profile/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/style-starter.css">
     <link href="assets/css/custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/ratings.css">
 <!--    <link href="assets/css/button.css" rel="stylesheet">-->
     <meta name="robots" content="noindex, follow">
     <script nonce="ccb4f610-5582-4505-9fad-a0d60af7ec7e">(function(w,d){!function(a,e,t,r){a.zarazData=a.zarazData||{};a.zarazData.executed=[];a.zaraz={deferred:[]};a.zaraz.q=[];a.zaraz._f=function(e){return function(){var t=Array.prototype.slice.call(arguments);a.zaraz.q.push({m:e,a:t})}};for(const e of["track","set","ecommerce","debug"])a.zaraz[e]=a.zaraz._f(e);a.zaraz.init=()=>{var t=e.getElementsByTagName(r)[0],z=e.createElement(r),n=e.getElementsByTagName("title")[0];n&&(a.zarazData.t=e.getElementsByTagName("title")[0].text);a.zarazData.x=Math.random();a.zarazData.w=a.screen.width;a.zarazData.h=a.screen.height;a.zarazData.j=a.innerHeight;a.zarazData.e=a.innerWidth;a.zarazData.l=a.location.href;a.zarazData.r=e.referrer;a.zarazData.k=a.screen.colorDepth;a.zarazData.n=e.characterSet;a.zarazData.o=(new Date).getTimezoneOffset();a.zarazData.q=[];for(;a.zaraz.q.length;){const e=a.zaraz.q.shift();a.zarazData.q.push(e)}z.defer=!0;for(const e of[localStorage,sessionStorage])Object.keys(e||{}).filter((a=>a.startsWith("_zaraz_"))).forEach((t=>{try{a.zarazData["z_"+t.slice(7)]=JSON.parse(e.getItem(t))}catch{a.zarazData["z_"+t.slice(7)]=e.getItem(t)}}));z.referrerPolicy="origin";z.src="../../../cdn-cgi/zaraz/sd0d9.js?z="+btoa(encodeURIComponent(JSON.stringify(a.zarazData)));t.parentNode.insertBefore(z,t)};["complete","interactive"].includes(e.readyState)?zaraz.init():a.addEventListener("DOMContentLoaded",zaraz.init)}(w,d,0,"script");})(window,document);</script>
@@ -98,15 +99,32 @@
         <iframe th:src="@{${sessionlink}}" height="700" width="1200" title="Iframe Example" allow="camera;microphone"></iframe>
         <br>
         <div class="wrap-custom">
-            <a th:if="${usertype=='user'}" th:href="@{/user-profile}" class="button-custom">⇚ Go Back</a>
+            <button th:if="${usertype=='user'}" onclick="openForm()" class="button-custom">⇚ Go Back</button>
             <a th:if="${usertype=='doctor'}" th:href="@{/doctor-profile}" class="button-custom">⇚ Go Back</a>
 <!--            <button class="button-custom" type="submit">Go Back</button>-->
         </div>
     </div>
 </section>
 </div>
+<div class="form-popup" id="myForm">
+    <div class="rating rating2"><!--
+		--><a th:href="@{/score-submit/5}" title="Give 5 stars">★</a><!--
+		--><a th:href="@{/score-submit/4}"  title="Give 4 stars">★</a><!--
+		--><a th:href="@{/score-submit/3}"  title="Give 3 stars">★</a><!--
+		--><a th:href="@{/score-submit/2}"  title="Give 2 stars">★</a><!--
+		--><a th:href="@{/score-submit/1}"  title="Give 1 star">★</a>
+    </div>
+</div>
 <!-- //main -->
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
 
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
 <script src="assets/Profile/js/jquery.min.js"></script>
 <script src="assets/Profile/js/popper.js"></script>
 <script src="assets/Profile/js/bootstrap.min.js"></script>
