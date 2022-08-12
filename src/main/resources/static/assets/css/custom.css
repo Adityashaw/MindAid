@@ -847,3 +847,31 @@ h2.custom-title{
     margin-left: 190px;
 }
 /*============================ button doc profile end===========================*/
+/*============================ doctor rating ===========================*/
+/*============================ doctor rating ===========================*/
+.profile-custom ul.statistic-custom li {
+    display: inline-block;
+    background-color: #3b9b82;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    line-height: 1;
+    color: #fff;
+    padding: 8px 10px 5px 10px;
+    font-weight: 600;
+    font-size: 12px;
+    font-size: 0.75rem;
+    min-width: 95px;
+    text-align: center;
+}
+.profile-custom ul.statistic-custom {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.box_list ul {
+    width: 100%;
+    /* padding: 20px 15px; */
+    /* border-top: 1px solid #ededed; */
+}
+/*============================ doctor rating end===========================*/

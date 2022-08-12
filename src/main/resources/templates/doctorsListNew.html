@@ -135,6 +135,12 @@
                     <div class="wrapper">
                         <small th:utext="${docName.getSpeciality()}"></small>
                         <h5 th:utext="${docName.getName()}"></h5>
+                        <div class="profile-custom">
+                            <ul class="statistic-custom">
+                                <li>854 Views</li>
+                                <li>124 Patients</li>
+                            </ul>
+                        </div>
                         <p class="education-custom" th:utext="${docName.getEducation()}"> </p>
 
                         <p>Available On: <span th:utext="${docName.getScheduleDay()}"></span></p>

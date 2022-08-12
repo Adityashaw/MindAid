@@ -1846,11 +1846,11 @@ iframe {
   color: #999;
   font-weight: 600;
 }
-.box_list ul {
-  width: 100%;
-  padding: 20px 15px;
-  border-top: 1px solid #ededed;
-}
+/*.box_list ul {*/
+/*  width: 100%;*/
+/*  padding: 20px 15px;*/
+/*  border-top: 1px solid #ededed;*/
+/*}*/
 @media (max-width: 991px) {
   .box_list ul {
     /* For less than 991px */
