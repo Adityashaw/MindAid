@@ -27,8 +27,7 @@ public class PopulateDropdownController {
         return temporaryConcernService;
     }
     @RequestMapping(value = "/schedule-time/{date}/{scheduleId}", method = RequestMethod.GET)
-    public @ResponseBody
-    List<TemporaryObjectHoldService> getAllSubcategories(@PathVariable("date") String date,@PathVariable("scheduleId") String scheduleId) {
+    public @ResponseBody List<TemporaryObjectHoldService> getAllSubcategories(@PathVariable("date") String date,@PathVariable("scheduleId") String scheduleId) {
         System.out.println("date:"+date);
         System.out.println("docId:"+scheduleId);
         List<String>times=new ArrayList<>();

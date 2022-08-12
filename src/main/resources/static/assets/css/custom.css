@@ -849,6 +849,9 @@ h2.custom-title{
 /*============================ button doc profile end===========================*/
 /*============================ doctor rating ===========================*/
 /*============================ doctor rating ===========================*/
+.profile-custom{
+    display: flex;
+}
 .profile-custom ul.statistic-custom li {
     display: inline-block;
     background-color: #3b9b82;

@@ -1888,10 +1888,10 @@ iframe {
 .box_list ul li a:hover {
   color: #e74e84;
 }
-.box_list ul li:last-child {
-  margin-right: 0;
-  float: right;
-}
+/*.box_list ul li:last-child {*/
+/*  margin-right: 0;*/
+/*  float: right;*/
+/*}*/
 .box_list ul li:last-child a {
   background: #fff;
   border: 2px solid #e74e84;

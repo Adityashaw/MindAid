@@ -10,8 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Time;
 import java.text.SimpleDateFormat;
@@ -119,5 +118,22 @@ public class UserProfileController {
         model.addAttribute("sessionlink",sessionlink);
         if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";
         else return "live";
+    }
+
+    @GetMapping(value = "/score-submit/{score}")
+    public String getUserProfile(@PathVariable("score") String score,Model model){
+        System.out.println(score);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user");
+        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("userName",user.getName());
+        String status="Upcoming";
+        model.addAttribute("status",status);
+        model.addAttribute("scheduleInfoList",scheduleInfoList);
+        return "userProfile";
+    }
+
+    @GetMapping("/ratings")
+    public String getRatings(Model model){
+        return "ratings";
     }
 }

@@ -80,4 +80,5 @@ public class DoctorsController {
                 System.out.println(doctorsDto.selectedScheduleDay);
                 return "payment";
         }
+
         }
