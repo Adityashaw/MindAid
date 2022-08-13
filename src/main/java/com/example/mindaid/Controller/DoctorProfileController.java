@@ -122,6 +122,8 @@ public class DoctorProfileController {
         doctors.setApproval("pending");
         LocalDate date=LocalDate.now();
         doctors.setAppliedDate(date.toString());
+        doctors.setRatings("0.0");
+        doctors.setPatientCount(0);
         String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
         doctors.setPhotos(fileName);
         Doctors savedDoctors= doctorsRepository.save(doctors);
@@ -150,6 +152,7 @@ public class DoctorProfileController {
         List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
         String sessionlink= paymentList.get(0).getSessionLink();
         String usertype="doctor";
+        model.addAttribute("paymentDto",paymentList.get(0));
         model.addAttribute("usertype",usertype);
         model.addAttribute("sessionlink",sessionlink);
         if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";

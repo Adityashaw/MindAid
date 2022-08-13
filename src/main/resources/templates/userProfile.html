@@ -146,7 +146,7 @@
   </nav>
 </div>
 
-  <div id="content" class="p-4 p-md-5 pt-5 custom-middle">
+  <div id="content-custom" class="p-4 p-md-5 pt-5 custom-middle">
 <!--    <h3 class="custom-h3" th:text="'Your ' +${status}+ ' Appointments'">Your Appointments</h3>-->
     <br>
     <section class="login service-1 section-padding-1 section--padding">
@@ -154,6 +154,7 @@
 
       <div class="container">
         <h3 class="custom-h3" th:text="'Your ' +${status}+ ' Appointments'">Your Appointments</h3>
+        <br>
         <div class="row">
           <div class="col-lg-12">
             <th:block th:each="scheduleInfo : ${scheduleInfoList}">

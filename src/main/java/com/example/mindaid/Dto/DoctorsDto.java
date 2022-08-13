@@ -32,6 +32,24 @@ public class DoctorsDto {
     public String selectedScheduleTime;
     public String scheduleday_parameter;
     public String photos;
+    public int patientCount;
+    public String ratings;
+
+    public int getPatientCount() {
+        return patientCount;
+    }
+
+    public void setPatientCount(int patientCount) {
+        this.patientCount = patientCount;
+    }
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
 
     public String getPhotos() {
         return photos;

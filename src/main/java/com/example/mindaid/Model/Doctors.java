@@ -40,6 +40,26 @@ public class Doctors {
     public String appliedDate;
     @Column(nullable = true, length = 64)
     public String photos;
+    @Column(name ="patient_count" )
+    public int patientCount;
+    @Column(name ="ratings" )
+    public String ratings;
+
+    public int getPatientCount() {
+        return patientCount;
+    }
+
+    public void setPatientCount(int patientCount) {
+        this.patientCount = patientCount;
+    }
+
+    public String getRatings() {
+        return ratings;
+    }
+
+    public void setRatings(String ratings) {
+        this.ratings = ratings;
+    }
 
     public String getPhotos() {
         return photos;

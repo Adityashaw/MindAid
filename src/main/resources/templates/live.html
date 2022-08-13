@@ -93,7 +93,7 @@
 <!-- //header -->
 
 <!-- //main -->
-<div class="custom-live">
+<div class="custom-live" id="live">
 <section class="service-1 section-padding-1" >
     <div class="container">
         <iframe th:src="@{${sessionlink}}" height="700" width="1200" title="Iframe Example" allow="camera;microphone"></iframe>
@@ -106,19 +106,29 @@
     </div>
 </section>
 </div>
-<div class="form-popup" id="myForm">
-    <div class="rating rating2"><!--
-		--><a th:href="@{/score-submit/5}" title="Give 5 stars">★</a><!--
-		--><a th:href="@{/score-submit/4}"  title="Give 4 stars">★</a><!--
-		--><a th:href="@{/score-submit/3}"  title="Give 3 stars">★</a><!--
-		--><a th:href="@{/score-submit/2}"  title="Give 2 stars">★</a><!--
-		--><a th:href="@{/score-submit/1}"  title="Give 1 star">★</a>
+<div class="form-popup-custom" id="myForm">
+    <div class="form-container-custom">
+        <h5><b>Give Your Ratings!</b></h5>
+    <div class="rating rating2">
+        <!--
+		--><a th:href="@{'/score-submit/5/'+${paymentDto.getDocId()}}" title="Give 5 stars">★</a><!--
+		--><a th:href="@{'/score-submit/4/'+${paymentDto.getDocId()}}"  title="Give 4 stars">★</a><!--
+		--><a th:href="@{'/score-submit/3/'+${paymentDto.getDocId()}}"  title="Give 3 stars">★</a><!--
+		--><a th:href="@{/'/score-submit/2/'+${paymentDto.getDocId()}}"  title="Give 2 stars">★</a><!--
+		--><a th:href="@{/'/score-submit/1/'+${paymentDto.getDocId()}}"  title="Give 1 star">★</a>
+        </div>
     </div>
 </div>
 <!-- //main -->
 <script>
     function openForm() {
         document.getElementById("myForm").style.display = "block";
+        $("#site-header").css({
+            "filter": "blur(4px)"
+        });
+        $("#live").css({
+            "filter": "blur(4px)"
+        });
     }
 
     function closeForm() {

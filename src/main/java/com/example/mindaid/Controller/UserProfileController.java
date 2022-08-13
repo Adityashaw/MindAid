@@ -115,6 +115,7 @@ public class UserProfileController {
         String sessionlink= paymentList.get(0).getSessionLink();
         String usertype="user";
         int disableFlag=1;
+        model.addAttribute("paymentDto",paymentList.get(0));
         model.addAttribute("usertype",usertype);
         model.addAttribute("sessionlink",sessionlink);
         model.addAttribute("disableFlag", disableFlag);
@@ -122,9 +123,17 @@ public class UserProfileController {
         else return "live";
     }
 
-    @GetMapping(value = "/score-submit/{score}")
-    public String getUserProfile(@PathVariable("score") String score,Model model){
+    @GetMapping(value = "/score-submit/{score}/{docId}")
+    public String getUserProfile(@PathVariable("score") String score,@PathVariable("docId") String docId,Model model){
         System.out.println(score);
+        System.out.println(docId);
+        List<Doctors>doctorsList=doctorsRepository.findByDocId(Integer.parseInt(docId));
+        double d=Double.parseDouble(doctorsList.get(0).getRatings())*doctorsList.get(0).getPatientCount();
+        doctorsList.get(0).setPatientCount(doctorsList.get(0).getPatientCount()+1);
+        d=d+Double.parseDouble(score+".0");
+        d=d/doctorsList.get(0).getPatientCount();
+        String rating=String.format("%.1f", d);
+        doctorsList.get(0).setRatings(rating);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user");
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("userName",user.getName());
