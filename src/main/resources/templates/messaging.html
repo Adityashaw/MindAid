@@ -53,6 +53,35 @@
     </div>
 
 </div>
+<div class="form-popup-custom" id="myForm">
+    <div class="form-container-custom">
+        <h5><b>Give Your Ratings!</b></h5>
+        <div class="rating rating2">
+            <!--
+            --><a th:href="@{/score-submit/5}" title="Give 5 stars">★</a><!--
+		--><a th:href="@{/score-submit/4}"  title="Give 4 stars">★</a><!--
+		--><a th:href="@{/score-submit/3}"  title="Give 3 stars">★</a><!--
+		--><a th:href="@{/score-submit/2}"  title="Give 2 stars">★</a><!--
+		--><a th:href="@{/score-submit/1}"  title="Give 1 star">★</a>
+        </div>
+    </div>
+</div>
+<!-- //main -->
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+        $("#site-header").css({
+            "filter": "blur(4px)"
+        });
+        $("#live").css({
+            "filter": "blur(4px)"
+        });
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
 
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>

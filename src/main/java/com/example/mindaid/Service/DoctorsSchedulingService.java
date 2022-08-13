@@ -60,6 +60,7 @@ public class DoctorsSchedulingService {
         friday.add("Friday");
         List<String>saturday=new ArrayList<>();
         saturday.add("6");
+        saturday.add("Saturday");
         for(String slot: schedules){
             String[] splittedSlot=slot.split(",");
             if(splittedSlot.length>1){
@@ -154,25 +155,42 @@ public class DoctorsSchedulingService {
         doctorsScheduleDto.setDocId(temporaryObjectHoldService.getUserDto().getUserId());
         List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
         List<Concern>concernList=concernRepository.findAll();
-        for(int i=0;i<7;i++){
+        for(int i=1;i<8;i++){
             DoctorsScheduleDto doctorsScheduleDto1=new DoctorsScheduleDto();
             doctorsScheduleDto1.setDayParameter(Integer.toString(i));
-            if(i==0) doctorsScheduleDto1.setDay("Sunday");
-            else if(i==1) doctorsScheduleDto1.setDay("Monday");
-            else if(i==2) doctorsScheduleDto1.setDay("Tuesday");
-            else if(i==3) doctorsScheduleDto1.setDay("Wednesday");
-            else if(i==4) doctorsScheduleDto1.setDay("Thursday");
-            else if(i==5) doctorsScheduleDto1.setDay("Friday");
-            else doctorsScheduleDto1.setDay("Saturday");
+//            if(i==7) {
+//                doctorsScheduleDto1.setDay("Sunday");
+//            }
+            if(i==1) {
+                doctorsScheduleDto1.setDay("Monday");
+            }
+            else if(i==2) {
+                doctorsScheduleDto1.setDay("Tuesday");
+            }
+            else if(i==3) {
+                doctorsScheduleDto1.setDay("Wednesday");
+            }
+            else if(i==4) {
+                doctorsScheduleDto1.setDay("Thursday");
+            }
+            else if(i==5) {
+                doctorsScheduleDto1.setDay("Friday");
+            }
+            else if(i==6) {
+                doctorsScheduleDto1.setDay("Saturday");
+            }
+            else {
+                doctorsScheduleDto1.setDay("Sunday");
+            }
             doctorsScheduleDtoList.add(doctorsScheduleDto1);
         }
         List<String> slotListMessage=new ArrayList<>();
         List<String> slotListLive=new ArrayList<>();
-        for(int message=10;message<=19;message+=3){
+        for(int message=8;message<=19;message+=3){
             String m_time=message+":00:00";
             slotListMessage.add(m_time);
         }
-        for(int live=10;live<=21;live++){
+        for(int live=8;live<=21;live++){
             String l_time=live+":00:00";
             slotListLive.add(l_time);
         }

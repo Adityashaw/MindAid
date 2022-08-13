@@ -165,9 +165,6 @@
                         <li>
                             <a th:href="@{/doctor-profile}">Previous</a>
                         </li>
-                        <!--            <li>-->
-                        <!--              <a href="#">Home 3</a>-->
-                        <!--            </li>-->
                     </ul>
                 </li>
                 <li>
@@ -176,23 +173,6 @@
                 <li>
                     <a href="/doctor-profile">Profile</a>
                 </li>
-                <!--        <li>-->
-                <!--          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
-                <!--          <ul class="collapse list-unstyled" id="pageSubmenu">-->
-                <!--            <li>-->
-                <!--              <a href="#">Page 1</a>-->
-                <!--            </li>-->
-                <!--            <li>-->
-                <!--              <a href="#">Page 2</a>-->
-                <!--            </li>-->
-                <!--            <li>-->
-                <!--              <a href="#">Page 3</a>-->
-                <!--            </li>-->
-                <!--          </ul>-->
-                <!--        </li>-->
-                <!--                <li>-->
-                <!--                    <a th:href="@{/previous_appoinments}">History</a>-->
-                <!--                </li>-->
                 <li>
                     <a href="/doctor-profile">Contact</a>
                 </li>
@@ -205,7 +185,6 @@
 </div>
 
 <div id="content-custom" class="p-4 p-md-5 pt-5 custom-middle">
-<!--    <h3 class="custom-h3">Your Schedule</h3>-->
     <br>
     <section class="login service-1 section-padding-1 section--padding">
         <form th:action="@{/submit-schedule}" th:object="${doctorsScheduleDto}" method="POST">
@@ -221,11 +200,9 @@
                 </th:block>
                 <h3 class="custom-custon-h3">Your  Schedule</h3>
                 <section class="login service-1 section-padding-1 section--padding">
-                    <!--                    <div class="container">-->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="concern_content_custom">
-<!--                                <h2 class="custom-title"><b>Your Current Schedule</b></h2><br>-->
                                 <p th:if="${flag==0}">You haven't select your schedule.Please update first from below..</p><br>
                                 <table id="customers">
                                     <tr>
@@ -283,10 +260,10 @@
                     <div class="custom-custom-column-3">
                         <!--                            <aside class="col-xl-4 col-lg-4" id="sidebar1">-->
                         <div class="box_general_3 booking">
-                            <div class="row-custom">
-                                <p class="p-custom"><b>Sunday: </b></p>
-                                <br>
-                            </div>
+<!--                            <div class="row-custom">-->
+<!--                                <p class="p-custom"><b>Sunday: </b></p>-->
+<!--                                <br>-->
+<!--                            </div>-->
                             <div class="row-custom">
                                 <p class="p-custom"><b>Monday: </b></p>
                                 <br>
@@ -309,6 +286,10 @@
                             </div>
                             <div class="row-custom">
                                 <p class="p-custom"><b>Saturday: </b></p>
+                                <br>
+                            </div>
+                            <div class="row-custom">
+                                <p class="p-custom"><b>Sunday: </b></p>
                                 <br>
                             </div>
                             <div class="row-custom">
@@ -377,10 +358,10 @@
 
                     <div class="custom-custom-column-4">
                         <div class="box_general_3 booking">
-                            <div class="row-custom">
-                                <p class="p-custom"><b>Sunday: </b></p>
-                                <br>
-                            </div>
+<!--                            <div class="row-custom">-->
+<!--                                <p class="p-custom"><b>Sunday: </b></p>-->
+<!--                                <br>-->
+<!--                            </div>-->
                             <div class="row-custom">
                                 <p class="p-custom"><b>Monday: </b></p>
                                 <br>
@@ -403,6 +384,10 @@
                             </div>
                             <div class="row-custom">
                                 <p class="p-custom"><b>Saturday: </b></p>
+                                <br>
+                            </div>
+                            <div class="row-custom">
+                                <p class="p-custom"><b>Sunday: </b></p>
                                 <br>
                             </div>
                             <div class="row-custom">

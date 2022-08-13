@@ -138,8 +138,8 @@
                                         <small th:text="'Specialized at: '+${doctorsDto.getSpeciality}"></small>
                                         <h1 th:text="${doctorsDto.getName}"></h1>
                                         <ul class="statistic">
-                                            <li>854 Views</li>
-                                            <li>124 Patients</li>
+                                            <li th:utext="${doctorsDto.getRatings}+'/5 ratings'"></li>
+                                            <li th:utext="${doctorsDto.getPatientCount}+' Patients'"></li>
                                         </ul>
                                         <ul class="contacts">
                                             <li>
