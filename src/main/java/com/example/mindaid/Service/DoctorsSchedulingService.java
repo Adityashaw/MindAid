@@ -41,7 +41,7 @@ public class DoctorsSchedulingService {
         }
         List<List<String>>days=new ArrayList();
         List<String>sunday=new ArrayList<>();
-        sunday.add("0");
+        sunday.add("7");
         sunday.add("Sunday");
         List<String>monday=new ArrayList<>();
         monday.add("1");
@@ -63,7 +63,7 @@ public class DoctorsSchedulingService {
         for(String slot: schedules){
             String[] splittedSlot=slot.split(",");
             if(splittedSlot.length>1){
-                if (splittedSlot[0].equals("0")){
+                if (splittedSlot[0].equals("7")){
                     sunday.add(splittedSlot[1]);
                 }
                 if (splittedSlot[0].equals("1")){

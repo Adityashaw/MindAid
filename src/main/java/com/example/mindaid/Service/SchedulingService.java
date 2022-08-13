@@ -118,6 +118,7 @@ public class SchedulingService {
 
         LocalDate date1=LocalDate.now().plusDays(1);
         obj1.setScheduleDate(date1);
+//        System.out.println("sunday paisi"+date1.getDayOfWeek().getValue());
         obj1.setActiveStatus(getActiveStatus(doctorsDto,date1));
         obj1.setActiveStatusBool(getActiveStatusBool(doctorsDto,date1));
 
@@ -151,9 +152,17 @@ public class SchedulingService {
     public boolean getActiveStatusBool(DoctorsDto doctorsDto,LocalDate date){
         boolean status=true;
         int day= date.getDayOfWeek().getValue();
+        if(day==0){
+            System.out.println("sunday paisi");
+        }
         char[] scheduleday_paramater=doctorsDto.getScheduleday_parameter().toCharArray();
         for(char c: scheduleday_paramater){
             if(day==Character.getNumericValue(c)){
+                if(day==1){
+                    System.out.println("monday paisi");
+                }
+
+
                 status=false;
             }
         }
@@ -358,6 +367,7 @@ public class SchedulingService {
         String[]schedulesList=scheduleList.get(0).scheduleTimeStart.split(",");
 
         int day=LocalDate.parse(date).getDayOfWeek().getValue();
+        System.out.println("abarrr subday paisi"+ day);
         System.out.println(day);
         String timestarts="";
         for (int i=0;i<schedulesList.length;i++){
