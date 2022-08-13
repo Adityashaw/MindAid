@@ -305,9 +305,22 @@ public class SchedulingService {
         String date=paymentDto.getScheduleDate();
         LocalDate localDate=LocalDate.parse(date);
         int dayInt=localDate.getDayOfWeek().getValue();
+        String timestart="";
         for (int i=0;i<scheduleTimeList.length;i++){
             String[]scheduleTimelistSplit=scheduleTimeList[i].split("~");
-            if (dayInt==Integer.parseInt(scheduleTimelistSplit[0]) && paymentDto.scheduleTime.equals(schedulingService.AmPmFormetter(scheduleTimelistSplit[1]))){
+            if (dayInt==Integer.parseInt(scheduleTimelistSplit[0])){ //&& paymentDto.scheduleTime.equals(schedulingService.AmPmFormetter(scheduleTimelistSplit[1]))
+                if (timestart.equals("")){
+                    timestart=scheduleTimeList[i];
+                }
+                else {
+                    timestart = timestart+","+scheduleTimeList[i];
+                }
+            }
+        }
+        String[]scheduleTimeList2=timestart.split(",");
+        for (int i=0;i<scheduleTimeList2.length;i++){
+            String[]scheduleTimelistSplit=scheduleTimeList[i].split("~");
+            if (paymentDto.scheduleTime.equals(schedulingService.AmPmFormetter(scheduleTimelistSplit[1]))){
                 index=i;
             }
         }

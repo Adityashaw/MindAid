@@ -114,8 +114,10 @@ public class UserProfileController {
         List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
         String sessionlink= paymentList.get(0).getSessionLink();
         String usertype="user";
+        int disableFlag=1;
         model.addAttribute("usertype",usertype);
         model.addAttribute("sessionlink",sessionlink);
+        model.addAttribute("disableFlag", disableFlag);
         if(paymentList.get(0).getContactMedia().equals("message")) return "messaging";
         else return "live";
     }

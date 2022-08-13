@@ -168,7 +168,8 @@
                 <div class="custom-column-2">
                   <form method="post" th:action="@{/connect-session}" th:object="${scheduleDto}">
                     <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
-                    <button class="button button--pan"><span>Join Now</span></button>
+                    <button th:if="${status=='Upcoming'}" class="button button--pan" disabled><span>Join Now</span></button>
+                    <button th:if="${status=='Ongoing'}" class="button button--pan"><span>Join Now</span></button>
                   </form>
                 </div>
               </div>

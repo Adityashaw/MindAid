@@ -282,6 +282,7 @@
 <!--                                                    <label for="psw"><b>Password</b></label>-->
 <!--                                                    <input type="password" placeholder="Enter Password" name="psw" required>-->
 
+                                                    <input type="hidden" th:value="${doctor.getDoctors().getDocId()}" th:attr="name='docId'"/>
                                                     <button type="submit" class="btn">Proceed</button>
                                                 </form>
                                                 <form action="/action_page.php" class="form-container">
