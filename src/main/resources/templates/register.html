@@ -9,6 +9,30 @@
     <link rel="stylesheet" href="assets/css/styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
+<script>
+    function verifyPassword() {
+        var pw = document.getElementById("pswd").value;
+        //check empty password field
+        if(pw == "") {
+            document.getElementById("message").innerHTML = "**Fill the password please!";
+            return false;
+        }
+
+        //minimum password length validation
+        if(pw.length < 8) {
+            document.getElementById("message").innerHTML = "**Password length must be atleast 8 characters";
+            return false;
+        }
+
+//maximum length of password validation
+        if(pw.length > 15) {
+            document.getElementById("message").innerHTML = "**Password length must not exceed 15 characters";
+            return false;
+        } else {
+            alert("Password is correct");
+        }
+    }
+</script>
 <body>
     <!-- register -->
     <div class="register">
@@ -19,12 +43,12 @@
                    </a>
                 <h2>Register Here</h2>
                 <!-- <h5>Profile information</h5> -->
-                <form id="signup_form" method=post class="form" action="action_page.php" th:action="@{/processregister}" th:object="${user}">
+                <form id="signup_form" method=post class="form" action="action_page.php" th:action="@{/processregister}" th:object="${user}" onsubmit ="return verifyPassword();Validate()">
                     <input type="text" placeholder="Your Name..." id=signupName name="email" th:field="*{name}" required>
                     <input type="text" placeholder="Your contact number..." id=signupPhone name="email" th:field="*{phone}" required> <br>
                     <input type="email" placeholder="Email Address" id=signupEmail name="email" th:field="*{email}" required>
-                    <input type="password" placeholder="Password" id=signupPassword name="email" th:field="*{password}" required>
-                    <input type="password" placeholder="Password Confirmation" id=signupconfirmPassword name="email" th:field="*{confirmPassword}" required>
+                    <input type="password" placeholder="Password" id=pswd name="email" th:field="*{password}" required>
+                    <input type="password" placeholder="Password Confirmation" id=pswdconfirm name="email" th:field="*{confirmPassword}" required>
                     <div class="register-check-box">
 <!--                        <div class="check">-->
 <!--                            <label class="checkbox"><input type="checkbox" name="checkbox"><i> </i>I accept the terms and conditions</label>-->
@@ -41,5 +65,16 @@
         </div>
     </div>
     <!-- //register -->
+    <script type="text/javascript">
+        function Validate() {
+            var password = document.getElementById("pswd").value;
+            var confirmPassword = document.getElementById("pswdconfirm").value;
+            if (password != confirmPassword) {
+                alert("Passwords do not match.");
+                return false;
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
