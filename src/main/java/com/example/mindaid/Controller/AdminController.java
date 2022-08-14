@@ -26,6 +26,7 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.print.Doc;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -62,9 +63,19 @@ public class AdminController {
     MailSendingService mailSendingService;
     @Autowired
     DynamicSchedulingrepository dynamicSchedulingrepository;
+    @Autowired
+    SessionValidatorService sessionValidatorService;
+
+
+    //admin login
+
+    //admin login end
 
     @GetMapping("/admin-profile")
-    public String getAdminProfile(Model model){
+    public String getAdminProfile(Model model, HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("pending");
         List<Doctors> pendingDoctorList=new ArrayList<>();
         String status="Appointments";
@@ -78,7 +89,10 @@ public class AdminController {
         return "adminProfile";
     }
     @RequestMapping(value = "/pending-appointment/{status}", method = RequestMethod.POST)
-    public String postAdminProfile(Model model, @PathVariable("status") String status, Payment payment){
+    public String postAdminProfile(Model model, @PathVariable("status") String status, Payment payment,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Payment> paymentList=paymentRepository.findByPaymentId(payment.getPaymentId());
         paymentList.get(0).setApproval(status);
         paymentRepository.save(paymentList.get(0));
@@ -91,7 +105,10 @@ public class AdminController {
         return "adminProfile";
     }
     @GetMapping("/admin-previous-appointments")
-    public String getAdminProfilePrevious(Model model){
+    public String getAdminProfilePrevious(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("approved");
         List<Payment> appointmentPendingListAdmin= paymentRepository.findByApprovalStatus("pending");
         int notification= appointmentPendingListAdmin.size();
@@ -105,7 +122,10 @@ public class AdminController {
         return "adminProfile";
     }
     @GetMapping("/new-therapist")
-    public String getNewTherapist(Model model){
+    public String getNewTherapist(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
@@ -128,7 +148,10 @@ public class AdminController {
 
     }
     @PostMapping("/appointment-contact")
-    public String postNewTherapist(Model model,Doctors doctors) throws MessagingException, UnsupportedEncodingException {
+    public String postNewTherapist(Model model,Doctors doctors,HttpSession httpSession) throws MessagingException, UnsupportedEncodingException {
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Doctors> findDoctors=doctorsRepository.findByDocId(doctors.getDocId());
         mailSendingService.sendEmailToNewApplicant(findDoctors.get(0).getEmail(),findDoctors.get(0).getName());
         findDoctors.get(0).setApproval("contacted");
@@ -146,7 +169,10 @@ public class AdminController {
 
     }
     @GetMapping("/edit-requests")
-    public String getEditRequests(Model model) throws NumberFormatException{
+    public String getEditRequests(Model model,HttpSession httpSession) throws NumberFormatException{
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
         List<Integer>scheduleDocIds=scheduleRepository.findByApproval("pending");
         for (int schedule:scheduleDocIds){
@@ -183,7 +209,7 @@ public class AdminController {
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
-        String status="New Therapist Requests";
+        String status="Schedule Update Requests";
         int notification= pendingDoctorList.size();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
@@ -195,7 +221,10 @@ public class AdminController {
         return "adminProfile";
     }
     @PostMapping("/approve-request")
-    public String postEditRequests(Model model,DoctorsScheduleDto doctorsScheduleDto1){
+    public String postEditRequests(Model model,DoctorsScheduleDto doctorsScheduleDto1,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<DoctorConcern>doctorConcernList=doctorConcernRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
         for(DoctorConcern doctorConcern:doctorConcernList){
             doctorConcernRepository.delete(doctorConcern);
@@ -267,7 +296,10 @@ public class AdminController {
         return "adminProfile";
     }
     @PostMapping("/deny-request")
-    public String postDenyRequest(Model model,DoctorsScheduleDto doctorsScheduleDto1){
+    public String postDenyRequest(Model model,DoctorsScheduleDto doctorsScheduleDto1,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
 
         List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
         for (Schedule schedule:scheduleList1){
@@ -323,7 +355,10 @@ public class AdminController {
         return "adminProfile";
     }
     @GetMapping("/all-doctors")
-    public String getAllDoctors(Model model){
+    public String getAllDoctors(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
@@ -345,7 +380,10 @@ public class AdminController {
         return "adminProfile";
     }
     @PostMapping("/doctor-remove")
-    public String removeDoctor(Model model,Doctors doctor){
+    public String removeDoctor(Model model,Doctors doctor,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Doctors>doctorsList=doctorsRepository.findByDocId(doctor.getDocId());
         for (Doctors doctors:doctorsList){
             doctorsRepository.delete(doctors);

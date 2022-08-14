@@ -34,6 +34,19 @@ public class SessionValidatorService {
             return true;
         }
     }
+
+    public boolean adminSessionValidator(HttpSession httpSession){
+        if ((List<String>)httpSession.getAttribute("userInfo")==null){
+            return true;
+        }
+        else if (((List<String>)httpSession.getAttribute("userInfo")).get(2).equals("admin")){
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
     public String loginPageReturn(Model model){
         Login login=new Login();
         List<Login> loginList=new ArrayList<>();

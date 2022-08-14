@@ -11,6 +11,7 @@ import com.example.mindaid.Repository.ScheduleRepository;
 import com.example.mindaid.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,6 +51,29 @@ public class AdminService {
 
         }
         return appointmentDtoList;
+    }
+
+    public String getAllDoctors(Model model){
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        ButtonFlagAllDoctors.add(1);
+        for (Doctors doctors:pendingDoctorList){
+            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+        }
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="All Therapists";
+        Doctors doctors=new Doctors();
+        int notification= pendingDoctorList.size();
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
+        model.addAttribute(doctors);
+        return "adminProfile";
+
     }
 
 }

@@ -49,6 +49,9 @@ public class LoginController {
     ConcernService concernService;
     @Autowired
     MailSendingService mailSendingService;
+    @Autowired
+    AdminService adminService;
+
 
 
     //log in area start
@@ -71,7 +74,7 @@ public class LoginController {
         int loginValidate=userService.loginValidationAndUserIdTransfer(login,model,session);
 //        System.out.println("sesion er lilakhela:"+((List<String>)session.getAttribute("userInfo")).size());
         if (loginValidate==1) {
-            if(temporaryObjectHoldService.getUserDto().getUserType().equals("doctor")){
+            if(((List<String>)session.getAttribute("userInfo")).get(2).equals("doctor")){
                 List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor",session);
 //                User user1=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
                 List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
@@ -80,6 +83,9 @@ public class LoginController {
                 model.addAttribute("scheduleInfoList",scheduleInfoList);
                 model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
                 return "doctorProfile";
+            }
+            else if (((List<String>)session.getAttribute("userInfo")).get(2).equals("admin")){
+                return adminService.getAllDoctors(model);
             }
             else{
                 concernService.getAndSetConcernList(model);

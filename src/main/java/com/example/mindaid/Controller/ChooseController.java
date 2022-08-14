@@ -73,11 +73,14 @@ public class ChooseController {
         }
            httpSession.setAttribute("contactMedia",chooseDto.getContactMedia());
             List<DoctorsDto> doctorsList = doctorListService.getDoctorList((List<Integer>) httpSession.getAttribute("concerns"), chooseDto);
+            if (doctorsList==null || doctorsList.isEmpty()){
+                return sessionValidatorService.loginPageReturn(model);
+            }
 //        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(concernDto,chooseDto);
             temporaryObjectHoldService.doctorsDtoList.clear();
             temporaryObjectHoldService.doctorsDtoList.add(doctorsList);
-            System.out.println(doctorsList);
-            System.out.println(doctorsList.get(0));
+//            System.out.println(doctorsList);
+//            System.out.println(doctorsList.get(0));
             System.out.println("choose: " + chooseDto.contactMedia);
             model.addAttribute("doctorsList", doctorsList);
             DoctorsDto doctorDto = new DoctorsDto();
