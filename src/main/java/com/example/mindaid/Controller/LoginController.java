@@ -72,7 +72,7 @@ public class LoginController {
 //        System.out.println("sesion er lilakhela:"+((List<String>)session.getAttribute("userInfo")).size());
         if (loginValidate==1) {
             if(temporaryObjectHoldService.getUserDto().getUserType().equals("doctor")){
-                List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor");
+                List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor",session);
 //                User user1=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
                 List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
                 String status="Upcoming";

@@ -58,17 +58,26 @@ public class ConcernController {
     SchedulingService schedulingService;
     @Autowired
     ConcernService concernService;
+    @Autowired
+    SessionValidatorService sessionValidatorService;
 
     @GetMapping("/concern")
     public String getConcern(Model model,HttpSession httpSession) {
-        UserDto userDto=new UserDto();
-        userDto=temporaryObjectHoldService.getUserDto();
-        concernService.getAndSetConcernList(model);
-        model.addAttribute("userDto",userDto);
-        return "concern";
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
+            UserDto userDto = new UserDto();
+            userDto = temporaryObjectHoldService.getUserDto();
+            concernService.getAndSetConcernList(model);
+            model.addAttribute("userDto", userDto);
+            return "concern";
+
     }
     @PostMapping("/submitconcern")
     public String postConcern(ConcernDto concernDto, UserDto userDto, Model model, HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         Choose choose=new Choose();
         ChooseDto chooseDto=new ChooseDto();
         temporaryConcernService.chooseList.clear();

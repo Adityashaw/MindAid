@@ -4,6 +4,7 @@ import com.example.mindaid.Dto.DoctorsScheduleDto;
 import com.example.mindaid.Model.Concern;
 import com.example.mindaid.Model.DoctorConcern;
 import com.example.mindaid.Model.Schedule;
+import com.example.mindaid.Model.User;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
 import com.example.mindaid.Repository.ScheduleRepository;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -150,9 +152,9 @@ public class DoctorsSchedulingService {
             }
         }
     }
-    public String getSetDoctorsSchedule(Model model){
+    public String getSetDoctorsSchedule(Model model, HttpSession httpSession){
         DoctorsScheduleDto doctorsScheduleDto=new DoctorsScheduleDto();
-        doctorsScheduleDto.setDocId(temporaryObjectHoldService.getUserDto().getUserId());
+        doctorsScheduleDto.setDocId((Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0))));
         List<DoctorsScheduleDto> doctorsScheduleDtoList=new ArrayList<>();
         List<Concern>concernList=concernRepository.findAll();
         for(int i=1;i<8;i++){
@@ -200,7 +202,7 @@ public class DoctorsSchedulingService {
         //special case
         slotListLive.add("01:00:00");
         //end
-        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
+        model.addAttribute("userName",(((List<String>)httpSession.getAttribute("userInfo")).get(1)));
         model.addAttribute("slotListMessage",slotListMessage);
         model.addAttribute("slotListLive",slotListLive);
         model.addAttribute("concernList",concernList);

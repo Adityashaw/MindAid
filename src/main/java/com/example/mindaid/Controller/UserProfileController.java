@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -53,12 +54,16 @@ public class UserProfileController {
     PaymentRepository paymentRepository;
     @Autowired
     ScheduleRepository scheduleRepository;
+    @Autowired
+    SessionValidatorService sessionValidatorService;
 
     @GetMapping("/user-profile")
-    public String getUserProfile(Model model){
-        System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+    public String getUserProfile(Model model, HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user",httpSession);
+        User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         model.addAttribute("userName",user.getName());
         String status="Upcoming";
         model.addAttribute("status",status);
@@ -66,10 +71,13 @@ public class UserProfileController {
         return "userProfile";
     }
     @GetMapping("/upcoming_appoinments")
-    public String getUpcomingAppointments(Model model){
+    public String getUpcomingAppointments(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","user");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","user",httpSession);
+        User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         model.addAttribute("username",user.getName());
         String status="Upcoming";
         model.addAttribute("status",status);
@@ -77,10 +85,13 @@ public class UserProfileController {
         return "userProfile";
     }
     @GetMapping("/ongoing_appoinments")
-    public String getOngoingAppointments(Model model){
+    public String getOngoingAppointments(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","user");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","user",httpSession);
+        User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         model.addAttribute("username",user.getName());
         String status="Ongoing";
         model.addAttribute("status",status);
@@ -88,10 +99,13 @@ public class UserProfileController {
         return "userProfile";
     }
     @GetMapping("/previous_appoinments")
-    public String getPrevAppointments(Model model){
+    public String getPrevAppointments(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved","user");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved","user",httpSession);
+        User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         model.addAttribute("username",user.getName());
         String status="Previous";
         model.addAttribute("status",status);
@@ -99,10 +113,13 @@ public class UserProfileController {
         return "userProfile";
     }
     @GetMapping("/pending_appoinments")
-    public String getPendingAppointments(Model model){
+    public String getPendingAppointments(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         System.out.println(temporaryObjectHoldService.userDto.userId);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2 ,"pending","user");
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2 ,"pending","user",httpSession);
+        User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         model.addAttribute("username",user.getName());
         String status="Pending";
         model.addAttribute("status",status);
@@ -110,7 +127,10 @@ public class UserProfileController {
         return "userProfile";
     }
     @PostMapping("/connect-session")
-    public String joinSession(Model model,ScheduleDto scheduleDto){
+    public String joinSession(Model model,ScheduleDto scheduleDto,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         List<Payment> paymentList=paymentRepository.findByPaymentId(scheduleDto.getPaymentId());
         String sessionlink= paymentList.get(0).getSessionLink();
         String usertype="user";
@@ -124,7 +144,10 @@ public class UserProfileController {
     }
 
     @GetMapping(value = "/score-submit/{score}/{docId}")
-    public String getUserProfile(@PathVariable("score") String score,@PathVariable("docId") String docId,Model model){
+    public String getUserProfile(@PathVariable("score") String score,@PathVariable("docId") String docId,Model model,HttpSession httpSession){
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         System.out.println(score);
         System.out.println(docId);
         List<Doctors>doctorsList=doctorsRepository.findByDocId(Integer.parseInt(docId));
@@ -134,7 +157,7 @@ public class UserProfileController {
         d=d/doctorsList.get(0).getPatientCount();
         String rating=String.format("%.1f", d);
         doctorsList.get(0).setRatings(rating);
-        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user");
+        List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user",httpSession);
         User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
         model.addAttribute("userName",user.getName());
         String status="Upcoming";
@@ -144,7 +167,11 @@ public class UserProfileController {
     }
 
     @GetMapping("/ratings")
-    public String getRatings(Model model){
+    public String getRatings(Model model,HttpSession httpSession){
+
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
         return "ratings";
     }
 }

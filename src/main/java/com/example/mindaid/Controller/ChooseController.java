@@ -56,23 +56,34 @@ public class ChooseController {
     TemporaryObjectHoldService temporaryObjectHoldService;
     @Autowired
     SchedulingService schedulingService;
+    @Autowired
+    SessionValidatorService sessionValidatorService;
 
     @GetMapping("/choose")
-    public String getChoose(Model model){
-        return "choose";
+    public String getChoose(Model model,HttpSession httpSession){
+        if (sessionValidatorService.userSessionValidator(httpSession)) {
+            return "choose";
+        }
+        else return sessionValidatorService.loginPageReturn(model);
     }
     @PostMapping("/doctors-list")
     public String postChoose(Model model, ChooseDto chooseDto, UserDto userDto, ConcernDto concernDto, HttpSession httpSession){
-        List<DoctorsDto> doctorsList=doctorListService.getDoctorList((List<Integer>)httpSession.getAttribute("concerns"),chooseDto);
+        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
+           httpSession.setAttribute("contactMedia",chooseDto.getContactMedia());
+            List<DoctorsDto> doctorsList = doctorListService.getDoctorList((List<Integer>) httpSession.getAttribute("concerns"), chooseDto);
 //        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(concernDto,chooseDto);
-        temporaryObjectHoldService.doctorsDtoList.clear();
-        temporaryObjectHoldService.doctorsDtoList.add(doctorsList);
-        System.out.println(doctorsList);
-        System.out.println(doctorsList.get(0));
-        System.out.println("choose: "+chooseDto.contactMedia);
-        model.addAttribute("doctorsList",doctorsList);
-        DoctorsDto doctorDto=new DoctorsDto();
-        model.addAttribute(doctorDto);
-        return "doctorsListNew";
+            temporaryObjectHoldService.doctorsDtoList.clear();
+            temporaryObjectHoldService.doctorsDtoList.add(doctorsList);
+            System.out.println(doctorsList);
+            System.out.println(doctorsList.get(0));
+            System.out.println("choose: " + chooseDto.contactMedia);
+            model.addAttribute("doctorsList", doctorsList);
+            DoctorsDto doctorDto = new DoctorsDto();
+            model.addAttribute(doctorDto);
+            return "doctorsListNew";
+
+
     }
 }

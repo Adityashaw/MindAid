@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -55,6 +56,8 @@ public class DoctorsController {
         TemporaryObjectHoldService temporaryObjectHoldService;
         @Autowired
         SchedulingService schedulingService;
+        @Autowired
+        SessionValidatorService sessionValidatorService;
 
         @GetMapping("/doctors-list")
         public String getdoctorList(Model model){
@@ -67,13 +70,22 @@ public class DoctorsController {
 
         }
         @PostMapping("/postdoctorlist")
-        public  String postdoclist(Model model,DoctorsDto docDto){
-                List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=schedulingService.getScheduleTimeAndTimeStr(docDto,temporaryObjectHoldService.getDoctorsDtoList().get(0),model);
+        public  String postdoclist(Model model, DoctorsDto docDto, HttpSession httpSession){
+                if ((sessionValidatorService.userSessionValidator(httpSession))) {
+                        return sessionValidatorService.loginPageReturn(model);
+                }
+                ChooseDto chooseDto=new ChooseDto();
+                chooseDto.setContactMedia((String) httpSession.getAttribute("contactMedia"));
+                List<DoctorsDto> doctorsList = doctorListService.getDoctorList((List<Integer>) httpSession.getAttribute("concerns"), chooseDto);
+                List<TemporaryObjectHoldService>scheduleTimeAndTimeStr=schedulingService.getScheduleTimeAndTimeStr(docDto,doctorsList,model);
                 model.addAttribute("scheduleTimeAndTimeStr",scheduleTimeAndTimeStr);
                 return "doctorsDetails";
         }
         @PostMapping("/payment")
-        public  String postdocDetails(Model model, DoctorsDto doctorsDto){
+        public  String postdocDetails(Model model, DoctorsDto doctorsDto,HttpSession httpSession){
+                if ((sessionValidatorService.userSessionValidator(httpSession))) {
+                        return sessionValidatorService.loginPageReturn(model);
+                }
                 Payment paymentDto=new PaymentDto();
                 model.addAttribute(paymentDto);
                 model.addAttribute("doctorsDto", doctorsDto);

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpSession;
 import java.sql.DatabaseMetaData;
 import java.sql.Time;
 import java.time.LocalDate;
@@ -207,13 +208,13 @@ public class SchedulingService {
         paymentRepository.save(paymentDto);
     }
 
-    public List<ScheduleDto> getcheduleInfo(Model model,int cStatus, String approval,String userType){
+    public List<ScheduleDto> getcheduleInfo(Model model, int cStatus, String approval, String userType, HttpSession httpSession){
         List<Payment>paymentList=new ArrayList<>();
         if (userType.equals("user")) {
-            paymentList = paymentRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+            paymentList = paymentRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         }
         else {
-           paymentList = paymentRepository.findByDocId(temporaryObjectHoldService.userDto.userId);
+           paymentList = paymentRepository.findByDocId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
         }
         List <ScheduleDto>scheduleInfoList=new ArrayList<>();
         for (Payment payment: paymentList){
