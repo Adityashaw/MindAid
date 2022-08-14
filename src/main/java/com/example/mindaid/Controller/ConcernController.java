@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -59,7 +60,7 @@ public class ConcernController {
     ConcernService concernService;
 
     @GetMapping("/concern")
-    public String getConcern(Model model) {
+    public String getConcern(Model model,HttpSession httpSession) {
         UserDto userDto=new UserDto();
         userDto=temporaryObjectHoldService.getUserDto();
         concernService.getAndSetConcernList(model);
@@ -67,14 +68,21 @@ public class ConcernController {
         return "concern";
     }
     @PostMapping("/submitconcern")
-    public String postConcern(ConcernDto concernDto, UserDto userDto, Model model){
+    public String postConcern(ConcernDto concernDto, UserDto userDto, Model model, HttpSession httpSession){
         Choose choose=new Choose();
         ChooseDto chooseDto=new ChooseDto();
         temporaryConcernService.chooseList.clear();
         temporaryConcernService.chooseList.add(concernDto);
+        List<Integer>concerns=new ArrayList<>();
+        for (int i=0;i<concernDto.getConcerns().length;i++){
+            concerns.add(concernDto.getConcerns()[i]);
+        }
+        httpSession.setAttribute("concerns",concerns);
+        System.out.println((List<String>)httpSession.getAttribute("userInfo"));
+        System.out.println((List<Integer>)httpSession.getAttribute("concerns"));
         //test
-        System.out.println(userDto.userId);
-        System.out.println(concernDto.getConcerns()[3]);
+//        System.out.println(userDto.userId);
+//        System.out.println(concernDto.getConcerns()[3]);
         //test end
         model.addAttribute(concernDto);
         model.addAttribute(chooseDto);

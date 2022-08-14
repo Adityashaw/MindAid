@@ -24,7 +24,7 @@ public interface DoctorConcernRepository extends JpaRepository<DoctorConcern , I
             " AND s.contact_media=:contactMedia "+
             " ORDER BY d.name ASC ",
             nativeQuery = true)
-    public List<Object[]> findByConcernId( int[] concerns,String contactMedia);
+    public List<Object[]> findByConcernId( List<Integer> concerns,String contactMedia);
 
     @Query(value = "select  * from doctorconcern where doc_id=:DocId and approval=:approval",nativeQuery = true)
     public List<DoctorConcern> findByDocIdAndApproval(int DocId, String approval);

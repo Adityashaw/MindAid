@@ -29,6 +29,7 @@ import java.util.Date;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
 @Controller
@@ -61,8 +62,8 @@ public class ChooseController {
         return "choose";
     }
     @PostMapping("/doctors-list")
-    public String postChoose(Model model, ChooseDto chooseDto, UserDto userDto,ConcernDto concernDto){
-        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(temporaryConcernService.chooseList.get(0),chooseDto);
+    public String postChoose(Model model, ChooseDto chooseDto, UserDto userDto, ConcernDto concernDto, HttpSession httpSession){
+        List<DoctorsDto> doctorsList=doctorListService.getDoctorList((List<Integer>)httpSession.getAttribute("concerns"),chooseDto);
 //        List<DoctorsDto> doctorsList=doctorListService.getDoctorList(concernDto,chooseDto);
         temporaryObjectHoldService.doctorsDtoList.clear();
         temporaryObjectHoldService.doctorsDtoList.add(doctorsList);

@@ -1,7 +1,6 @@
-package com.example.mindaid.Controller;
-import com.example.mindaid.Dto.ScheduleDto;
-import com.example.mindaid.Dto.UserDto;
-import com.example.mindaid.Model.*;
+package com.example.mindaid.Controller.RestController;
+
+import com.example.mindaid.Model.User;
 import com.example.mindaid.Repository.ConcernRepository;
 import com.example.mindaid.Repository.DoctorConcernRepository;
 import com.example.mindaid.Repository.DoctorsRepository;
@@ -16,14 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+
 @Controller
-public class IndexController {
+public class SignupController {
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -51,27 +48,36 @@ public class IndexController {
     @Autowired
     MailSendingService mailSendingService;
 
-    @GetMapping("/home")
-    public String getHome(Model model) {
+//Registration start
+    @GetMapping("/register")
+    public String getIndex_reg(Model model) {
         User user = new User();
         model.addAttribute(user);
-        return "home";
+        return "register";
     }
-    @GetMapping("/faq")
-    public String getFaq() {
-        return "faq";
+    @PostMapping("/processregister")
+    public String postSignup(User user, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+        if ((signup_request.emailCheck(user.email)) && (signup_request.passCheck(user.password, user.confirmPassword))) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedPassword = passwordEncoder.encode(user.getPassword());
+            user.setPassword(encodedPassword);
+            user.setUserType("user");
+            userRepository.save(user);
+            emailVerificationService.register(user, getSiteURL(request));
+            return "register_success";
+        } else return "dummy";
     }
-    @GetMapping("/contact")
-    public String getContact(Model model) {
-        Contact contact=new Contact();
-        model.addAttribute(contact);
-        return "contact";
+    private String getSiteURL(HttpServletRequest request) {
+        String siteURL = request.getRequestURL().toString();
+        return siteURL.replace(request.getServletPath(), "");
     }
-    @PostMapping("/postContact")
-    public String postContact(Model model,Contact contact1) throws MessagingException, UnsupportedEncodingException {
-        mailSendingService.contactMail(contact1);
-        Contact contact=new Contact();
-        model.addAttribute(contact);
-        return "contact";
+    @GetMapping("/verify")
+    public String verifyUser(@Param("code") String code) {
+        if (emailVerificationService.verify(code)) {
+            return "verify_success";
+        } else {
+            return "verify_fail";
+        }
     }
+    //Registration End
 }

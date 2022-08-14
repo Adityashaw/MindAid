@@ -16,7 +16,10 @@ import javax.persistence.*;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -32,7 +35,7 @@ public class UserService {
 
     @PersistenceContext
     public EntityManager entityManager;
-    public int loginValidationAndUserIdTransfer(Login login, Model model) throws UnsupportedEncodingException {
+    public int loginValidationAndUserIdTransfer(Login login, Model model, HttpSession session) throws UnsupportedEncodingException {
         List<User> userList = userRepository.findByEmail(login.email);
         List<Doctors>doctorsList=doctorsRepository.findByEmailPassword(login.email,login.password);
         if (userList.size() > 0) {
@@ -48,6 +51,9 @@ public class UserService {
                     temporaryObjectHoldService.setUserDto(userDto);
                     userDto.setUserDto(userDto);
                     model.addAttribute(userDto);
+                    List<String>userinfos=new ArrayList<>();
+                    Collections.addAll(userinfos,String.valueOf(userDto.getUserId()),userDto.getName(),userDto.getUserType());
+                    session.setAttribute("userInfo",userinfos);
                     return 1;
                 }
                 else return 2;
@@ -68,8 +74,12 @@ public class UserService {
                 userRepository.save(user);
                 UserDto userDto=new UserDto();
                 userDto.setUserId(doctorList.get(0).getDocId());
+                userDto.setName(doctorList.get(0).getName());
                 userDto.setUserType("doctor");
                 temporaryObjectHoldService.setUserDto(userDto);
+                List<String>userinfos=new ArrayList<>();
+                Collections.addAll(userinfos,String.valueOf(userDto.getUserId()),userDto.getName(),userDto.getUserType());
+                session.setAttribute("userInfo",userinfos);
                 return 1;
             }
             return 3;
