@@ -58,6 +58,7 @@ public class DoctorProfileController {
         String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfile";
     }
     @GetMapping("/schedule-form")
@@ -85,6 +86,7 @@ public class DoctorProfileController {
         String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfile";
     }
     @GetMapping("/ongoing_doctor_appoinments")
@@ -96,6 +98,7 @@ public class DoctorProfileController {
         String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfile";
     }
     @GetMapping("/previous_doctor_appoinments")
@@ -108,6 +111,7 @@ public class DoctorProfileController {
         String status="Previous";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfile";
     }
 
@@ -162,6 +166,7 @@ public class DoctorProfileController {
     public String getDoctorProfileEdit(Model model){
         List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
         model.addAttribute("profile",doctorsList.get(0));
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfileEdit";
     }
 
@@ -179,6 +184,7 @@ public class DoctorProfileController {
         doctorsList.get(0).setGender(doctors.getGender());
         doctorsRepository.save(doctorsList.get(0));
         model.addAttribute("profile",doctorsList.get(0));
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         return "doctorProfileEdit";
     }
 

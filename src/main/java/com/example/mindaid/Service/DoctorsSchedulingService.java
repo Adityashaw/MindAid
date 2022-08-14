@@ -186,14 +186,21 @@ public class DoctorsSchedulingService {
         }
         List<String> slotListMessage=new ArrayList<>();
         List<String> slotListLive=new ArrayList<>();
-        for(int message=8;message<=19;message+=3){
+        for(int message=10;message<=19;message+=3){
             String m_time=message+":00:00";
             slotListMessage.add(m_time);
         }
-        for(int live=8;live<=21;live++){
+        //special case
+        slotListMessage.add("02:00:00");
+        //end
+        for(int live=10;live<=21;live++){
             String l_time=live+":00:00";
             slotListLive.add(l_time);
         }
+        //special case
+        slotListLive.add("01:00:00");
+        //end
+        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
         model.addAttribute("slotListMessage",slotListMessage);
         model.addAttribute("slotListLive",slotListLive);
         model.addAttribute("concernList",concernList);

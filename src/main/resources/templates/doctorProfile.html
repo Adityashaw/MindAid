@@ -124,7 +124,7 @@
                     <a th:href="@{/your-schedule}">Your Schedule</a>
                 </li>
                 <li>
-                    <a href="/doc-profile">Profile</a>
+                    <a th:href="@{/doc-profile}">Profile</a>
                 </li>
                 <!--        <li>-->
                 <!--          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
@@ -144,11 +144,11 @@
 <!--                    <a th:href="@{/previous_appoinments}">History</a>-->
 <!--                </li>-->
                 <li>
-                    <a href="/doctor-profile">Contact</a>
+                    <a th:href="@{/contact}">Contact</a>
                 </li>
             </ul>
             <div class="mb-5">
-                <h4 class="h6">Logout</h4>
+                <a class="h6" th:href="@{/login}">Logout</a>
             </div>
         </div>
     </nav>
@@ -176,7 +176,8 @@
                                         <form method="post" th:action="@{/connect-session-doc}" th:object="${scheduleDto}">
                                             <input type="hidden" th:value="${scheduleInfo.getPaymentId}" th:attr="name='paymentId'"/>
                                             <!--                    <button class="custom-join-btn" type="submit">Join Now</button>-->
-                                            <button class="button button--pan"><span>Join Now</span></button>
+                                            <button th:if="${status=='Upcoming'}" class="button button--pan" disabled><span>Join Now</span></button>
+                                            <button th:if="${status=='Ongoing'}" class="button button--pan"><span>Join Now</span></button>
                                         </form>
                                     </div>
                                 </div>

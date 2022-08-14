@@ -77,13 +77,13 @@ public class IndexController {
         int loginValidate=userService.loginValidationAndUserIdTransfer(login,model);
         if (loginValidate==1) {
             if(temporaryObjectHoldService.getUserDto().getUserType().equals("doctor")){
-                List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","doctor");
+                List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "approved","doctor");
 //                User user1=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
                 List<Doctors>doctorsList=doctorsRepository.findByDocId(temporaryObjectHoldService.userDto.getUserId());
-                model.addAttribute("username",doctorsList.get(0).getName());
                 String status="Upcoming";
                 model.addAttribute("status",status);
                 model.addAttribute("scheduleInfoList",scheduleInfoList);
+                model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
                 return "doctorProfile";
             }
             else{
