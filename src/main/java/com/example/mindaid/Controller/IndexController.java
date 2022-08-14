@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 @Controller
 public class IndexController {
@@ -59,7 +60,8 @@ public class IndexController {
     }
     //log in area start
     @GetMapping("/login")
-    public String getLogin(Model model) {
+    public String getLogin(Model model, HttpSession session) {
+        System.out.println(session.getId());
         Login login=new Login();
         List<Login> loginList=new ArrayList<>();
         model.addAttribute(login);
@@ -67,7 +69,8 @@ public class IndexController {
         return "login";
     }
     @PostMapping("/postLogin")
-    public String postLogin(Model model,Login login) throws UnsupportedEncodingException {
+    public String postLogin(Model model,Login login,HttpSession session) throws UnsupportedEncodingException {
+        System.out.println(session.getId());
         User user=new User();
         model.addAttribute(user);
         List<Login> loginList=new ArrayList<>();
