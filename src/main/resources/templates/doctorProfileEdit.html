@@ -125,7 +125,7 @@
                     <a th:href="@{/your-schedule}">Your Schedule</a>
                 </li>
                 <li>
-                    <a href="/doctor-profile">Profile</a>
+                    <a th:href="@{/doc-profile}">Profile</a>
                 </li>
                 <!--        <li>-->
                 <!--          <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>-->
@@ -145,11 +145,11 @@
                 <!--                    <a th:href="@{/previous_appoinments}">History</a>-->
                 <!--                </li>-->
                 <li>
-                    <a href="/doctor-profile">Contact</a>
+                    <a th:href="@{/contact}">Contact</a>
                 </li>
             </ul>
             <div class="mb-5">
-                <h4 class="h6">Logout</h4>
+                <h4 class="h6" th:href="@{/login}">Logout</h4>
             </div>
         </div>
     </nav>

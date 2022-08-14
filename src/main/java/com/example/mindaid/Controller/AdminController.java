@@ -211,7 +211,8 @@ public class AdminController {
             for(DynamicScheduling dynamicScheduling:dynamicSchedulingList){
                 dynamicSchedulingrepository.delete(dynamicScheduling);
             }
-            scheduleRepository.delete(schedule);
+            schedule.setApproval("previous");
+            scheduleRepository.save(schedule);
         }
         List<Schedule>scheduleList1=scheduleRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"pending");
         for (Schedule schedule:scheduleList1){

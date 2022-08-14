@@ -41,6 +41,7 @@ public class UserService {
                     UserDto userDto=new UserDto();
                     userDto.setUserId(userList.get(0).userId);
                     userDto.setUserType(userList.get(0).getUserType());
+                    userDto.setName(userList.get(0).getName());
                     if (userList.get(0).getUserType().equals("doctor")){
                         userDto.setUserId(doctorsList.get(0).getDocId());
                     }
