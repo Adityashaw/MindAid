@@ -73,7 +73,7 @@ public class AdminController {
 
     @GetMapping("/admin-profile")
     public String getAdminProfile(Model model, HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("pending");
@@ -90,7 +90,7 @@ public class AdminController {
     }
     @RequestMapping(value = "/pending-appointment/{status}", method = RequestMethod.POST)
     public String postAdminProfile(Model model, @PathVariable("status") String status, Payment payment,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<Payment> paymentList=paymentRepository.findByPaymentId(payment.getPaymentId());
@@ -106,7 +106,7 @@ public class AdminController {
     }
     @GetMapping("/admin-previous-appointments")
     public String getAdminProfilePrevious(Model model,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<AppointmentDto> appointmentListAdmin= adminService.getAppointmentListAdmin("approved");
@@ -123,16 +123,16 @@ public class AdminController {
     }
     @GetMapping("/new-therapist")
     public String getNewTherapist(Model model,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagNewTherapist.add(1);
-        for (Doctors doctors:pendingDoctorList){
-            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
-        }
+//        for (Doctors doctors:pendingDoctorList){
+//            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+//        }
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
         Doctors doctors=new Doctors();
@@ -149,7 +149,7 @@ public class AdminController {
     }
     @PostMapping("/appointment-contact")
     public String postNewTherapist(Model model,Doctors doctors,HttpSession httpSession) throws MessagingException, UnsupportedEncodingException {
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<Doctors> findDoctors=doctorsRepository.findByDocId(doctors.getDocId());
@@ -170,7 +170,7 @@ public class AdminController {
     }
     @GetMapping("/edit-requests")
     public String getEditRequests(Model model,HttpSession httpSession) throws NumberFormatException{
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<DoctorsScheduleDto>DoctorScheduleList=new ArrayList<>();
@@ -207,10 +207,11 @@ public class AdminController {
             doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
-        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="Schedule Update Requests";
         int notification= pendingDoctorList.size();
+        pendingDoctorList.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
@@ -222,7 +223,7 @@ public class AdminController {
     }
     @PostMapping("/approve-request")
     public String postEditRequests(Model model,DoctorsScheduleDto doctorsScheduleDto1,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<DoctorConcern>doctorConcernList=doctorConcernRepository.findByDocIdAndApproval(doctorsScheduleDto1.getDocId(),"approved");
@@ -282,10 +283,11 @@ public class AdminController {
             doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
-        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
         int notification= pendingDoctorList.size();
+        pendingDoctorList.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
@@ -297,7 +299,7 @@ public class AdminController {
     }
     @PostMapping("/deny-request")
     public String postDenyRequest(Model model,DoctorsScheduleDto doctorsScheduleDto1,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
 
@@ -341,10 +343,11 @@ public class AdminController {
             doctorsScheduleDto.setScheduleList(scheduleList);
             DoctorScheduleList.add(doctorsScheduleDto);
         }
-        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("nothing");
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("pending");
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="New Therapist Requests";
         int notification= pendingDoctorList.size();
+        pendingDoctorList.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
@@ -356,20 +359,22 @@ public class AdminController {
     }
     @GetMapping("/all-doctors")
     public String getAllDoctors(Model model,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagAllDoctors.add(1);
-        for (Doctors doctors:pendingDoctorList){
-            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
-        }
+//        for (Doctors doctors:pendingDoctorList){
+//            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+//        }
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="All Therapists";
         Doctors doctors=new Doctors();
-        int notification= pendingDoctorList.size();
+        List<Doctors> pendingDoctorList2= doctorsRepository.findByApproval("pending");
+        int notification= pendingDoctorList2.size();
+        pendingDoctorList2.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);
@@ -381,7 +386,7 @@ public class AdminController {
     }
     @PostMapping("/doctor-remove")
     public String removeDoctor(Model model,Doctors doctor,HttpSession httpSession){
-        if ((sessionValidatorService.userSessionValidator(httpSession))) {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
         List<Doctors>doctorsList=doctorsRepository.findByDocId(doctor.getDocId());
@@ -400,13 +405,15 @@ public class AdminController {
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagAllDoctors.add(1);
-        for (Doctors doctors:pendingDoctorList){
-            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
-        }
+//        for (Doctors doctors:pendingDoctorList){
+//            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+//        }
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="All Therapists";
         Doctors doctors=new Doctors();
-        int notification= pendingDoctorList.size();
+        List<Doctors> pendingDoctorList2= doctorsRepository.findByApproval("pending");
+        int notification= pendingDoctorList2.size();
+        pendingDoctorList2.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);

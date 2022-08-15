@@ -58,13 +58,15 @@ public class AdminService {
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagAllDoctors.add(1);
-        for (Doctors doctors:pendingDoctorList){
-            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
-        }
+//        for (Doctors doctors:pendingDoctorList){
+//            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+//        }
         List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
         String status="All Therapists";
         Doctors doctors=new Doctors();
-        int notification= pendingDoctorList.size();
+        List<Doctors> pendingDoctorList2= doctorsRepository.findByApproval("pending");
+        int notification= pendingDoctorList2.size();
+        pendingDoctorList2.clear();
         model.addAttribute("notification",notification);
         model.addAttribute("pendingDoctorList", pendingDoctorList);
         model.addAttribute("appointmentListAdmin", appointmentListAdmin);

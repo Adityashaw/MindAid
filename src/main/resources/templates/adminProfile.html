@@ -135,7 +135,7 @@
                             <a th:href="@{/edit-requests}">Edit Requests</a>
                         </li>
                         <li>
-                            <a href="#">Remove Therapist</a>
+                            <a th:href="@{/all-doctors}">Remove Therapist</a>
                         </li>
                         <!--            <li>-->
                         <!--              <a href="#">Home 3</a>-->
@@ -208,11 +208,27 @@
                             </div>
                             <br>
                         </th:block>
+<!--                        <div class="concern_content">-->
+<!--                            <div class="custom-row-1">-->
+<!--                        <div class="custom-column-admin-3">-->
+<!--                            <th:block th:each="flag : ${flag2}">-->
+<!--                                <form method="post" th:action="@{/doctor-remove}" th:object="${doctors}">-->
+<!--&lt;!&ndash;                                    <input type="hidden" th:value="${doctor.getDocId()}" th:attr="name='docId'"/>&ndash;&gt;-->
+<!--                                    <button class="btn-red" onclick="openForm()">Add Doctor<i class="fa fa-plus" aria-hidden="true"></i></button>-->
+<!--                                </form>-->
+<!--                            </th:block>-->
+<!--                        </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <br>-->
+<!--                        <br>-->
+
+
                         <th:block th:each="doctor : ${pendingDoctorList}">
                             <div class="concern_content">
                                 <div class="custom-row-1">
                                     <div class="custom-column-admin-1">
-                                        <img th:src="@{${doctor.getPhotos()}}" alt="" class="img-fluid-custom ">
+                                        <img th:src="@{${'/assets/user-photos/' + doctor.getDocId() +'/'+ doctor.getPhotos()}}" alt="" class="img-fluid-custom ">
                                     </div>
                                     <!--                <th:block th:each="scheduleInfo : ${scheduleInfoList}">-->
                                     <div class="custom-column-admin-2">
