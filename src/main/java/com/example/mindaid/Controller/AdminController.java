@@ -362,7 +362,7 @@ public class AdminController {
         if ((sessionValidatorService.adminSessionValidator(httpSession))) {
             return sessionValidatorService.loginPageReturn(model);
         }
-        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("added");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagAllDoctors.add(1);
