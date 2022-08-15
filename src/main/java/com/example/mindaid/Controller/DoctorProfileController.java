@@ -64,7 +64,7 @@ public class DoctorProfileController {
         String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        model.addAttribute("userName",temporaryObjectHoldService.getUserDto().getName());
+        model.addAttribute("userName",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         return "doctorProfile";
     }
     @GetMapping("/schedule-form")
@@ -102,7 +102,7 @@ public class DoctorProfileController {
         String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        model.addAttribute("userName",user.getName());
+        model.addAttribute("userName",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         return "doctorProfile";
     }
     @GetMapping("/ongoing_doctor_appoinments")
@@ -113,12 +113,12 @@ public class DoctorProfileController {
         System.out.println(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,1, "approved","doctor",httpSession);
         List<Doctors>doctorsList=doctorsRepository.findByDocId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
-        User user=userRepository.findByUserId((Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0))));
+//        User user=userRepository.findByUserId((Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0))));
         model.addAttribute("username",doctorsList.get(0).getName());
         String status="Ongoing";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
-        model.addAttribute("userName",user.getName());
+        model.addAttribute("userName",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         return "doctorProfile";
     }
     @GetMapping("/previous_doctor_appoinments")
