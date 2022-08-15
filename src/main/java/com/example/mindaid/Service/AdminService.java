@@ -54,7 +54,7 @@ public class AdminService {
     }
 
     public String getAllDoctors(Model model){
-        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("added");
         List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
         List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
         ButtonFlagAllDoctors.add(1);
