@@ -423,4 +423,72 @@ public class AdminController {
         model.addAttribute(doctors);
         return "adminProfile";
     }
+
+
+    @GetMapping("/contacted-doctor")
+    public String addNewTherapist(Model model,HttpSession httpSession){
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+//        for (Doctors doctors:pendingDoctorList){
+//            doctors.setPhotos("\\assets\\user-photos\\"+doctors.getDocId()+ "\\"+doctors.getPhotos());
+//        }
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="Contacted Therapist";
+        Doctors doctors=new Doctors();
+        List<Doctors> pendingDoctorList2= doctorsRepository.findByApproval("pending");
+        int notification= pendingDoctorList2.size();
+        pendingDoctorList2.clear();
+
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        List<Integer> ButtonFlagAddDoctor=new ArrayList<>();
+
+        ButtonFlagAddDoctor.add(1);
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
+        model.addAttribute("flag3",ButtonFlagAddDoctor);
+        model.addAttribute(doctors);
+        return "adminProfile";
+
+    }
+    @PostMapping("/add-doctor")
+    public String postAddDoctor(Model model,Doctors doctors,HttpSession httpSession) throws MessagingException, UnsupportedEncodingException {
+        if ((sessionValidatorService.adminSessionValidator(httpSession))) {
+            return sessionValidatorService.loginPageReturn(model);
+        }
+        String randomPassword=schedulingService.randomPasswordGenerator();
+        List<Doctors> findDoctors=doctorsRepository.findByDocId(doctors.getDocId());
+        for (Doctors doctors1:findDoctors){
+            doctors1.setLoginEmail(doctors1.getEmail());
+            doctors1.setLoginPassword(randomPassword);
+        }
+        mailSendingService.sendEmailToAddedTherapist(findDoctors.get(0).getEmail(),findDoctors.get(0).getName(),randomPassword);
+        findDoctors.get(0).setApproval("added");
+        doctorsRepository.save(findDoctors.get(0));
+        List<Doctors> pendingDoctorList= doctorsRepository.findByApproval("contacted");
+        List<AppointmentDto> appointmentListAdmin=new ArrayList<>();
+        String status="Contacted Therapist";
+        int notification= pendingDoctorList.size();
+        List<Integer> ButtonFlagNewTherapist=new ArrayList<>();
+        List<Integer> ButtonFlagAllDoctors=new ArrayList<>();
+        List<Integer> ButtonFlagAddDoctor=new ArrayList<>();
+
+        ButtonFlagAddDoctor.add(1);
+        model.addAttribute("notification",notification);
+        model.addAttribute("pendingDoctorList", pendingDoctorList);
+        model.addAttribute("appointmentListAdmin", appointmentListAdmin);
+        model.addAttribute("status", status);
+        model.addAttribute("flag1",ButtonFlagNewTherapist);
+        model.addAttribute("flag2",ButtonFlagAllDoctors);
+        model.addAttribute("flag3",ButtonFlagAddDoctor);
+        model.addAttribute(doctors);
+        return "adminProfile";
+
+    }
 }

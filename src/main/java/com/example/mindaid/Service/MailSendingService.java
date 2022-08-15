@@ -42,6 +42,37 @@ public class MailSendingService {
         javaMailSender.send(message);
     }
 
+    public void sendEmailToAddedTherapist(String recipientEmail, String name,String password) throws MessagingException, UnsupportedEncodingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom("tamzidkhan015@gmail.com", "MindAid Support");
+        helper.setTo(recipientEmail);
+
+        String subject = "MindAid Therapist Recruitement";
+
+        String content = "<p>Hello,</p>"+name
+                + "<p>Congratulation!You have selected as mindaid therapist!</p>"
+                + "<p>Please login to work further!</p>"
+                + "<p>Email:"+recipientEmail+"<p>"
+                + "<p>Password: </p>"+password
+                + "<p>Please change your password after login for the first time!!</p>"
+//                + "<p>We look forward to evaluate you</p>"
+//                + "<p><a href=\"" + link + "\">Change my password</a></p>"
+//                + "<br>"
+                + "<p>Thanks,</p>"
+                + "<p>Team MindAid</p>"
+                + "<p>mindaid.help@gmail.com</p>"
+                + "<p>ABC,8-b,xyz,Dhaka.</p>";
+
+        helper.setSubject(subject);
+
+        helper.setText(content, true);
+
+        javaMailSender.send(message);
+    }
+
+
     public void contactMail(Contact contact) throws MessagingException, UnsupportedEncodingException{
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
