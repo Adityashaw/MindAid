@@ -120,7 +120,10 @@
                 <div class="box_list home">
                     <figure>
 
-                        <a href="detail-page.html"><img th:src="@{${docName.getPhotos()}}" class="img-fluid" alt=""></a>
+                        <a href="detail-page.html">
+<!--                            <img th:src="@{${docName.getPhotos()}}" class="img-fluid" alt="">-->
+                            <img th:src="@{${'/assets/user-photos/' + docName.getDocId() +'/'+ docName.getPhotos()}}" alt="" class="img-fluid ">
+                        </a>
                         <div class="preview"><span>Read more</span></div>
                     </figure>
                     <form method=post th:action="@{/postdoctorlist}" th:object="${doctorDto}">

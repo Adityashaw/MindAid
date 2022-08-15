@@ -36,7 +36,7 @@ public class DoctorListService {
                     doctor.setAge((String) doctors[8]);
                     doctor.setGender((String) doctors[9]);
                     doctor.setAppliedDate((String) doctors[13]);
-                    doctor.setPhotos("\\assets\\user-photos\\"+doctor.getDocId()+ "\\"+(String)doctors[14]);
+                    doctor.setPhotos((String)doctors[14]);//"\\assets\\user-photos\\"+doctor.getDocId()+ "\\"+
                     doctor.setPatientCount((int)doctors[15]);
                     doctor.setRatings((String) doctors[16]);
                     doctor.setScheduleId((int)doctors[17]);

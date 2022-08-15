@@ -106,7 +106,7 @@ public class UserProfileController {
         System.out.println(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,0, "approved","user",httpSession);
         User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
-        model.addAttribute("username",user.getName());
+        model.addAttribute("username",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         String status="Previous";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
@@ -120,7 +120,7 @@ public class UserProfileController {
         System.out.println(temporaryObjectHoldService.userDto.userId);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2 ,"pending","user",httpSession);
         User user=userRepository.findByUserId(Integer.parseInt(((List<String>)httpSession.getAttribute("userInfo")).get(0)));
-        model.addAttribute("username",user.getName());
+        model.addAttribute("username",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         String status="Pending";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);
