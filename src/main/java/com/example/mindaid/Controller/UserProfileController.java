@@ -158,8 +158,8 @@ public class UserProfileController {
         String rating=String.format("%.1f", d);
         doctorsList.get(0).setRatings(rating);
         List <ScheduleDto>scheduleInfoList=schedulingService.getcheduleInfo(model,2, "pending","user",httpSession);
-        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
-        model.addAttribute("userName",user.getName());
+//        User user=userRepository.findByUserId(temporaryObjectHoldService.userDto.userId);
+        model.addAttribute("userName",((List<String>)httpSession.getAttribute("userInfo")).get(1));
         String status="Upcoming";
         model.addAttribute("status",status);
         model.addAttribute("scheduleInfoList",scheduleInfoList);

@@ -5,9 +5,11 @@
           content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <title>MindAid-ChatBox</title>
 <!--    <link rel="icon" href="Logo1.png">-->
-    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/main.css"/>
+    <link rel="stylesheet" href="assets/css/custom.css"/>
+    <link rel="stylesheet" href="assets/css/ratings.css">
 </head>
-<body background="assets/img/bckground.jpg"
+<body background="assets/img/bckground.jpg" id="site-header"
       style="background-position: center; background-repeat: no-repeat; background-size: cover;">
 
 <div id="username-page">
@@ -26,7 +28,7 @@
 </div>
 
 <div id="chat-page" class="hidden">
-    <div class="chat-container">
+    <div class="chat-container" id="site-header-2">
         <div class="chat-header">
             <h2>MindAid-Chatbox</h2>
         </div>
@@ -43,8 +45,8 @@
                 </div>
             </div>
         </form><br>
-        <div class="wrap-custom">
-            <a th:if="${usertype=='user'}" th:href="@{/user-profile}" class="button-custom">⇚ Go Back</a>
+        <div class="wrap-custom-something">
+            <button th:if="${usertype=='user'}" onclick="openForm()" class="something">⇚ Go Back</button>
             <a th:if="${usertype=='doctor'}" th:href="@{/doctor-profile}" class="button-custom">⇚ Go Back</a>
             <!--            <button class="button-custom" type="submit">Go Back</button>-->
         </div>
@@ -58,11 +60,11 @@
         <h5><b>Give Your Ratings!</b></h5>
         <div class="rating rating2">
             <!--
-            --><a th:href="@{/score-submit/5}" title="Give 5 stars">★</a><!--
-		--><a th:href="@{/score-submit/4}"  title="Give 4 stars">★</a><!--
-		--><a th:href="@{/score-submit/3}"  title="Give 3 stars">★</a><!--
-		--><a th:href="@{/score-submit/2}"  title="Give 2 stars">★</a><!--
-		--><a th:href="@{/score-submit/1}"  title="Give 1 star">★</a>
+            --><a th:href="@{'/score-submit/5/'+${paymentDto.getDocId()}}" title="Give 5 stars">★</a><!--
+		--><a th:href="@{'/score-submit/4/'+${paymentDto.getDocId()}}"  title="Give 4 stars">★</a><!--
+		--><a th:href="@{'/score-submit/3/'+${paymentDto.getDocId()}}"  title="Give 3 stars">★</a><!--
+		--><a th:href="@{/'/score-submit/2/'+${paymentDto.getDocId()}}"  title="Give 2 stars">★</a><!--
+		--><a th:href="@{/'/score-submit/1/'+${paymentDto.getDocId()}}"  title="Give 1 star">★</a>
         </div>
     </div>
 </div>
@@ -73,16 +75,15 @@
         $("#site-header").css({
             "filter": "blur(4px)"
         });
-        $("#live").css({
-            "filter": "blur(4px)"
-        });
+        // $("#chat-page").css({
+        //     "filter": "blur(4px)"
+        // });
     }
 
     function closeForm() {
         document.getElementById("myForm").style.display = "none";
     }
 </script>
-
 <script
         src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script
