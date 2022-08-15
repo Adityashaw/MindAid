@@ -112,7 +112,8 @@ public class LoginController {
     //Logout area Start
     @GetMapping("/logout")
     public String getLogOut(Model model,HttpSession httpSession){
-        httpSession.invalidate();
+        httpSession.removeAttribute("userInfo");
+//        httpSession.invalidate();
 //        System.out.println(httpSession.getId());
         Login login=new Login();
         List<Login> loginList=new ArrayList<>();
