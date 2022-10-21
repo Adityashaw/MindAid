@@ -9,6 +9,8 @@ Users can pay and access the therapist after selecting a session type.
 On the other side, the therapist will have access to a platform that will enable them to conduct the sessions in accordance with the convenient timeframe they 
 have specified. There will also be some other features like a stress meter, a FAQ, and articles.
 
-We have created this project for Therp Javafest 2022.
+2nd Runner up in Javafest 2022
+
+Project Demonstration: https://www.youtube.com/watch?v=6JQ3cG5dQEo
 ©Abu Mauze Tamzid Khan 
 ©Miftahul Zannat Maliha
