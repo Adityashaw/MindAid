@@ -1,14 +1,14 @@
 .btn-outline-info {
     color: white;
-    border-color: #17a2b8;
+    border-color: skyblue;
     border-radius: 10px;
     background-color: #325359;
 }
 
 .btn-outline-info:hover {
     color: #fff;
-    background-color: #17a2b8;
-    border-color: #17a2b8
+    background-color: skyblue;
+    border-color: skyblue
 }
 h2.custom-title{
     color: white;
@@ -60,7 +60,7 @@ header.fixed-top-custom{
     right: 0;
     left: 0;
     z-index: 1030;
-    background-color: #1b5660;
+    background-color: steelblue;
     position: fixed;
     /* padding-bottom: 10px; */
 }
@@ -422,12 +422,12 @@ header.a.navbar-brand-custom{
 
 .check-item input[type=checkbox]:checked~span{
     color: #ffffff;
-    background-color: #17a2b8;
+    background-color: skyblue;
 }
 
 .check-item input[type=radio]:checked~span{
     color: #ffffff;
-    background-color: #17a2b8;
+    background-color: skyblue;
 }
 
 @media screen and (max-width: 767px){

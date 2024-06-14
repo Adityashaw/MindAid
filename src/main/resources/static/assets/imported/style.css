@@ -129,7 +129,7 @@ ul,li{
 .service-icons{
     font-size: 4rem;
     margin: 30px 0;
-    color: #17a2b8;
+    color: skyblue;
 }
 /* =============Service End ==============*/
 
@@ -149,7 +149,7 @@ ul,li{
 
 .features-content .icon-feature{
     font-size: 20px;
-    color: #17a2b8;
+    color: skyblue;
 }
 /* =============Free Features End ==============*/
 
@@ -287,7 +287,7 @@ ul,li{
 }
 
 .signup-area a{
-    color: #17a2b8;
+    color: skyblue;
     font-size: 16px;
 
 }
@@ -397,12 +397,12 @@ span.psw {
 
 .check-item input[type=checkbox]:checked~span{
     color: #ffffff;
-    background-color: #17a2b8;
+    background-color: skyblue;
 }
 
 .check-item input[type=radio]:checked~span{
     color: #ffffff;
-    background-color: #17a2b8;
+    background-color: skyblue;
 }
 
 @media screen and (max-width: 767px){
@@ -458,7 +458,7 @@ ul {
 }
 
 .sidebar ul li:hover,.sidebar ul li:hover a{
-    background: #17a2b8;
+    background: skyblue;
     color: #ffffff;
 }
 
@@ -483,7 +483,7 @@ ul {
 }
 
 .profile-icon-contact{
-    color: #17a2b8;
+    color: skyblue;
     margin-right: 5px;
     font-size: 24px;
 }
@@ -742,7 +742,7 @@ ul {
 
 /*============================ Stress Meter Start ===========================*/
 .result-text{
-    background-color: #17a2b8;
+    background-color: skyblue;
     color: #ffffff;
     border-radius: 10px;
     width: 50%;
@@ -769,7 +769,7 @@ ul {
 }
 
 .links a:hover{
-    color: #17a2b8;
+    color: skyblue;
     text-decoration: none;
     transition: ease-in 0.3s;
 }

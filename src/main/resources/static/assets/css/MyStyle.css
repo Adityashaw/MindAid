@@ -1,7 +1,7 @@
 /*-- login --*/
 
 .login{
-    background-color: #1b5660;
+    background-color: steelblue;
     padding: 9em;
     padding-bottom: 20em;
 }
@@ -133,7 +133,7 @@
 
 .register {
     padding: 4em 0em 11em;
-    background-color: #1b5660;
+    background-color: steelblue;
 }
 
 .login-form-grids h5,

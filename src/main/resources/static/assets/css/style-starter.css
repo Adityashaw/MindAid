@@ -20,14 +20,14 @@ Author URL: http://w3layouts.com
   --yellow: #ffc107;
   --green: #28a745;
   --teal: #20c997;
-  --cyan: #17a2b8;
+  --cyan: skyblue;
   --white: #fff;
   --gray: #6c757d;
   --gray-dark: #343a40;
   --primary: #F42A2A;
   --secondary: #f8b195;
   --success: #28a745;
-  --info: #17a2b8;
+  --info: skyblue;
   --warning: #ffc107;
   --danger: #dc3545;
   --light: #f8f9fa;
@@ -2891,8 +2891,8 @@ fieldset:disabled a.btn {
 
 .btn-info {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: skyblue;
+  border-color: skyblue;
 }
 
 .btn-info:hover {
@@ -2912,8 +2912,8 @@ fieldset:disabled a.btn {
 .btn-info.disabled,
 .btn-info:disabled {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: skyblue;
+  border-color: skyblue;
 }
 
 .btn-info:not(:disabled):not(.disabled):active,
@@ -3203,14 +3203,14 @@ fieldset:disabled a.btn {
 }
 
 .btn-outline-info {
-  color: #17a2b8;
-  border-color: #17a2b8;
+  color: skyblue;
+  border-color: skyblue;
 }
 
 .btn-outline-info:hover {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: skyblue;
+  border-color: skyblue;
 }
 
 .btn-outline-info:focus,
@@ -3220,7 +3220,7 @@ fieldset:disabled a.btn {
 
 .btn-outline-info.disabled,
 .btn-outline-info:disabled {
-  color: #17a2b8;
+  color: skyblue;
   background-color: transparent;
 }
 
@@ -3228,8 +3228,8 @@ fieldset:disabled a.btn {
 .btn-outline-info:not(:disabled):not(.disabled).active,
 .show>.btn-outline-info.dropdown-toggle {
   color: #fff;
-  background-color: #17a2b8;
-  border-color: #17a2b8;
+  background-color: skyblue;
+  border-color: skyblue;
 }
 
 .btn-outline-info:not(:disabled):not(.disabled):active:focus,
@@ -5474,7 +5474,7 @@ a.badge-success.focus {
 
 .badge-info {
   color: #fff;
-  background-color: #17a2b8;
+  background-color: skyblue;
 }
 
 a.badge-info:hover,
@@ -7070,7 +7070,7 @@ button.bg-success:focus {
 }
 
 .bg-info {
-  background-color: #17a2b8 !important;
+  background-color: skyblue !important;
 }
 
 a.bg-info:hover,
@@ -7185,7 +7185,7 @@ button.bg-dark:focus {
 }
 
 .border-info {
-  border-color: #17a2b8 !important;
+  border-color: skyblue !important;
 }
 
 .border-warning {
@@ -10793,7 +10793,7 @@ a.text-success:focus {
 }
 
 .text-info {
-  color: #17a2b8 !important;
+  color: skyblue !important;
 }
 
 a.text-info:hover,
@@ -17362,5 +17362,9 @@ h3.post-content-title {
   }
 }
 
-
-/*# sourceMappingURL=style-freedom.css.map */
+/*
+Changing theme to skyblue
+*/
+.fixed-top {
+  background-color: skyblue;
+}
